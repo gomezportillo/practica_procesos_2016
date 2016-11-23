@@ -9,9 +9,16 @@
 <body>
 	<br>
 	<div style="text-align: center;">
-		<h1>
-			Bienvenido al tutorial de Procesos de Ingeniería del Softwre
-		</h1>
+		<table border=1>
+		<tr>
+			<td>Usuario</td>
+			<td><input type="text" name="usuario" /></td>
+		</tr>
+		<tr>
+			<td>Contraseña</td>
+			<td><input type="text" name="contraseña" /></td>
+		</tr>
+		</table>
 		
 		<form action="bienvenido.jsp" method="post">
 			Introduzca su nombre: <input type="text" name="nombre" />
