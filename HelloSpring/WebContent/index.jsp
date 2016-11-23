@@ -18,12 +18,17 @@
 			<td>Contraseña</td>
 			<td><input type="text" name="contraseña" /></td>
 		</tr>
+		<tr>
+			
+			<td><<input type="submit" value="Aceptar" /></td>
+		</tr>
+		
 		</table>
 		
 		<form action="bienvenido.jsp" method="post">
 			Introduzca su nombre: <input type="text" name="nombre" />
 			<br /> <br />
-			<input type="submit" value="Aceptar" />
+			
 		</form> 
 	</div>
 </body>
