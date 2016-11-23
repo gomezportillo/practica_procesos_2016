@@ -20,16 +20,16 @@
 		</tr>
 		<tr>
 			
-			<td><<input type="submit" value="Aceptar" /></td>
+			<td>
+				<form action="bienvenido.jsp" method="post">
+				<input type="submit" value="Aceptar" />
+				</form> 
+			</td>
 		</tr>
 		
 		</table>
 		
-		<form action="bienvenido.jsp" method="post">
-			Introduzca su nombre: <input type="text" name="nombre" />
-			<br /> <br />
-			
-		</form> 
+		
 	</div>
 </body>
 </html>
