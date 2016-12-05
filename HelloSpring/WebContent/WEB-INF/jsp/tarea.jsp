@@ -37,11 +37,11 @@
         <br>Fecha Limite: <input type="text"  id="datepicker" name="fecha">
         <br> Notas: <input type="text" align="right" name="notas">
         <br> Estado:
-         <select name="ad" onchange="crearlink(this.form)" name="estado">
-	        <option selected> ---</option>
-	        <option value="1.htm">texto 1</option>
-	        <option value="2.htm">texto 2</option>
-	        <option value="3.htm">texto 3</option>
+         <select onchange="crearlink(this.form)" name="estado">
+	        
+	        <option value="1">texto 1</option>
+	        <option value="2">texto 2</option>
+	        <option value="3">texto 3</option>
 	     </select>
         <br><br><br><br>
 

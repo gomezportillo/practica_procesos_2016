@@ -4,6 +4,8 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.bson.codecs.configuration.CodecConfigurationException;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -13,12 +15,16 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 public class MongoDB {
-
+	public static MongoClient conexion() throws UnknownHostException{
+		MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
+        MongoClient mongoClient = new MongoClient(uri);
+        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+        return mongoClient;
+		
+	}
 	
 		public static String comprobar_user_pass(String user, String password) throws UnknownHostException{
-			MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
-	          MongoClient mongoClient = new MongoClient(uri);
-	          Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+			MongoClient mongoClient=conexion();
 	          
 			String dbName="usuarios_prueba";
 			String tabla="usuarios";
@@ -38,15 +44,46 @@ public class MongoDB {
 					rol=theObj.get("rol").toString();
 				}
 			}
-			
+			mongoClient.close();
 			return rol;
+		}
+		public static void Consulta(String bbddName, String tabla) throws UnknownHostException{
+			MongoClient mongoClient=conexion();
+			DB db= mongoClient.getDB(bbddName);
+			DBCollection coll=db.getCollection(tabla);
+			DBCursor cursor=coll.find();
+			//int i =1;
+			while(cursor.hasNext()){
+				System.out.println(cursor.next());
+			}
+		}
+
+		public static String generar_tabla_users(String bbddName, String tabla) throws UnknownHostException{
+			MongoClient mongoClient=conexion();
+			DB db= mongoClient.getDB(bbddName);
+			DBCollection coll=db.getCollection(tabla);
+			DBCursor cursor=coll.find();
+			
+			String cadena="";
+	    	cadena+="<table border=1><tr><th>User</th><th>Email</th><th>Rol</th>";
+	    	
+	    	while (cursor.hasNext()) {
+				DBObject theObj = cursor.next();
+				String user = theObj.get("user").toString();
+				String email = theObj.get("email").toString();
+				String rol = theObj.get("rol").toString();
+				
+				cadena+="<tr><td>"+user+"</td><td>"+email+"</td><td>"+rol+"</td></tr>";
+			}
+	    		//System.out.println(cursor.next().get("prioridad"));
+	    	cadena+="</table>";
+			
+			return cadena;
 		}
 		
 		public static String generar_tabla_tareas() throws UnknownHostException{
 			//MongoClient mongoClient = new MongoClient("localhost");
-			MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
-	          MongoClient mongoClient = new MongoClient(uri);
-	          Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+			MongoClient mongoClient=conexion();
 	          
 			 	String dbName="usuarios_prueba";
 				String tabla="tareas";
@@ -76,10 +113,9 @@ public class MongoDB {
 		  		mongoClient.close();
 		  		return cadena;
 		}
+		
 		public static void insertar_tarea(String nombre, String prioridad, String pertenece, String fecha, String notas, String estado) throws UnknownHostException{
-			MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
-	          MongoClient mongoClient = new MongoClient(uri);
-	          Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+			MongoClient mongoClient=conexion();
 	          
 			String dbName="usuarios_prueba";
 			String tabla="tareas";
@@ -89,4 +125,9 @@ public class MongoDB {
 			BasicDBObject doc = new BasicDBObject("nombre",nombre).append("prioridad",prioridad).append("pertenece",pertenece).append("fecha",fecha).append("notas",notas).append("estado",estado);
 			coll.insert(doc);
 		}
+		public static void inserta_usuario(String user, String password, String email, String rol) throws UnknownHostException {
+			MongoClient mongoClient=conexion();
+			
+		}
+		
 }
