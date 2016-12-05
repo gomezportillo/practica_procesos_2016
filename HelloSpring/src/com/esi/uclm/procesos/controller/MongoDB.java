@@ -124,10 +124,18 @@ public class MongoDB {
 			DBCollection coll= db.getCollection(tabla);
 			BasicDBObject doc = new BasicDBObject("nombre",nombre).append("prioridad",prioridad).append("pertenece",pertenece).append("fecha",fecha).append("notas",notas).append("estado",estado);
 			coll.insert(doc);
+			mongoClient.close();
 		}
 		public static void inserta_usuario(String user, String password, String email, String rol) throws UnknownHostException {
 			MongoClient mongoClient=conexion();
+			String dbName="usuarios_prueba";
+			String tabla="usuarios";
 			
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+			BasicDBObject doc = new BasicDBObject("user", user).append("password", password).append("email", email).append("rol", rol);
+			coll.insert(doc);
+			mongoClient.close();			
 		}
 		
 }

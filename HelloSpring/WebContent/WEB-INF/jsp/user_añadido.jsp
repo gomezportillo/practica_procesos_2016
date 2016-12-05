@@ -1,4 +1,4 @@
-<%@page import="com.mongodb.*" %>
+
 <%@page import="com.esi.uclm.procesos.controller.MongoDB" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -8,6 +8,7 @@
 	String email = request.getParameter("email");
 	String rol = request.getParameter("rol");
 	
+	MongoDB.inserta_usuario(user, password, email, rol);
 	
 	
 %>
@@ -26,6 +27,6 @@
 
 	
 	<br /> <br />
-	<div style="text-align: center;"><a href="/HelloSpring"">Volver</a> </div>
+	<div style="text-align: center;"><a href="/HelloSpring/interfaz_admin">Volver</a> </div>
 </body>
 </html>
