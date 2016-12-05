@@ -26,11 +26,11 @@ public class login {
 
 	@When("^Insertamos nombre y password en la barra$")
 	public void Insertamos_nombre_contraseña() throws Throwable {
-		WebElement barraNombre = driver.findElement(By.name("nombre"));
+		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
 		barraNombre.sendKeys("pablo");
 		barraNombre.submit();
-		password.sendKeys("procesos");
+		password.sendKeys("pablo");
 		password.submit();
 		Thread.sleep(1000);
 	}

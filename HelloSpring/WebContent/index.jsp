@@ -25,7 +25,7 @@
       
         Login:  <input type="text" align="right" name="user"><br>
         Contrasena: <input type="password" align="right" name="password"><br>  
-       <input type="submit" value="Aceptar" />
+       <button type="submit" value="Aceptar" name="aceptar"/>Aceptar</button>
       
         <button type="button" >Registarse</button> 
         </form>        
