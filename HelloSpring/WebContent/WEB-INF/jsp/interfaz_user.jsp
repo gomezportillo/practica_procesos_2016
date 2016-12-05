@@ -27,36 +27,14 @@
 		}
 	}
 	
-	mongoClient.close();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Hello Spring - Welcome !</title>
-<script type="text/javascript">
+<title>Tareas</title>
 
-function mostrar_fecha() {
- var tareas=[{nombre:"Pablo  Gonzalez",Prioridad:"1",Fecha_limite:"20/12/2016",Estado:"Pendiente",Perteneces:"Proyecto 1"},
-	{nombre:"Alvaro Alonso",Prioridad:"3",Fecha_limite:"20/12/2016",Estado:"Completada",Perteneces:"Proyecto 2"}];
-	var cadena,botones;
-	cadena="";
-	botones="";
- 	var cl = document.getElementById("cont");
-   
-	cadena +='<table border=1><tr><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th></tr>';
-
-	  
-  for (i = 0; i < tareas.length; i++) {
-    cadena +='<tr><td>'+tareas[i].nombre+'</td><td>'+tareas[i].Prioridad+'</td><td>'+tareas[i].Fecha_limite+'</td><td>'+tareas[i].Estado+'</td><td>'+tareas[i].Perteneces+'</td></tr>';
-	}
-	
-  cadena +='</table>';
-  botones=cl.outerHTML;
-  cl.innerHTML=cadena+botones;
-}
-</script>
 </head>
 <link rel="stylesheet" type="text/css" href="css/procesos.css" />
 <body>
@@ -73,15 +51,44 @@ function mostrar_fecha() {
       <h2>Usuario</h2><br>      
       <div class="contenido" id="cont">
       
-      <%
+      <%  	
+      DBCollection coll2= db.getCollection("tareas");
+    	DBCursor cursor = coll2.find(); 
+    
+    	int i=0;
+    	String cadena="";
+    	cadena+="<table border=1><tr><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></tr> ";
+    	
+    	while (cursor.hasNext()) {
+			DBObject theObj = cursor.next();
+			String nombre = theObj.get("nombre").toString();
+			String prioridad = theObj.get("prioridad").toString();
+			String pertenece =theObj.get("pertenece").toString();
+			String fecha= theObj.get("fecha").toString();
+			String notas= theObj.get("notas").toString();
+			String estado= theObj.get("estado").toString();
+			
+			cadena+="<tr><td>"+nombre+"</td><td>"+prioridad+"</td><td>"+fecha+"</td><td>"+estado+"</td><td>"+pertenece+"</td><td>"+notas+"</td></tr>";
+		}
+    		
+    		//System.out.println(cursor.next().get("prioridad"));
+    		
+    		
+    	
+    	cadena+="</table>";
+    	out.println(cadena);
+  	
+  		mongoClient.close();
+  	
       if(rol.equals("admin")){
-    	  out.println(" <a href='AdminUser.jsp'>Panel de Administracion de Usuarios</a>");
+    	  out.println("  <form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
     	  
     	  //out.println("<button type='button' href='AdminUser.jsp'>Panel de Administracion de Usuarios</button> <br>   ");
       }
       %>
-      
-        <button type="button" onclick="location.href='tarea.jsp'">Añadir</button> <br>        
+       <form action="tarea.jsp" method="post">        
+        	<button type="submit" value="Añadir" name="Añadir"/>Añadir</button> <br>
+        </form>     
         <button type="button" >Modificar</button>    <br>
         <button type="button" >Eliminar</button>   <br>  
        <a href="/HelloSpring">Volver</a>     

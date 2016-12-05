@@ -14,10 +14,13 @@ import com.mongodb.MongoClient;
 @Controller
 public class HelloSpring {
 
-	@RequestMapping("/bienvenido")
+	@RequestMapping("/interfaz_user")
 	public ModelAndView helloSpring() {
-		String message = "Bienvenido jesusito de mi corazon, ";		
-		return new ModelAndView("bienvenido", "message", message);
+		//String message = "Bienvenido jesusito de mi corazon, ";		
+		//return new ModelAndView("interfaz_user", "message", message);
+		ModelAndView model = new ModelAndView("interfaz_user");
+		model.addObject("msg", "hello world");
+		return model;
 	}	
 	public void conexionMongoDB() throws UnknownHostException {
 		// TODO Auto-generated method stub

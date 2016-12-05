@@ -21,7 +21,7 @@
      <div class="vertical">
       <h2>Autenticacion</h2><br>      
       <div class="contenido">
-      <form action="bienvenido.jsp" method="post">
+      <form action="interfaz_user.jsp" method="post">
       
         Login:  <input type="text" align="right" name="user"><br>
         Contrasena: <input type="password" align="right" name="password"><br>  
