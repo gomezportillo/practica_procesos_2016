@@ -8,7 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 
 @Controller
@@ -22,7 +26,7 @@ public class HelloSpring {
 		model.addObject("msg", "hello world");
 		return model;
 	}	
-	public void conexionMongoDB() throws UnknownHostException {
+	/*public void conexionMongoDB() throws UnknownHostException {
 		// TODO Auto-generated method stub
 			MongoClient  mongoClient = new MongoClient("localhost");
 			List<String> databases= mongoClient.getDatabaseNames();
@@ -36,5 +40,6 @@ public class HelloSpring {
 				}
 			}
 			mongoClient.close();
-	}
+	}*/
+	
 }

@@ -1,4 +1,5 @@
 <%@page import="com.mongodb.*" %>
+<%@page import="com.esi.uclm.procesos.controller.MongoDB" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
@@ -14,16 +15,9 @@
 	{
 		estado="vacio";
 	}
+	MongoDB.insertar_tarea(nombre, prioridad, pertenece, fecha, notas, estado);
 	
 	
-	MongoClient mongoClient = new MongoClient("localhost");
-	String dbName="procesos";
-	String tabla="tareas";
-	String rol="";
-	DB db=mongoClient.getDB(dbName);
-	DBCollection coll= db.getCollection(tabla);
-	BasicDBObject doc = new BasicDBObject("nombre",nombre).append("prioridad",prioridad).append("pertenece",pertenece).append("fecha",fecha).append("notas",notas).append("estado",estado);
-	coll.insert(doc);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
