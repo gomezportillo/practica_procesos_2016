@@ -42,9 +42,9 @@ public class login {
 		boton.click();
 	}
 	
-	@Then("^boton anadir$")
+	@Then("^boton_anadir$")
 	public void anadir() throws Throwable {
-		Thread.sleep(3000);
+		Thread.sleep(3000); //Necesita esperar unos segundos para reconocer el boton
 		WebElement boton = driver.findElement(By.name("anadir"));		
 		boton.click();		
 	}

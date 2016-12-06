@@ -6,6 +6,6 @@ Feature: login
 	Given Abrimos Mozilla Firefox
 	When Insertamos nombre y password en la barra
 	Then boton aceptar
-	And boton anadir
+	And boton_anadir
 	And cerraremos el navegador	
 	

@@ -46,7 +46,7 @@ pageEncoding="ISO-8859-1"%>
       }
       %>
        <form action="tarea.jsp" method="post">        
-        	<button type="submit" value="anadir" name="anadir"/>Añadir</button> <br>
+        	<button type="submit" value="anadir" name="anadir"/>Añadir</button> <br> 
         </form>     
         <button type="button" >Modificar</button>    <br>
         <button type="button" >Eliminar</button>   <br>  
