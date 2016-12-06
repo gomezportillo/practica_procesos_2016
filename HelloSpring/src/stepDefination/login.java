@@ -41,6 +41,14 @@ public class login {
 		WebElement boton= driver.findElement(By.name("aceptar"));
 		boton.click();
 	}
+	
+	@Then("^boton anadir$")
+	public void anadir() throws Throwable {
+		Thread.sleep(3000);
+		WebElement boton = driver.findElement(By.name("anadir"));		
+		boton.click();		
+	}
+	
 
 	@Then("^cerraremos el navegador$")
 	public void cerraremos_el_navegador() throws Throwable {

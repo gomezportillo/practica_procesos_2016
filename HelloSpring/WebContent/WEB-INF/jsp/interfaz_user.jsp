@@ -46,7 +46,7 @@ pageEncoding="ISO-8859-1"%>
       }
       %>
        <form action="tarea.jsp" method="post">        
-        	<button type="submit" value="Añadir" name="Añadir"/>Añadir</button> <br>
+        	<button type="submit" value="anadir" name="anadir"/>Añadir</button> <br>
         </form>     
         <button type="button" >Modificar</button>    <br>
         <button type="button" >Eliminar</button>   <br>  
@@ -56,7 +56,7 @@ pageEncoding="ISO-8859-1"%>
 </div>
  </div>
  <script type="text/javascript">
-			  mostrar_fecha(); // Invocar función
+			  //mostrar_fecha(); // Invocar función
 </script>
 </body>
 </body>
