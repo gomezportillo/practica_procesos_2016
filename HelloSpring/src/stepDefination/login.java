@@ -44,7 +44,7 @@ public class login {
 	
 	@Then("^boton_anadir$")
 	public void anadir() throws Throwable {
-		Thread.sleep(3000); //Necesita esperar unos segundos para reconocer el boton
+		Thread.sleep(3000); // Necesita esperar unos segundos para reconocer el boton
 		WebElement boton = driver.findElement(By.name("anadir"));		
 		boton.click();		
 	}
