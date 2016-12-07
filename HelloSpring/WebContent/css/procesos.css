@@ -1,7 +1,9 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One|Josefin+Sans|Raleway');
 
- 
+<!-- General -->
+
+
 *{
 	padding:0;
 	margin:0;
@@ -30,10 +32,6 @@ h3{
 	color:black;
 	font-weight:bold;
 	
-}
-p{
-	color:white;
-	padding:2%;
 }
 
  #marco {
@@ -96,7 +94,40 @@ table,td{
     width: auto;
     margin-bottom: 10px;
 }
+.contenido label {
+  margin: .4em 0;
+  width: 25%;
+  float: left;
+
+}
+
+<!-- Botton Style -->
+
+.azul{
+	background: #3498DB;
+	border: 1px solid #2980B9;
+}
+
+.azul:hover{
+  background: #39a0e5;
+}
+
+.verde{
+  background: #2ECC71; 
+  border: 1px solid #27AE60;
+}
+
+.verde:hover{
+  background: #32db78;
+}
+
+.rojo{
+  background: #E74C3C;
+  border: 1px solid #C0392B;
+}
+
+.rojo:hover{
+  background: #ff5242;
+}
 
 </style>
-
-
