@@ -13,29 +13,28 @@
 
 <body>
 
-<h1> Inicio</h1>
+<h1>Inicio</h1>
 
 </section>
-<div  id='marco'>
-  <div id="contenedor">
-     <div class="vertical">
-      <h2>Autenticacion</h2><br>      
-      <div class="contenido">
-      <form action="interfaz_user.jsp" method="post">
-      
-        Login:  <input type="text" align="right" name="user"><br>
-        Contrasena: <input type="password" align="right" name="password"><br>  
-       <button type="submit" value="Aceptar" name="aceptar">Aceptar</button>
-        </form>
-        
-        <form action="registrarse.jsp" method="post">
-        <button type="submit" value="Registrarse" name = "Registrarse">Registarse</button> 
-        </form>
-        
-      </div>
- 	 </div>
-</div>
 
+	<div id="contenedor">
+	    <div class="vertical">
+			<h2>Autenticacion</h2><br>      
+			<div class="contenido">
+			<form action="interfaz_user.jsp" method="post" name="form_login">
+	      
+				<label for="login">Usuario: </label>			<input type="text" align="right" name="user"> <br>
+				<label for="contrasena">Contrasena: </label> <input type="password" align="right" name="password"><br>  
+			
+				<button type="submit" value="Aceptar" name="aceptar" class="verde">Aceptar</button>
+			</form>
+			<form action="registrarse.jsp" method="post">
+				<button type="submit" value="Registrarse" name = "Registrarse" class="azul">Registarse</button> 
+			</form>
+    
+	      </div>
+	 	 </div>
+	</div>
 </body>
 
 </html>
