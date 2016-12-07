@@ -43,7 +43,7 @@ public class anadirNuevaTarea {
 	
 	@Then("^boton anadir$")
 	public void anadir() throws Throwable {
-		Thread.sleep(2000);
+		Thread.sleep(7000);
 		WebElement botonAnadir = driver.findElement(By.name("anadir"));
 		botonAnadir.click();
 		Thread.sleep(7000);
