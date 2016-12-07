@@ -1,5 +1,6 @@
 
 <%@page import="com.esi.uclm.procesos.controller.MongoDB" %>
+<%@page import="com.esi.uclm.procesos.controller.Usuario" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
@@ -8,7 +9,8 @@
 	String email = request.getParameter("email");
 	String rol = request.getParameter("rol");
 	
-	MongoDB.inserta_usuario(user, password, email, rol);
+	Usuario usuario= new Usuario(user, password, email, rol);
+	MongoDB.inserta_usuario(usuario);
 	
 	
 %>

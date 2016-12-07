@@ -4,8 +4,8 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
+import com.esi.uclm.procesos.gestion.Tarea;
+import com.esi.uclm.procesos.gestion.Usuario;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -15,13 +15,13 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 public class MongoDB {
-	public static MongoClient conexion() throws UnknownHostException{
-		MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
-        MongoClient mongoClient = new MongoClient(uri);
-        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
-        return mongoClient;
-		
-	}
+		public static MongoClient conexion() throws UnknownHostException{
+			MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
+	        MongoClient mongoClient = new MongoClient(uri);
+	        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+	        return mongoClient;
+			
+		}
 	
 		public static String comprobar_user_pass(String user, String password) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
@@ -114,7 +114,7 @@ public class MongoDB {
 		  		return cadena;
 		}
 		
-		public static void insertar_tarea(String nombre, String prioridad, String pertenece, String fecha, String notas, String estado) throws UnknownHostException{
+		public static void insertar_tarea(Tarea t) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
 	          
 			String dbName="usuarios_prueba";
@@ -122,18 +122,19 @@ public class MongoDB {
 			String rol="";
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
-			BasicDBObject doc = new BasicDBObject("nombre",nombre).append("prioridad",prioridad).append("pertenece",pertenece).append("fecha",fecha).append("notas",notas).append("estado",estado);
+			BasicDBObject doc = new BasicDBObject("nombre",t.getNombre()).append("prioridad",t.getPrioridad()).append("pertenece",t.getPertenece()).append("fecha",t.getFecha()).append("notas",t.getNotas()).append("estado",t.getEstado());
 			coll.insert(doc);
 			mongoClient.close();
 		}
-		public static void inserta_usuario(String user, String password, String email, String rol) throws UnknownHostException {
+		public static void inserta_usuario(Usuario usuario) throws UnknownHostException {
+			
 			MongoClient mongoClient=conexion();
 			String dbName="usuarios_prueba";
 			String tabla="usuarios";
 			
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
-			BasicDBObject doc = new BasicDBObject("user", user).append("password", password).append("email", email).append("rol", rol);
+			BasicDBObject doc = new BasicDBObject("user", usuario.getUser()).append("password", usuario.getPassword()).append("email", usuario.getEmail()).append("rol", usuario.getRol());
 			coll.insert(doc);
 			mongoClient.close();			
 		}

@@ -20,9 +20,11 @@
 	 <div class="vertical">
 	 <h2>Buscar usuario existente</h2><br>
 		<div class="contenido">
-			Buscar usuario: <br><input type="search" width=20><button type="search" width=20>Buscar</button><br>
+			Buscar usuario: <br><input type="search" width=20><button type="search" width=20 onclick=" ">Buscar</button><br>
 	<%
 	out.println(MongoDB.generar_tabla_users("usuarios_prueba", "usuarios"));
+	
+	
 	%>
 	<br>
 			<textarea name="usuarios" rows="10" cols="40">Aqui se cargaran los usuarios segun lo que se escriba el campo de usuario</textarea>

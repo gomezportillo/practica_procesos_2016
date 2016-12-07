@@ -1,5 +1,6 @@
 <%@page import="com.mongodb.*" %>
 <%@page import="com.esi.uclm.procesos.controller.MongoDB" %>
+<%@page import="com.esi.uclm.procesos.gestion.Tarea" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%
@@ -10,7 +11,9 @@
 	String notas= request.getParameter("notas");
 	String estado= request.getParameter("estado");	
 	
-	MongoDB.insertar_tarea(nombre, prioridad, pertenece, fecha, notas, estado);
+	Tarea t= new Tarea(nombre, prioridad, pertenece, fecha, notas, estado);
+	
+	MongoDB.insertar_tarea(t);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
