@@ -100,14 +100,12 @@ public class MongoDB {
 		    	cadena+="<table border=1><tr><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></tr> ";
 		    	
 		    	
+		    	ArrayList<Tarea> lista_tarea = new ArrayList<Tarea>();
 		    	while (cursor.hasNext()) {
-		    		
 					DBObject theObj = cursor.next();
-					//Tarea t = new Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());					
-					Tarea t = new Tarea("","","","","","");
-					//lista_tareas.add(t);
-					cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
-					i++;
+					Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+					lista_tarea.add(t);
+					cadena+="<tr><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
 				}
 		    		//System.out.println(cursor.next().get("prioridad"));
 		    	cadena+="</table>";
