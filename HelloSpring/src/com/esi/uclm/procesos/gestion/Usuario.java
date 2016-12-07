@@ -12,8 +12,7 @@ public class Usuario {
 		this.password = password;
 		this.email = email;
 		this.rol = rol;
-	}
-	
+	}	
 	
 	public String getUser() {
 		return user;

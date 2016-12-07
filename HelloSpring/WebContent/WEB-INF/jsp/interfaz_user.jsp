@@ -7,14 +7,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%
-	String user = request.getParameter("user");
+	
+	String user = request.getParameter("user");	
 	String password = request.getParameter("password");
-	//
+	
 	String rol=MongoDB.comprobar_user_pass(user, password);
 	System.out.println(rol);
 	
-	 String tarea=MongoDB.generar_list_tareas().get(0).getNombre().toString();
-     System.out.println(tarea);
+	String tarea=MongoDB.generar_list_tareas().get(0).getNombre().toString();
+    System.out.println(tarea);
 	
 	
 %>
@@ -51,27 +52,24 @@ function muestra(valor){
       
       <%  	
       out.println(MongoDB.generar_tabla_tareas());
-  	
-     
-      
+
       if(rol.equals("admin")){
-    	  out.println("  <form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
-    	  
-    	  //out.println("<button type='button' href='AdminUser.jsp'>Panel de Administracion de Usuarios</button> <br>   ");
+    	  out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
       }
       %>
-       <form action="tarea.jsp" method="post">        
-        	<button type="submit" value="anadir" name="anadir">Añadir</button> <br> 
-        </form>     
-        <button type="button" >Modificar</button>    <br>
-        <button type="button" >Eliminar</button>   <br>  
+					<form action="tarea.jsp" method="post">
+						<button type="submit" value="anadir" name="anadir">Añadir</button>
+						<br>
+					</form>
+					<button type="button">Modificar</button><br>	
+        <button type="button" >Eliminar</button><br>  
        <a href="/HelloSpring">Volver</a>     
       </div>
  	 </div>
 </div>
  </div>
  <script type="text/javascript">
-			  //mostrar_fecha(); // Invocar función
+			  //mostrar_fecha();
 </script>
 </body>
 </body>

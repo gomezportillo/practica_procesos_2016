@@ -47,7 +47,7 @@
 			<button type="button" onclick="location.href='registrarse.html'">Modificar</button>  
 			<!--<button type="button" onclick="location.href='index.html'">Denegar</button> -->        
 			<!--<button type="button" onclick="location.href='registrarse.html'">Añadir</button>  -->   
-			<button type="submit" value="Añadir" name="Añadir"/>Añadir</button> <br> 
+			<button type="submit" value="anadir" name="anadir">Añadir</button> <br> 
 		<div>
 		</form>
       </div>

@@ -25,10 +25,13 @@
       
         Login:  <input type="text" align="right" name="user"><br>
         Contrasena: <input type="password" align="right" name="password"><br>  
-       <button type="submit" value="Aceptar" name="aceptar"/>Aceptar</button>
-      
-        <button type="button" >Registarse</button> 
-        </form>        
+       <button type="submit" value="Aceptar" name="aceptar">Aceptar</button>
+        </form>
+        
+        <form action="registrarse.jsp" method="post">
+        <button type="submit" value="Registrarse" name = "Registrarse">Registarse</button> 
+        </form>
+        
       </div>
  	 </div>
 </div>
