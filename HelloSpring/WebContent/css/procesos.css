@@ -82,13 +82,6 @@ table,td{
     font: normal bold 12px Verdana, Arial;
 }
 
-.contenido button {
-
-    display: inline-block;
-    width: 100px;
-    margin-left: 40px;
-}
-
 .contenido input {
     display: inline-block;
     width: auto;
@@ -102,15 +95,6 @@ table,td{
 }
 
 <!-- Botton Style -->
-
-.azul{
-	background: #3498DB;
-	border: 1px solid #2980B9;
-}
-
-.azul:hover{
-  background: #39a0e5;
-}
 
 .verde{
   background: #2ECC71; 
@@ -131,3 +115,5 @@ table,td{
 }
 
 </style>
+
+

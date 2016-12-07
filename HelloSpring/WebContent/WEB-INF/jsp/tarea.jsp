@@ -31,26 +31,22 @@
       <h2>Usuario</h2><br>      
       <div class="contenido" id="cont">
        <form action="tareaAñadida.jsp" method="post"> 
-       <br>Nombre: <input type="text" align="right" name="nombre">
-        <label for="movie">Prioridad: </label><input id="movie" type="number" value="0" name="prioridad"/>
-        <br>Pertenece a: <input type="text" align="right" name="pertenece">
-        <br>Fecha Limite: <input type="text"  id="datepicker" name="fecha">
-        <br> Notas: <input type="text" align="right" name="notas">
-        <br> Estado:
-         <select onchange="crearlink(this.form)" name="estado">
+	       	<br>
+	       	<label for="nombre">Nombre: </label><input type="text" align="right" name="nombre"><br>
+	        <label for="movie">Prioridad: </label><input id="movie" type="number" value="0" name="prioridad"/><br>
+	        <label for="pertenece">Pertenece a: </label><input type="text" align="right" name="pertenece"><br>
+	        <label for="fecha_limite">Fecha Limite: </label><input type="text"  id="datepicker" name="fecha"><br>
+	        <label for="notas">Notas: </label><input type="text" align="right" name="notas"><br>
+	        <label for="Estado">Estado: </label>
+	        <select onchange="crearlink(this.form)" name="estado">
+		        <option value="1">texto 1</option>
+		        <option value="2">texto 2</option>
+		        <option value="3">texto 3</option>
+		    </select>
+	        <br><br><br><br>
 	        
-	        <option value="1">texto 1</option>
-	        <option value="2">texto 2</option>
-	        <option value="3">texto 3</option>
-	     </select>
-        <br><br><br><br>
-
-     
-        <button type="button" onclick="Limpiar()">Limpiar</button> 
-            
-          
-              
-        	<button type="submit" value="Aceptar" name="Aceptar"/>Aceptar</button> <br>
+	        <button type="reset" value="Limpiar">Limpiar</button>  
+	        <button type="submit" value="Aceptar" name="Aceptar" class="verde"/>Aceptar</button> <br>
         </form>
       </div>
    </div>

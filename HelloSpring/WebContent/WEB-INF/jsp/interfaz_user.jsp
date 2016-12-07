@@ -46,26 +46,26 @@ function muestra(valor){
 
 <div  id='marco'>
   <div id="contenedor">
-     <div class="vertical">
+	<div class="vertical">
       <h2>Usuario</h2><br>      
       <div class="contenido" id="cont">
       
-      <%  	
-      out.println(MongoDB.generar_tabla_tareas());
+		<%  	
+			out.println(MongoDB.generar_tabla_tareas());
 
-      if(rol.equals("admin")){
-    	  out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
-      }
-      %>
-					<form action="tarea.jsp" method="post">
-						<button type="submit" value="anadir" name="anadir">Añadir</button>
-						<br>
-					</form>
-					<button type="button">Modificar</button><br>	
-        <button type="button" >Eliminar</button><br>  
-       <a href="/HelloSpring">Volver</a>     
+     		if(rol.equals("admin")){
+    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
+      		}
+     	%>
+
+		<form action="tarea.jsp" method="post">
+			<button type="submit" value="anadir" name="anadir" class="verde">Añadir</button><br>
+		</form>
+		<button type="button">Modificar</button><br>	
+    	<button type="button" class="rojo" >Eliminar</button><br>  
+    	<a href="/HelloSpring">Volver</a>     
       </div>
- 	 </div>
+	</div>
 </div>
  </div>
  <script type="text/javascript">

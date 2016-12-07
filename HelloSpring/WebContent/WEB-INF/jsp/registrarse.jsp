@@ -19,16 +19,17 @@
      <form action="user_añadido.jsp" method="post"> 
       <h2>Autenticacion</h2><br>      
       <div class="contenido">
-        Usuario:  <br><input type="text" name = "user" ><br>
-        Contrasena: <br><input type="password" name = "password"><br>  
-        Email: <br><input type="text" name = "email"><br> 
-        Rol: <br>  <select name="rol">
-					<option value="user" selected>Usuario</option>
-				 </select><br><br><br> 	   
+        <label for="Usuario">Usuario: </label><input type="text" name = "user" ><br>
+        <label for="Contrasena">Contrasena: </label><input type="password" name = "password"><br>  
+        <label for="Email">Email: </label><input type="text" name = "email"><br> 
+        <label for="Rol">Rol: </label>
+        <select name="rol">
+				<option value="user" selected>Usuario</option>
+		</select><br><br><br> 	   
         <div class="bottom">
         
-			<button type="button" onclick="location.href='/HelloSpring'">Cancelar</button>  
-			<button type="submit" value="aceptar" name="aceptar">Aceptar</button> <br> 
+			<button type="button" onclick="location.href='/HelloSpring'" class="rojo">Cancelar</button>  
+			<button type="submit" value="aceptar" name="aceptar" class="verde">Aceptar</button> <br> 
 		</div>
       </div>
        </form>  
