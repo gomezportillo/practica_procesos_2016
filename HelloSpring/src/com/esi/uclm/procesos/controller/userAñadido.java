@@ -11,8 +11,6 @@ public class userAñadido {
 		//return new ModelAndView("bienvenido", "message", message);
 		ModelAndView model = new ModelAndView("user_añadido");
 		model.addObject("message", "Usuario añadido ");
-		
-
 		return model;
 	}	
 }

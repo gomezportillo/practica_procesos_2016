@@ -1,6 +1,8 @@
 package com.esi.uclm.procesos.controller;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,10 +79,10 @@ public class MongoDB {
 			}
 	    		//System.out.println(cursor.next().get("prioridad"));
 	    	cadena+="</table>";
-			
 			return cadena;
 		}
 		
+		@SuppressWarnings("null")
 		public static String generar_tabla_tareas() throws UnknownHostException{
 			//MongoClient mongoClient = new MongoClient("localhost");
 			MongoClient mongoClient=conexion();
@@ -97,16 +99,15 @@ public class MongoDB {
 		    	String cadena="";
 		    	cadena+="<table border=1><tr><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></tr> ";
 		    	
+		    	
 		    	while (cursor.hasNext()) {
+		    		
 					DBObject theObj = cursor.next();
-					String nombre = theObj.get("nombre").toString();
-					String prioridad = theObj.get("prioridad").toString();
-					String pertenece =theObj.get("pertenece").toString();
-					String fecha= theObj.get("fecha").toString();
-					String notas= theObj.get("notas").toString();
-					String estado= theObj.get("estado").toString();
-					
-					cadena+="<tr><td>"+nombre+"</td><td>"+prioridad+"</td><td>"+fecha+"</td><td>"+estado+"</td><td>"+pertenece+"</td><td>"+notas+"</td></tr>";
+					//Tarea t = new Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());					
+					Tarea t = new Tarea("","","","","","");
+					//lista_tareas.add(t);
+					cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
+					i++;
 				}
 		    		//System.out.println(cursor.next().get("prioridad"));
 		    	cadena+="</table>";
@@ -138,5 +139,16 @@ public class MongoDB {
 			coll.insert(doc);
 			mongoClient.close();			
 		}
+		
+		static List<Tarea> lista_tareas = new ArrayList<Tarea>();
+
+		public static List<Tarea> getLista_tareas() {
+			return lista_tareas;
+		}
+
+		public static void setLista_tareas(List<Tarea> lista_tareas) {
+			MongoDB.lista_tareas = lista_tareas;
+		}
+		
 		
 }

@@ -1,7 +1,8 @@
 
 <%@ page import="com.esi.uclm.procesos.controller.MongoDB" %>
 <%@ page import="com.esi.uclm.procesos.controller.HelloSpring" %>
-
+<%@ page import=" java.util.ArrayList" %>
+<%@ page import=" java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%
@@ -10,6 +11,8 @@ pageEncoding="ISO-8859-1"%>
 	
 	String rol=MongoDB.comprobar_user_pass(user, password);
 	System.out.println(rol);
+	List lista_tareas=MongoDB.getLista_tareas();
+	
 	
 	
 %>
@@ -21,6 +24,14 @@ pageEncoding="ISO-8859-1"%>
 <title>Tareas</title>
 
 </head>
+<script type="text/javascript">
+function muestra(valor){
+   alert(valor);
+  var manolo=<%=lista_tareas%>;
+  manolo.get(valor);
+   
+}
+</script>
 <link rel="stylesheet" type="text/css" href="css/procesos.css" />
 <body>
 	<h2 style="text-align: center;">Bienvenido <%= user %> !</h2>	
