@@ -97,7 +97,13 @@ public class MongoDB {
 		    
 		    	int i=0;
 		    	String cadena="";
-		    	cadena+="<table border=1><tr><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></tr> ";
+		    	cadena+="<table border=1><tr bgcolor='#EBEBEB' style='vertical-align:middle'>"
+		    			+ "<th>Nombre</th>"
+		    			+ "<th>Prioridad</th>"
+		    			+ "<th>Fecha limite</th>"
+		    			+ "<th>Estado</th>"
+		    			+ "<th>Pertenece</th>"
+		    			+ "<th>Notas</th></tr>";
 		    	
 		    	
 		    	
