@@ -2,7 +2,7 @@
 	
 Feature: login
 	
-	Scenario: Test para loging
+	Scenario: Test para login
 	Given Abrimos Mozilla Firefox
 	When Insertamos nombre y password en la barra
 	Then boton aceptar

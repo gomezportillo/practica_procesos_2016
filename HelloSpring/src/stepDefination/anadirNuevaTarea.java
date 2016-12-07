@@ -13,7 +13,7 @@ import cucumber.api.java.en.When;
 public class anadirNuevaTarea {
 	WebDriver driver = new FirefoxDriver();
 	//WebDriver driver = new ChromeDriver();
-	
+	//funciona
 	@Given("^Abrimos Mozilla Firefox2$")
 	public void Abrimos_Mozilla_Firefox() throws Throwable {
 		System.setProperty("webdriver.gecko.driver","geckodriver.exe");

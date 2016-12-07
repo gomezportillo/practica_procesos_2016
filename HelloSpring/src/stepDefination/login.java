@@ -13,7 +13,7 @@ public class login {
 
 	WebDriver driver = new FirefoxDriver();
 	//WebDriver driver = new ChromeDriver();
-	
+	//funciona
 	@Given("^Abrimos Mozilla Firefox$")
 	public void Abrimos_Mozilla_Firefox() throws Throwable {
 		System.setProperty("webdriver.gecko.driver","geckodriver.exe");
