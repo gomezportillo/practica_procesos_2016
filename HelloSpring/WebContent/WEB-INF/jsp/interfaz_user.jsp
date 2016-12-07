@@ -1,6 +1,7 @@
 
 <%@ page import="com.esi.uclm.procesos.controller.MongoDB" %>
 <%@ page import="com.esi.uclm.procesos.controller.HelloSpring" %>
+<%@ page import="com.esi.uclm.procesos.gestion.Tarea" %>
 <%@ page import=" java.util.ArrayList" %>
 <%@ page import=" java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -11,8 +12,9 @@ pageEncoding="ISO-8859-1"%>
 	//
 	String rol=MongoDB.comprobar_user_pass(user, password);
 	System.out.println(rol);
-	List lista_tareas=MongoDB.getLista_tareas();
 	
+	 String tarea=MongoDB.generar_list_tareas().get(0).getNombre().toString();
+     System.out.println(tarea);
 	
 	
 %>
@@ -26,9 +28,9 @@ pageEncoding="ISO-8859-1"%>
 </head>
 <script type="text/javascript">
 function muestra(valor){
-   alert(valor);
-  var manolo=<%=lista_tareas%>;
-  manolo.get(valor);
+  
+  nombre="<%=MongoDB.generar_list_tareas().get(0).getNombre().toString()%>";
+  alert(nombre);
    
 }
 </script>
@@ -50,6 +52,8 @@ function muestra(valor){
       <%  	
       out.println(MongoDB.generar_tabla_tareas());
   	
+     
+      
       if(rol.equals("admin")){
     	  out.println("  <form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
     	  

@@ -82,7 +82,7 @@ public class MongoDB {
 			return cadena;
 		}
 		
-		@SuppressWarnings("null")
+		
 		public static String generar_tabla_tareas() throws UnknownHostException{
 			//MongoClient mongoClient = new MongoClient("localhost");
 			MongoClient mongoClient=conexion();
@@ -100,12 +100,13 @@ public class MongoDB {
 		    	cadena+="<table border=1><tr><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></tr> ";
 		    	
 		    	
-		    	ArrayList<Tarea> lista_tarea = new ArrayList<Tarea>();
+		    	
 		    	while (cursor.hasNext()) {
 					DBObject theObj = cursor.next();
 					Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
-					lista_tarea.add(t);
-					cadena+="<tr><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
+					
+					cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
+					i++;
 				}
 		    		//System.out.println(cursor.next().get("prioridad"));
 		    	cadena+="</table>";
@@ -138,15 +139,27 @@ public class MongoDB {
 			mongoClient.close();			
 		}
 		
-		static List<Tarea> lista_tareas = new ArrayList<Tarea>();
+		 
 
-		public static List<Tarea> getLista_tareas() {
-			return lista_tareas;
-		}
-
-		public static void setLista_tareas(List<Tarea> lista_tareas) {
-			MongoDB.lista_tareas = lista_tareas;
-		}
-		
-		
+		public static ArrayList<Tarea> generar_list_tareas() throws UnknownHostException{
+			//MongoClient mongoClient = new MongoClient("localhost");
+			ArrayList<Tarea> lista_tarea = new ArrayList<Tarea>();
+			MongoClient mongoClient=conexion();
+	          
+			 	String dbName="usuarios_prueba";
+				String tabla="tareas";
+				
+				DB db=mongoClient.getDB(dbName);
+				DBCollection coll= db.getCollection(tabla);				
+		    	DBCursor cursor = coll.find(); 
+		    	
+		    	while (cursor.hasNext()) {
+					DBObject theObj = cursor.next();
+					Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+					lista_tarea.add(t);					
+				}
+		    	
+		  		mongoClient.close();
+		  		return lista_tarea;
+		}	 		
 }
