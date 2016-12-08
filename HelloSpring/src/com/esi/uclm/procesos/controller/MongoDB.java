@@ -83,7 +83,7 @@ public class MongoDB {
 		}
 		
 		
-		public static String generar_tabla_tareas() throws UnknownHostException{
+		public static String generar_tabla_tareas(String usuario) throws UnknownHostException{
 			//MongoClient mongoClient = new MongoClient("localhost");
 			MongoClient mongoClient=conexion();
 	          
@@ -104,17 +104,23 @@ public class MongoDB {
 		    			+ "<th>Estado</th>"
 		    			+ "<th>Pertenece</th>"
 		    			+ "<th>Notas</th></tr>";
-		    	
-		    	
-		    	
-		    	while (cursor.hasNext()) {
-					DBObject theObj = cursor.next();
+		    				
+				
+				BasicDBObject filtro = new BasicDBObject();
+				filtro.put("pertenece", usuario);
+				
+				
+				DBCursor cur = coll.find(filtro);
+
+		    	while (cur.hasNext()) {
+					DBObject theObj = cur.next();
 					Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
 					
 					cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
 					i++;
 				}
 		    		//System.out.println(cursor.next().get("prioridad"));
+		    	
 		    	cadena+="</table>";
 		  		mongoClient.close();
 		  		return cadena;
@@ -145,9 +151,42 @@ public class MongoDB {
 			mongoClient.close();			
 		}
 		
+		public static void eliminar_usuario(String usuario) throws UnknownHostException {
+			
+			MongoClient mongoClient=conexion();
+			String dbName="usuarios_prueba";
+			String tabla="usuarios";
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+			
+			DBCursor cursor=coll.find();
+			
+			DBObject usuarioEliminar=new BasicDBObject("user", usuario);
+			//db.getCollection("users").find();
+			coll.remove(usuarioEliminar);
+			
+			mongoClient.close();			
+		}
+		
+		public static void modificar_usuario() throws UnknownHostException {
+			
+			MongoClient mongoClient=conexion();
+			String dbName="usuarios_prueba";
+			String tabla="usuarios";
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+			
+			DBCursor cursor=coll.find();
+			
+			//CUIDADO, Si actualizas usando el campo user, no puede modificar dicho campo.
+			coll.update(new BasicDBObject("user", "pablo"),
+	                  new BasicDBObject("$set", new BasicDBObject("email", "jose")));
+			mongoClient.close();
+		}
 		 
-
+/*
 		public static ArrayList<Tarea> generar_list_tareas() throws UnknownHostException{
+			
 			//MongoClient mongoClient = new MongoClient("localhost");
 			ArrayList<Tarea> lista_tarea = new ArrayList<Tarea>();
 			MongoClient mongoClient=conexion();
@@ -157,15 +196,46 @@ public class MongoDB {
 				
 				DB db=mongoClient.getDB(dbName);
 				DBCollection coll= db.getCollection(tabla);				
-		    	DBCursor cursor = coll.find(); 
+		    	 
+				
+				
+				BasicDBObject filtro = new BasicDBObject();
+				filtro.put("user", "pablo");
+				 System.out.println("eeeeeeeeeeeeeeeeeeee");
+				DBCursor cur = coll.find(filtro);
+				while (cur.hasNext())
+				  System.out.println(cur.next());
+				System.out.println("eeeeeeeeeeeeeeeeeeee");
+				
+				
+				
+				
 		    	
-		    	while (cursor.hasNext()) {
-					DBObject theObj = cursor.next();
-					Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
-					lista_tarea.add(t);					
-				}
+		    	BasicDBObject query = new BasicDBObject();
+		    	query.put("name", new BasicDBObject("$regex", "pablo").append("$options","pablo"));
+		    	
+		    	
+		    	DBCursor cursor = coll.find(query); 
+		    	while(cursor.hasNext()){
+		    			DBObject theObj = cursor.next();
+		    			System.out.print(theObj.get("name").toString());
+						//Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+						//lista_tarea.add(t);	
+						 
+			
+		    	}
+		    	
+		    	
+		    	//while (cursor.hasNext()) {
+				//	DBObject theObj = cursor.next();
+				//	Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+				//	lista_tarea.add(t);					
+				//}
+				 * 
+				 
 		    	
 		  		mongoClient.close();
 		  		return lista_tarea;
-		}	 		
+		}	 
+*/
 }

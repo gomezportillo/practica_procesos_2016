@@ -10,6 +10,7 @@ public class Tarea {
 	
 	public Tarea(String nombre, String prioridad, String pertenece, String fecha, String notas, String estado) {
 		super();
+		System.out.println("Tarea creada");
 		this.nombre = nombre;
 		this.prioridad = prioridad;
 		this.pertenece = pertenece;

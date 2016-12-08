@@ -1,4 +1,19 @@
-
+ <%@page import="java.util.*"%>
+<%@page session='true'%> 
+ <% HttpSession sesion=request.getSession();
+	System.out.println("Último acceso: "+sesion.getId()); 
+	System.out.println("La sesión es "+sesion.getAttribute("user"));
+%>
+<%@page import="com.esi.uclm.procesos.controller.MongoDB" %>
+<%@page import="com.esi.uclm.procesos.gestion.Tarea" %>
+<%!
+	public String helloWorld(){
+			System.out.print("sto si");
+			
+		 return "Hello World";
+	}
+%>
+ 
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,10 +33,42 @@
   $( function() {
     $( "#datepicker" ).datepicker();
   } );
+  
   </script>
+  
+  <script type="text/javascript">
+
+
+  function mostrarMensaje1() {
+  	
+
+<%
+	String resultado="No se ha creado la tarea";
+	String nombre=request.getParameter("nombre");
+	String prioridad=request.getParameter("prioridad");
+	String pertenece=request.getParameter("pertenece");
+	String fecha=request.getParameter("fecha");
+	String notas=request.getParameter("notas");
+	String estado=request.getParameter("estado");
+
+	//Claramente hay un error porque cuando inicia esta pagina se mete aquí sin llamar a la función javaScript
+	// ehhhh....pero que lo arregle otro si tiene huevos.
+	
+	if(nombre!=null){
+	Tarea t=new Tarea(nombre, prioridad, pertenece, fecha, notas, estado);
+	MongoDB.insertar_tarea(t);
+	resultado="SI se ha creado la tarea";
+	}
+
+%>
+
+  }
+  </script>
+
     
 </head>
 <body>
+<h2 style="text-align: center;">Usuario:  <%= sesion.getAttribute("user") %> !</h2>	
 <h1> Inicio</h1>
 
 </section>
@@ -30,7 +77,7 @@
      <div class="vertical">
       <h2>Usuario</h2><br>      
       <div class="contenido" id="cont">
-       <form action="tareaAñadida.jsp" method="post"> 
+       <form  method="get"  id="form1" > 
 	       	<br>
 	       	<label for="nombre">Nombre: </label><input type="text" align="right" name="nombre"><br>
 	        <label for="movie">Prioridad: </label><input id="movie" type="number" value="0" name="prioridad"/><br>
@@ -46,7 +93,7 @@
 	        <br><br><br><br>
 	        
 	        <button type="reset" value="Limpiar">Limpiar</button>  
-	        <button type="submit" value="Aceptar" name="Aceptar" class="verde"/>Aceptar</button> <br>
+	        <button type="submit" value="Aceptar" name="Aceptar" class="verde" onclick=mostrarMensaje1() >Aceptar</button> <br>
         </form>
       </div>
    </div>
