@@ -57,9 +57,8 @@
       <h2>Usuario</h2><br>      
       <div class="contenido" id="cont">
       
-<%			
-		
-		out.println(MongoDB.generar_tabla_tareas(user));
+<%					
+		out.println(MongoDB.generar_tabla_tareas_usuario(user));
 
      		if(rol.equals("admin")){
     	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");

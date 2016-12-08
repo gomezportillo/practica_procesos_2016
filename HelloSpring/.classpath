@@ -33,5 +33,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/pablo/Desktop/lib/mockito-all-2.0.2-beta.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/pablo/Desktop/lib/mongo-java-driver-2.10.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/pablo/Desktop/lib/selenium-server-standalone-3.0.0-beta4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/lib/servlet-2.2.8.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

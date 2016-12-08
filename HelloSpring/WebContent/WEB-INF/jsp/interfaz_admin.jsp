@@ -15,21 +15,41 @@
 
 </section>
 <div  id='marco'>
-  <div id="contenedor">
+	<div id="contenedor">
 	
-	 <div class="vertical">
-	 <h2>Buscar usuario existente</h2><br>
-		<div class="contenido">
-			Buscar usuario: <br><input type="search" width=20><button type="search" width=20 onclick=" ">Buscar</button><br>
-	<%
-	out.println(MongoDB.generar_tabla_users("usuarios_prueba", "usuarios"));
-	
-	
-	%>
-	<br>
-			<textarea name="usuarios" rows="10" cols="40">Aqui se cargaran los usuarios segun lo que se escriba el campo de usuario</textarea>
+	 	<div class="vertical">
+	 
+			<div class="contenido" title="Administrar tareas">
+			
+				<%					
+						out.println(MongoDB.generar_tabla_users());
+				
+				 %>
+			
+			</div>
 		</div>
-	 </div>
+	</div>
+		<div id="contenedor">
+	
+	 	<div class="vertical">
+	 
+			<div class="contenido" title="Administrar tareas">
+			
+				<%					
+						out.println(MongoDB.generar_tabla_tareas_admin());
+				
+				 %>
+			
+			</div>
+		</div>
+	</div>	
+	 	
+	 
+	 <!--  
+	 <label name="busarTarea"></label><br><input type="search" width=20><button type="search" width=20 onclick=" ">Buscar</button><br>
+			<textarea name="usuarios" rows="10" cols="40">Aqui se cargaran los usuarios segun lo que se escriba el campo de usuario</textarea>
+			
+			
      <div class="vertical">
       <h2>Administrar usuario</h2><br>      
       <div class="contenido">
@@ -45,13 +65,15 @@
 		<div class="bottom">
 			<button type="button" onclick="location.href='index.html'">Borrar</button>         
 			<button type="button" onclick="location.href='registrarse.html'">Modificar</button>  
-			<!--<button type="button" onclick="location.href='index.html'">Denegar</button> -->        
-			<!--<button type="button" onclick="location.href='registrarse.html'">Añadir</button>  -->   
+			<button type="button" onclick="location.href='index.html'">Denegar</button>         
+			<button type="button" onclick="location.href='registrarse.html'">Añadir</button>    
 			<button type="submit" value="anadir" name="anadir">Añadir</button> <br> 
 		<div>
 		</form>
       </div>
+      
  	 </div>
+ 	 -->
 </div>
 
 </body>

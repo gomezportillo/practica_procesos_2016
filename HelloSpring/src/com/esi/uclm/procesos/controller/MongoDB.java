@@ -49,6 +49,7 @@ public class MongoDB {
 			mongoClient.close();
 			return rol;
 		}
+/*
 		public static void Consulta(String bbddName, String tabla) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
 			DB db= mongoClient.getDB(bbddName);
@@ -59,11 +60,16 @@ public class MongoDB {
 				System.out.println(cursor.next());
 			}
 		}
-
-		public static String generar_tabla_users(String bbddName, String tabla) throws UnknownHostException{
+*/
+		public static String generar_tabla_users() throws UnknownHostException{
 			MongoClient mongoClient=conexion();
-			DB db= mongoClient.getDB(bbddName);
-			DBCollection coll=db.getCollection(tabla);
+	          
+		 	String dbName="usuarios_prueba";
+			String tablaUsuarios="usuarios";
+			
+			
+			DB db= mongoClient.getDB(dbName);
+			DBCollection coll=db.getCollection(tablaUsuarios);
 			DBCursor cursor=coll.find();
 			
 			String cadena="";
@@ -80,23 +86,23 @@ public class MongoDB {
 	    		//System.out.println(cursor.next().get("prioridad"));
 	    	cadena+="</table>";
 			return cadena;
-		}
-		
-		
-		public static String generar_tabla_tareas(String usuario) throws UnknownHostException{
+		}		
+						
+		public static String generar_tabla_tareas_usuario(String usuario) throws UnknownHostException{
 			//MongoClient mongoClient = new MongoClient("localhost");
 			MongoClient mongoClient=conexion();
 	          
 			 	String dbName="usuarios_prueba";
-				String tabla="tareas";
-				String rol="";
-				DB db=mongoClient.getDB(dbName);
-				DBCollection coll= db.getCollection(tabla);
+				String tablaTareas="tareas";
 				
-		    	DBCursor cursor = coll.find(); 
-		    
+
+				DB db=mongoClient.getDB(dbName);
+				DBCollection collTareas= db.getCollection(tablaTareas);
+				
+				
 		    	int i=0;
 		    	String cadena="";
+		    	
 		    	cadena+="<table border=1><tr bgcolor='#EBEBEB' style='vertical-align:middle'>"
 		    			+ "<th>Nombre</th>"
 		    			+ "<th>Prioridad</th>"
@@ -105,27 +111,62 @@ public class MongoDB {
 		    			+ "<th>Pertenece</th>"
 		    			+ "<th>Notas</th></tr>";
 		    				
-				
-				BasicDBObject filtro = new BasicDBObject();
-				filtro.put("pertenece", usuario);
-				
-				
-				DBCursor cur = coll.find(filtro);
-
-		    	while (cur.hasNext()) {
-					DBObject theObj = cur.next();
-					Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
-					
-					cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
-					i++;
-				}
-		    		//System.out.println(cursor.next().get("prioridad"));
+			
+		    	
+					//Buscar solo los usuario con el filtro dado
+					BasicDBObject filtro = new BasicDBObject();
+					filtro.put("pertenece", usuario);
+					DBCursor cur = collTareas.find(filtro);
+	
+			    	while (cur.hasNext()) {
+						DBObject theObj = cur.next();
+						Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+						
+						cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
+						i++;
+					}
 		    	
 		    	cadena+="</table>";
 		  		mongoClient.close();
 		  		return cadena;
 		}
-		
+		public static String generar_tabla_tareas_admin()  throws UnknownHostException{
+
+			MongoClient mongoClient=conexion();
+	          
+			String dbName="usuarios_prueba";
+			String tabla="tareas";
+			String rol="";
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+				
+		    DBCursor cursor = coll.find(); 
+		    
+		    int i=0;
+		    String cadena="";
+		    cadena+="<table border=1><tr bgcolor='#EBEBEB' style='vertical-align:middle'>"
+		    			+ "<th>Nombre</th>"
+		    			+ "<th>Prioridad</th>"
+		    			+ "<th>Fecha limite</th>"
+		    			+ "<th>Estado</th>"
+		    			+ "<th>Pertenece</th>"
+		    			+ "<th>Notas</th></tr>";
+		    	
+		    	
+		    	
+		    while (cursor.hasNext()) {
+				DBObject theObj = cursor.next();
+				Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+				
+				cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
+				i++;
+			}
+		    		//System.out.println(cursor.next().get("prioridad"));
+		    cadena+="</table>";
+		  	mongoClient.close();
+		  	return cadena;
+		  		
+		}
 		public static void insertar_tarea(Tarea t) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
 	          
@@ -150,7 +191,6 @@ public class MongoDB {
 			coll.insert(doc);
 			mongoClient.close();			
 		}
-		
 		public static void eliminar_usuario(String usuario) throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
@@ -166,8 +206,7 @@ public class MongoDB {
 			coll.remove(usuarioEliminar);
 			
 			mongoClient.close();			
-		}
-		
+		}	
 		public static void modificar_usuario() throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
