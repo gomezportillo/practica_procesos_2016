@@ -36,6 +36,32 @@
 <html>
 <head>
 
+<script type="text/javascript">
+function muestra(valor){
+
+//var x = document.getElementById("myTable").rows[0].cells.length;
+//document.getElementById("test").innerHTML=x;  
+var nombre=document.getElementById("myTable").rows[valor].cells[0].innerHTML;
+var prioridad=document.getElementById("myTable").rows[valor].cells[1].innerHTML;
+var fecha_limite=document.getElementById("myTable").rows[valor].cells[2].innerHTML;
+var estado=document.getElementById("myTable").rows[valor].cells[3].innerHTML;
+var pertenece=document.getElementById("myTable").rows[valor].cells[4].innerHTML;
+var notas=document.getElementById("myTable").rows[valor].cells[5].innerHTML;
+
+
+
+
+document.getElementById("nombre").value=nombre;
+document.getElementById("prioridad").value=prioridad;
+document.getElementById("fecha_limite").value=fecha_limite;
+document.getElementById("estado").value=estado;
+document.getElementById("pertenece").value=pertenece;
+document.getElementById("notas").value=notas;
+
+//alert(nombre+prioridad+fecha_limite+estado+pertenece+notas);
+}
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Tareas</title>
 
@@ -52,20 +78,48 @@
 
 
 <div  id='marco'>
-  <div id="contenedor">
+	<div id="contenedor">
+		<div class="vertical">
+		     <h2>Usuario</h2><br>      
+		     <div class="contenido" id="cont">
+		      
+			<%					
+					out.println(MongoDB.generar_tabla_tareas_usuario(user));
+			
+			     		if(rol.equals("admin")){
+			    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
+			      		}
+			 %>     		
+			</div>
+		</div>
+	</div>
+
 	<div class="vertical">
-      <h2>Usuario</h2><br>      
-      <div class="contenido" id="cont">
-      
-<%					
-		out.println(MongoDB.generar_tabla_tareas_usuario(user));
+	    <h2>Administrar usuario</h2><br>      
+		<div class="contenido">
+	        <form action="user_añadido.jsp" method="post">   
+		        Nombre:<br>  <input type="text" id="nombre" name="nombre"><br>
+		        Prioridad:<br>  <input type="text" id="prioridad" name="prioridad" ><br>
+		        Fecha Limite:<br>  <input type="text"  id="fecha_limite" name="fecha_limite"><br>
+		        Estado:<br>  <input type="text" id="estado" name="estado"><br>
+		        Pertenece:<br>  <input type="text" id="pertenece" name="pertenece"><br>
+		        Notas:<br>  <input type="text" id="notas" name="notas"><br>
+		        
+		        
+				<div class="bottom">
+					<button type="button" onclick="location.href='index.html'">Borrar</button>         
+					<button type="button" onclick="location.href='registrarse.html'">Modificar</button>  
+					<!--<button type="button" onclick="location.href='index.html'">Denegar</button> -->        
+					<!--<button type="button" onclick="location.href='registrarse.html'">Añadir</button>  -->   
+					<!--<button type="submit" value="Añadir" name="Añadir"/>Añadir</button> <br>--> 
+				<div>
+			</form>
+		</div>
+	</div>
 
-     		if(rol.equals("admin")){
-    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
-      		}
- %>     		
-
-
+</div>
+ 
+<!--  
 
 		<form action="tarea.jsp" method="post" target="_blank">
 			<button type="submit" value="anadir" name="anadir" class="verde">Añadir</button><br>
@@ -77,6 +131,8 @@
 	</div>
 </div>
  </div>
+-->
+ 
 </body>
 </body>
 </html>
