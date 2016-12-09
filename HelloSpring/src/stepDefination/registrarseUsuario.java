@@ -9,12 +9,11 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class anadirNuevoUsuario {
-	
+public class registrarseUsuario {
 	WebDriver driver = new FirefoxDriver();
 	//WebDriver driver = new ChromeDriver();
 	//funciona
-	@Given("^Abrimos Mozilla Firefox3$")
+	@Given("^Abrimos Mozilla Firefox4$")
 	public void Abrimos_Mozilla_Firefox() throws Throwable {
 		System.setProperty("webdriver.gecko.driver","geckodriver.exe");
 		//System.setProperty("webdriver.chrome.driver","chromedriver.exe");
@@ -24,38 +23,22 @@ public class anadirNuevoUsuario {
 		Thread.sleep(1000);
 	}
 
-	@When("^Insertamos nombre y password en la barra3$")
+	@When("^Pulsa registrarse$")
 	public void Insertamos_nombre_contraseña() throws Throwable {
-		WebElement barraNombre = driver.findElement(By.name("user"));
-		WebElement password = driver.findElement(By.name("password"));
-		Thread.sleep(2000);
-		barraNombre.sendKeys("pablo");
-		//barraNombre.submit();
-		Thread.sleep(2000);
-		password.sendKeys("pablo");
-		//password.submit();
+		WebElement boton = driver.findElement(By.name("Registrarse"));
+		boton.click();
 		Thread.sleep(1000);
 	}
 	
-	@Then("^boton aceptar3$")
+	@Then("^RellenoDeCampos$")
 	public void aceptar() throws Throwable {
-		Thread.sleep(2000);
-		WebElement boton= driver.findElement(By.name("aceptar"));
-		boton.click();
-	}	
-	
-	@Then("^boton admin$")
-	public void anadirUsuario() throws Throwable {
-		Thread.sleep(7000);
-		WebElement botonAdmin = driver.findElement(By.name("Panel_admin"));
-		botonAdmin.click();
-		Thread.sleep(7000);
+		Thread.sleep(5000);
 		WebElement nombre = driver.findElement(By.name("user"));
 		nombre.sendKeys("Paquito");
 		//nombre.submit();
-		//Thread.sleep(3000);
-		//WebElement prioridad = driver.findElement(By.name("password"));
-		//prioridad.sendKeys("paquito");
+		Thread.sleep(3000);
+		WebElement prioridad = driver.findElement(By.name("password"));
+		prioridad.sendKeys("paquito");
 		//prioridad.submit();
 		Thread.sleep(3000);
 		WebElement email = driver.findElement(By.name("email"));
@@ -66,14 +49,15 @@ public class anadirNuevoUsuario {
 		rol.sendKeys("Usuario");
 		//rol.submit();
 		Thread.sleep(3000);
-		WebElement boton= driver.findElement(By.name("anadir"));
+		WebElement boton = driver.findElement(By.name("aceptar"));
 		boton.click();
-	}
+		Thread.sleep(1000);
+	}	
 
-	@Then("^cerraremos el navegador3$")
+	@Then("^cerraremos el navegador4$")
 	public void cerraremos_el_navegador() throws Throwable {
 	    Thread.sleep(5000);
 		driver.quit();
 	}
-	
+
 }

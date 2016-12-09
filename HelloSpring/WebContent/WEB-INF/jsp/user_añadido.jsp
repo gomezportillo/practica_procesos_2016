@@ -17,7 +17,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Refresh" content="1;url=interfaz_user.jsp">
+<meta http-equiv="Refresh" content="1;url=/HelloSpring">
 <title>Tarea añadida</title>
 </head>
 <body>
@@ -27,9 +27,9 @@
 	<h1><%= email%></h1><br>
 	<h1><%= rol%></h1><br>
 
-	<a href="/HelloSpring/interfaz_user.jsp">Volver2</a> 
+	<!-- <a href="/HelloSpring">Volver2</a>--> 
 	
 	<br /> <br />
-	<div style="text-align: center;"><a href="/HelloSpring/interfaz_admin">Volver</a> </div>
+	<!--  <div style="text-align: center;"><a href="/HelloSpring/interfaz_admin">Volver</a> </div>-->
 </body>
 </html>

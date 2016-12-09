@@ -5,16 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class anadirNuevaTarea {
+public class borrarTarea {
 	WebDriver driver = new FirefoxDriver();
 	//WebDriver driver = new ChromeDriver();
 	//funciona
-	@Given("^Abrimos Mozilla Firefox2$")
+	@Given("^Abrimos Mozilla Firefox6$")
 	public void Abrimos_Mozilla_Firefox() throws Throwable {
 		System.setProperty("webdriver.gecko.driver","geckodriver.exe");
 		//System.setProperty("webdriver.chrome.driver","chromedriver.exe");
@@ -24,7 +23,7 @@ public class anadirNuevaTarea {
 		Thread.sleep(1000);
 	}
 
-	@When("^Insertamos nombre y password en la barra2$")
+	@When("^Insertamos nombre y password en la barra6$")
 	public void Insertamos_nombre_contraseña() throws Throwable {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
@@ -37,7 +36,7 @@ public class anadirNuevaTarea {
 		Thread.sleep(1000);
 	}
 	
-	@Then("^boton aceptar2$")
+	@Then("^boton aceptar6$")
 	public void aceptar() throws Throwable {
 		Thread.sleep(7000);
 		WebElement boton= driver.findElement(By.name("aceptar"));
@@ -45,11 +44,11 @@ public class anadirNuevaTarea {
 		Thread.sleep(2000);
 	}	
 	
-	@Then("^boton anadir$")
+	@Then("^boton eliminar$")
 	public void anadir() throws Throwable {
 		Thread.sleep(4000);
 		WebElement nombre = driver.findElement(By.name("nombre"));
-		nombre.sendKeys("Tarea1");
+		nombre.sendKeys("tareauno");
 		//nombre.submit();
 		Thread.sleep(4000);
 		WebElement prioridad = driver.findElement(By.name("prioridad"));
@@ -57,26 +56,26 @@ public class anadirNuevaTarea {
 		//prioridad.submit();
 		Thread.sleep(4000);
 		WebElement pertenece = driver.findElement(By.name("pertenece"));
-		pertenece.sendKeys("Kike");
+		pertenece.sendKeys("pablo");
 		//pertenece.submit();
 		Thread.sleep(4000);
 		WebElement fecha = driver.findElement(By.name("fecha_limite"));
-		fecha.sendKeys("01/01/2018");
+		fecha.sendKeys("25/06/9");
 		//fecha.submit();
 		Thread.sleep(4000);
 		WebElement notas = driver.findElement(By.name("notas"));
-		notas.sendKeys("Tarea1");
+		notas.sendKeys("adsfas");
 		//notas.submit();
 		Thread.sleep(4000);
 		WebElement estado = driver.findElement(By.name("estado"));
-		estado.sendKeys("Acabada");
+		estado.sendKeys("dsfadfsadsfadsa");
 		Thread.sleep(4000);
-		WebElement botonAnadir = driver.findElement(By.name("anadir"));
-		botonAnadir.click();
+		WebElement botonEliminar = driver.findElement(By.name("eliminar"));
+		botonEliminar.click();
 		Thread.sleep(7000);
 	}
 
-	@Then("^cerraremos el navegador2$")
+	@Then("^cerraremos el navegador6")
 	public void cerraremos_el_navegador() throws Throwable {
 	    Thread.sleep(5000);
 		driver.quit();
