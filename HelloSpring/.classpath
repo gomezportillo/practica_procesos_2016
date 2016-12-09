@@ -32,6 +32,6 @@
 	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/junit-4.11.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/mockito-all-2.0.2-beta.jar"/>
 	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/selenium-server-standalone-3.0.0-beta4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/mongodb-driver-3.4.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/mongo-java-driver-2.10.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
