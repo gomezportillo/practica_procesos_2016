@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="com.esi.uclm.procesos.controller.MongoDB" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -7,6 +8,8 @@
 <meta charset="UTF-8">
 <title>Procesos de Ingieneria del Software </title>
 </head>
+
+
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css/procesos.css" />
 
@@ -26,7 +29,7 @@
 				<label for="login">Usuario: </label>			<input type="text" align="right" name="user"> <br>
 				<label for="contrasena">Contrasena: </label> <input type="password" align="right" name="password"><br>  
 			
-				<button type="submit" value="Aceptar" name="aceptar" class="verde">Aceptar</button>
+				<button type="submit" value="Aceptar" name="aceptar" onclick=comprobar_y_crear_sesion() class="verde">Aceptar</button>
 			</form>
 			<form action="registrarse.jsp" method="post">
 				<button type="submit" value="Registrarse" name = "Registrarse" class="azul">Registarse</button> 

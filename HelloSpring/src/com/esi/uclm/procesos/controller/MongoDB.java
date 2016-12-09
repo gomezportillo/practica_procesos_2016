@@ -211,7 +211,38 @@ public class MongoDB {
 	                  new BasicDBObject("$set", new BasicDBObject("email", usuario.getEmail())));
 			mongoClient.close();
 		}
-		 
+		public static void modificar_tarea(Tarea tarea) throws UnknownHostException {
+			
+			MongoClient mongoClient=conexion();
+			String dbName="usuarios_prueba";
+			String tabla="tareas";
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+			
+			DBCursor cursor=coll.find();
+			
+			//CUIDADO, Si actualizas usando el campo user, no puede modificar dicho campo.
+			coll.update(new BasicDBObject("user", tarea.getNombre()),
+	                  new BasicDBObject("$set", new BasicDBObject("prioridad", tarea.getPrioridad())));
+			mongoClient.close();
+		}
+		
+		public static void eliminar_tarea(String nombretarea) throws UnknownHostException {
+			
+			MongoClient mongoClient=conexion();
+			String dbName="usuarios_prueba";
+			String tabla="usuarios";
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+			
+			DBCursor cursor=coll.find();
+			
+			//DBObject usuarioEliminar=new BasicDBObject("user", usuario);
+			//db.getCollection("users").find();
+			coll.remove(new BasicDBObject("nombre",nombretarea));
+			
+			mongoClient.close();			
+		}	
 /*
 		public static ArrayList<Tarea> generar_list_tareas() throws UnknownHostException{
 			

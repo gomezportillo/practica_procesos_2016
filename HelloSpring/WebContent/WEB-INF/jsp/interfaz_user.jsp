@@ -11,26 +11,46 @@
 
 
 <%
-	//BASURA_MongoDB.eliminar_usuario();
-	//BASURA_MongoDB.modificar_usuario();
-	
-	String user = request.getParameter("user");	
-	String password = request.getParameter("password");
-	
-	String rol=MongoDB.comprobar_user_pass(user, password);
- 	//System.out.println(rol);
-	
-	//MongoDB.generar_list_tareas();
-   // System.out.println(tarea);
 	
 	
-%>
- <% HttpSession sesion=request.getSession();
- 	sesion.setAttribute("user",user); 
-	System.out.println("Último acceso: "+sesion.getId()); 
-	System.out.println("La sesión es "+sesion.getAttribute("user"));
+	//String user=request.getParameter("user");
+	//String password = request.getParameter("password");	
+	//String rol=MongoDB.comprobar_user_pass(user, "pablo");
+	
 %>
 
+<%@page session='true'%> 
+ <% 
+	
+	%> 
+	<script>
+function comprobar_y_crear_sesion() {
+	<%
+		String resultado="No eliminado el usuario";
+		String user=request.getParameter("user");
+		String password=request.getParameter("password");
+		String rol="";
+		HttpSession sesion;
+		if(user!=null && password!=null){	
+			// user=request.getParameter("user");
+			sesion=request.getSession();
+			sesion.setAttribute("user",user); 
+		    rol=MongoDB.comprobar_user_pass(user, password);
+			sesion.setAttribute("rol",rol);
+			
+			System.out.println("Último acceso: "+sesion.getId()); 
+		  	System.out.println("La sesión es "+sesion.getAttribute("user"));
+		}
+		else
+		{
+			sesion=request.getSession();
+			System.out.println("Último acceso: "+sesion.getId()); 
+			System.out.println("La sesión es "+sesion.getAttribute("user"));
+			System.out.println("El Rol es "+sesion.getAttribute("rol"));
+		}
+	%>
+	  }
+</script>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -61,6 +81,14 @@ document.getElementById("notas").value=notas;
 //alert(nombre+prioridad+fecha_limite+estado+pertenece+notas);
 }
 </script>
+
+<script type="text/javascript">
+	function guardar_user_sesion(){
+		
+		document.getElementById("user").value="julio";
+	}
+
+</script>
 <script type="text/javascript">
 
 
@@ -71,12 +99,9 @@ document.getElementById("notas").value=notas;
 	    String nombre=request.getParameter("nombre");
 		String prioridad=request.getParameter("prioridad");
 		String pertenece=request.getParameter("pertenece");
-		String fecha=request.getParameter("fecha");
+		String fecha=request.getParameter("fecha_limite");
 		String notas=request.getParameter("notas");
 		String estado=request.getParameter("estado");
-		
-	  	
-		
 		
 	  	if(nombre!=null){
 	  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
@@ -85,7 +110,34 @@ document.getElementById("notas").value=notas;
 	  %>
 	    }
   
- 
+  function modificar() {
+	  <%
+	    nombre=request.getParameter("nombre");
+		prioridad=request.getParameter("prioridad");
+		pertenece=request.getParameter("pertenece");
+		fecha=request.getParameter("fecha_limite");
+		notas=request.getParameter("notas");
+		estado=request.getParameter("estado");
+		
+	  	if(nombre!=null){
+	  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
+	 	 	MongoDB.modificar_tarea(tarea);
+	  	}
+	  %>
+	    }
+  
+  function borrar() {
+	  <%
+	    nombre=request.getParameter("nombre");		
+		
+	  	if(nombre!=null){
+	  		//Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
+	 	 	MongoDB.eliminar_tarea(nombre);
+	  	}
+	  %>
+	    }
+  
+  
   </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -110,7 +162,7 @@ document.getElementById("notas").value=notas;
 		     <div class="contenido" id="cont">
 		      
 			<%					
-					out.println(MongoDB.generar_tabla_tareas_usuario(user));
+					out.println(MongoDB.generar_tabla_tareas_usuario(sesion.getAttribute("user").toString()));
 			
 			     		if(rol.equals("admin")){
 			    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> </form> ");
@@ -131,15 +183,15 @@ document.getElementById("notas").value=notas;
 		        Fecha Limite:<br>  <input type="text"  id="fecha_limite" name="fecha_limite"><br>
 		        Estado:<br>  <input type="text" id="estado" name="estado"><br>
 		        Pertenece:<br>  <input type="text" id="pertenece" name="pertenece"><br>
-		        Notas:<br>  <input type="text" id="notas" name="notas"><br>
-		        
+		        Notas:<br>  <input type="text" id="notas" name="notas"><br>		        
+				User:	<input type="text" id="user" name="user"><br>
 		        
 				<div class="bottom">
-					<button type="button" onclick="location.href='index.html'">Borrar</button>         
-					<button type="button" onclick="location.href='registrarse.html'">Modificar</button>  
-					<!--<button type="button" onclick="location.href='index.html'">Denegar</button> -->        
-					<button type="button" onclick=anadir()>Añadir</button>    
-					<!--<button type="submit" value="Añadir" name="Añadir"/>Añadir</button> <br>--> 
+					<button type="button" onclick=this.form.submit(),comprobar_y_crear_sesion(),borrar()>Borrar</button>         
+					<button type="button" onclick=this.form.submit(),comprobar_y_crear_sesion(),modificar()>Modificar</button>  
+					        
+					<button type="button" onclick=this.form.submit(),comprobar_y_crear_sesion(),anadir()>Añadir</button>    
+					 
 				<div>
 			</form>
 		</div>
@@ -147,20 +199,8 @@ document.getElementById("notas").value=notas;
 </div>
 </div>
  
-<!--  
 
-		<form action="tarea.jsp" method="post" target="_blank">
-			<button type="submit" value="anadir" name="anadir" class="verde">Añadir</button><br>
-		</form>
-		<button type="button" >Modificar</button><br>	
-    	<button type="submit"  value="borrar" name="borrar" >Eliminar</button>	
-    	<a href="/HelloSpring">Volver</a>     
-      </div>
-	</div>
-</div>
- </div>
--->
  
 </body>
-</body>
+
 </html>
