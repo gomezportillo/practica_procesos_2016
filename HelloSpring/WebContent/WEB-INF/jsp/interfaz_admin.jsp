@@ -13,13 +13,13 @@
 <script type="text/javascript">
 function muestra(valor){
 
- 
-var user=document.getElementById("myTable").rows[valor].cells[0].innerHTML;
-var email=document.getElementById("myTable").rows[valor].cells[1].innerHTML;
-var rol=document.getElementById("myTable").rows[valor].cells[2].innerHTML;
+var id=document.getElementById("myTable").rows[valor].cells[0].innerHTML;
+var user=document.getElementById("myTable").rows[valor].cells[1].innerHTML;
+var email=document.getElementById("myTable").rows[valor].cells[2].innerHTML;
+var rol=document.getElementById("myTable").rows[valor].cells[3].innerHTML;
 
 
-
+document.getElementById("id").value=id;
 document.getElementById("user").value=user;
 document.getElementById("email").value=email;
 document.getElementById("rol").value=rol;
@@ -30,43 +30,46 @@ document.getElementById("rol").value=rol;
 </script>
 
 <%
-	String user,password,email,rol;
+	String user,password,email,rol,id;
 	String accion=request.getParameter("accion");
+	
 	if(accion!=null)
 	{
 			if(accion.equals("borrar"))
 			{
 				String resultado="No eliminado el usuario";
-				user=request.getParameter("user");
+				id=request.getParameter("id");
 				
-				if(user!=null){	
-					MongoDB.eliminar_usuario(user);
+				if(id!=null){	
+					MongoDB.eliminar_usuario(id);
 					resultado="SI se ha eliminado el usuario";
 				}
 			}
 	
 		  if(accion.equals("anadir"))
 			{
+			    id=String.valueOf(MongoDB.ultimoid("usuarios_prueba", "usuarios"));
 			  	user=request.getParameter("user");
 				password=user;
 				email=request.getParameter("email");
 				rol=request.getParameter("rol");
 				
 			  	if(user!=null){
-			  		Usuario usuario= new Usuario(user,  password,  email,  rol);
+			  		Usuario usuario= new Usuario(id,user,  password,  email,  rol);
 			 	 	MongoDB.inserta_usuario(usuario);	  	
 			  	}
 			}
 		 
 		  	if(accion.equals("modificar"))
 		  	{
+		  		id=request.getParameter("id");
 			  	user=request.getParameter("user");
 			 	password=user;
 				email=request.getParameter("email");
 				rol=request.getParameter("rol");
 				
 			  	if(user!=null){
-			  		Usuario usuario= new Usuario(user,  password,  email,  rol);
+			  		Usuario usuario= new Usuario(id,user,  password,  email,  rol);
 			 	 	MongoDB.modificar_usuario(usuario);	  	
 			  	}
 		  	}
@@ -115,8 +118,9 @@ document.getElementById("rol").value=rol;
       <h2>Administrar usuario</h2><br>      
       <div class="contenido">
         <form  method="post">   
+        <br>  <input type="hidden" id="id" name="id"><br>
         Usuario:<br>  <input type="text" id="user" name="user"><br>
-       <!-- Contraseña:<br>  <input type="password" id="contraseña" name="password"><br><br>-->
+      
         Email:<br> <input type="text"  value="@gmail.com" id="email" name="email"><br>
         Rol:<br> <input type="text" id="rol" name="rol">
 		 <input type="hidden" id="accion" name="accion"><br>

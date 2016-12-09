@@ -55,7 +55,8 @@ public class GestionUsuario extends HttpServlet
 		 String usuarioSesion=(String) request.getSession().getAttribute("user");
 
 	 	*/
-		 System.out.println("Lega aqui2");
+		
+		String id=request.getParameter("id");
 		String nombre=request.getParameter("nombre");
 		String prioridad=request.getParameter("prioridad");
 		String pertenece=request.getParameter("pertenece");
@@ -64,66 +65,8 @@ public class GestionUsuario extends HttpServlet
 		String estado=request.getParameter("estado");
 		
 		if(nombre!=null){
-				Tarea t=new Tarea(nombre, prioridad, pertenece, fecha, notas, estado);
+				Tarea t=new Tarea(id,nombre, prioridad, pertenece, fecha, notas, estado);
 				MongoDB.insertar_tarea(t);
 			}
-	
-/*
-	 try 
-	 {
-		 set = con.createStatement();
-		 rs = set.executeQuery("SELECT * FROM Jugadores");
-		 while (rs.next())
-		 {
-		 cad = rs.getString("Nombre");
-		 cad = cad.trim();
-		 if (cad.compareTo(nombre.trim())==0)
-		 existe = true;
-		 }
-		 rs.close();
-		 set.close();
-		 }
-		 catch(Exception e)
-		 {
-		 System.out.println("No lee de la tabla");
-		 }
-		 try
-		 {
-		 set = con.createStatement();
-		 if (existe)
-		 set.executeUpdate( "UPDATE Jugadores SET votos=votos+1 " +
-		 "WHERE nombre LIKE '%" + nombre + "%'");
-		 else
-		 set.executeUpdate( "INSERT INTO Jugadores " +
-		 "(nombre,votos) VALUES ('" + nombre + "',1)");
-		 rs.close();
-		 set.close();
-		 }
-		 catch(Exception e)
-		 {
-		 System.out.println( "No inserta ni modifica la tabla");
-		 }
-		 // Llamada al servlet que nos visualiza
-		 // las estadísticas de jugadores
-		 res.sendRedirect(res.encodeRedirectURL("./TablaVotos.jsp"));
-		 }
-		 public void doGet(HttpServletRequest req, HttpServletResponse res)
-		 throws ServletException, IOException
-		 {
-		 try{doPost(req,res);}catch (Exception e)
-		 {
-		 }
-		 }
-		 public void destroy()
-		 {
-		 try {
-		 con.close();
-		 }
-		 catch (Exception e)
-		 {
-		 }
-		 super.destroy();
-		 }
-		 */
 	 }
 }

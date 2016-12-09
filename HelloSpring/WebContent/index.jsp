@@ -15,6 +15,7 @@
 
 
 <%
+
 String user= request.getParameter("user");
 String password,rol;
 String flag="false";

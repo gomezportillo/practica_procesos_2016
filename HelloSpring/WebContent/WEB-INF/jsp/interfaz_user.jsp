@@ -10,15 +10,6 @@
   
 
 
-<%
-	
-	
-	//String user=request.getParameter("user");
-	//String password = request.getParameter("password");	
-	//String rol=MongoDB.comprobar_user_pass(user, "pablo");
-	
-%>
-
 <%@page session='true'%> 
  <% 
 	
@@ -64,16 +55,17 @@ function muestra(valor){
 
 //var x = document.getElementById("myTable").rows[0].cells.length;
 //document.getElementById("test").innerHTML=x;  
-var nombre=document.getElementById("myTable").rows[valor].cells[0].innerHTML;
-var prioridad=document.getElementById("myTable").rows[valor].cells[1].innerHTML;
-var fecha_limite=document.getElementById("myTable").rows[valor].cells[2].innerHTML;
-var estado=document.getElementById("myTable").rows[valor].cells[3].innerHTML;
-var pertenece=document.getElementById("myTable").rows[valor].cells[4].innerHTML;
-var notas=document.getElementById("myTable").rows[valor].cells[5].innerHTML;
+var id=document.getElementById("myTable").rows[valor].cells[0].innerHTML;
+var nombre=document.getElementById("myTable").rows[valor].cells[1].innerHTML;
+var prioridad=document.getElementById("myTable").rows[valor].cells[2].innerHTML;
+var fecha_limite=document.getElementById("myTable").rows[valor].cells[3].innerHTML;
+var estado=document.getElementById("myTable").rows[valor].cells[4].innerHTML;
+var pertenece=document.getElementById("myTable").rows[valor].cells[5].innerHTML;
+var notas=document.getElementById("myTable").rows[valor].cells[6].innerHTML;
 
 
 
-
+document.getElementById("id").value=id;
 document.getElementById("nombre").value=nombre;
 document.getElementById("prioridad").value=prioridad;
 document.getElementById("fecha_limite").value=fecha_limite;
@@ -94,13 +86,14 @@ document.getElementById("notas").value=notas;
 </script>
 <script type="text/javascript">
 <%
-String nombre,prioridad,pertenece,fecha,notas,estado;
+String nombre,prioridad,pertenece,fecha,notas,estado,id;
 
 String accion=request.getParameter("accion");
 if(accion!=null)
 {
 	  if(accion.equals("anadir"))
 		{
+		  	 id=String.valueOf(MongoDB.ultimoid("usuarios_prueba", "tareas"));
 		     nombre=request.getParameter("nombre");
 			 prioridad=request.getParameter("prioridad");
 			 pertenece=request.getParameter("pertenece");
@@ -109,7 +102,7 @@ if(accion!=null)
 			 estado=request.getParameter("estado");
 			
 		  	if(nombre!=null){
-		  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
+		  		Tarea tarea= new Tarea(id,nombre,prioridad,pertenece,fecha,notas,estado);
 		 	 	MongoDB.insertar_tarea(tarea);
 		  	}
 		}
@@ -117,6 +110,7 @@ if(accion!=null)
   
 	  if(accion.equals("modificar"))
 		{
+		    id=request.getParameter("id");
 		    nombre=request.getParameter("nombre");
 			prioridad=request.getParameter("prioridad");
 			pertenece=request.getParameter("pertenece");
@@ -125,7 +119,7 @@ if(accion!=null)
 			estado=request.getParameter("estado");
 			
 		  	if(nombre!=null){
-		  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
+		  		Tarea tarea= new Tarea(id,nombre,prioridad,pertenece,fecha,notas,estado);
 		 	 	MongoDB.modificar_tarea(tarea);
 		  	}
 	  
@@ -133,11 +127,11 @@ if(accion!=null)
   
 	  if(accion.equals("borrar"))
 		{
-		    nombre=request.getParameter("nombre");		
+		    id=request.getParameter("id");		
 			
-		  	if(nombre!=null){
+		  	if(id!=null){
 		  		//Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
-		 	 	MongoDB.eliminar_tarea(nombre);
+		 	 	MongoDB.eliminar_tarea(id);
 		  	}	 
 	    }
   
@@ -195,7 +189,8 @@ if(accion!=null)
 	<div class="vertical">
 	    <h2>Administrar tareas</h2><br>      
 		<div class="contenido">
-	        <form method="get">   
+	        <form method="get"> 
+	        	<br>  <input type="hidden" id="id" name="id"><br>  
 		        Nombre:<br>  <input type="text" id="nombre" name="nombre"><br>
 		        Prioridad:<br>  <input type="text" id="prioridad" name="prioridad" ><br>
 		        Fecha Limite:<br>  <input type="text"  id="fecha_limite" name="fecha_limite"><br>

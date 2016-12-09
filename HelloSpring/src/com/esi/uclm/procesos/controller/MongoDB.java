@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
+
 import com.esi.uclm.procesos.gestion.Tarea;
 import com.esi.uclm.procesos.gestion.Usuario;
 import com.mongodb.BasicDBObject;
@@ -53,18 +55,18 @@ public class MongoDB {
 			mongoClient.close();
 			return rol;
 		}
-/*
-		public static void Consulta(String bbddName, String tabla) throws UnknownHostException{
+		public static int ultimoid(String dbName, String tabla) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
-			DB db= mongoClient.getDB(bbddName);
-			DBCollection coll=db.getCollection(tabla);
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
 			DBCursor cursor=coll.find();
-			//int i =1;
-			while(cursor.hasNext()){
-				System.out.println(cursor.next());
-			}
+			cursor.sort(new BasicDBObject("id", -1)).toString();
+			int valor= Integer.parseInt((cursor.next().get("id").toString()))+1;
+			
+		
+			return valor;
 		}
-*/
+
 		public static String generar_tabla_users() throws UnknownHostException{
 			MongoClient mongoClient=conexion();
 	          
@@ -77,15 +79,16 @@ public class MongoDB {
 			DBCursor cursor=coll.find();
 			
 			String cadena="";
-	    	cadena+="<table id='myTable' border=1><tr><th>User</th><th>Email</th><th>Rol</th>";
+	    	cadena+="<table id='myTable' border=1><tr><th>Id</th><th>User</th><th>Email</th><th>Rol</th>";
 	    	int i=0;;
 	    	while (cursor.hasNext()) {
 				DBObject theObj = cursor.next();
+				String id=theObj.get("id").toString();
 				String user = theObj.get("user").toString();
 				String email = theObj.get("email").toString();
 				String rol = theObj.get("rol").toString();
 				i++;
-				cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+user+"</td><td>"+email+"</td><td>"+rol+"</td></tr>";
+				cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+id+"</td><td>"+user+"</td><td>"+email+"</td><td>"+rol+"</td></tr>";
 			}
 	    		//System.out.println(cursor.next().get("prioridad"));
 	    	cadena+="</table>";
@@ -105,7 +108,7 @@ public class MongoDB {
 	        int i=0;
 	        String cadena="";
 	         
-	        cadena+="<table id='myTable' border=1><tr  bgcolor='#EBEBEB' style='vertical-align:middle'><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></tr> ";
+	        cadena+="<table id='myTable' border=1><tr  bgcolor='#EBEBEB' style='vertical-align:middle'><th>id</th><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></tr> ";
 	          
 	        //Buscar solo los usuario con el filtro dado
 				BasicDBObject filtro = new BasicDBObject();
@@ -114,9 +117,9 @@ public class MongoDB {
 
 		    while (cur.hasNext()) {
 				DBObject theObj = cur.next(); 
-				Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+				Tarea t = new  Tarea(theObj.get("id").toString(),theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
 				i++;
-				cadena+="<tr  style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
+				cadena+="<tr  style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getId()+"</td><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
 	        }
 	        
 	        cadena+="</table>";
@@ -149,9 +152,9 @@ public class MongoDB {
 		    	
 		    while (cursor.hasNext()) {
 				DBObject theObj = cursor.next();
-				Tarea t = new  Tarea(theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+				Tarea t = new  Tarea(theObj.get("id").toString(),theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
 				
-				cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
+				cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getId()+"</td><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
 				i++;
 			}
 		    		//System.out.println(cursor.next().get("prioridad"));
@@ -168,7 +171,7 @@ public class MongoDB {
 			String rol="";
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
-			BasicDBObject doc = new BasicDBObject("nombre",t.getNombre()).append("prioridad",t.getPrioridad()).append("pertenece",t.getPertenece()).append("fecha",t.getFecha()).append("notas",t.getNotas()).append("estado",t.getEstado());
+			BasicDBObject doc = new BasicDBObject("id",t.getId()).append("nombre",t.getNombre()).append("prioridad",t.getPrioridad()).append("pertenece",t.getPertenece()).append("fecha",t.getFecha()).append("notas",t.getNotas()).append("estado",t.getEstado());
 			coll.insert(doc);
 			mongoClient.close();
 		}
@@ -180,7 +183,7 @@ public class MongoDB {
 			
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
-			BasicDBObject doc = new BasicDBObject("user", usuario.getUser()).append("password", usuario.getPassword()).append("email", usuario.getEmail()).append("rol", usuario.getRol());
+			BasicDBObject doc = new BasicDBObject("id", usuario.getId()).append("user", usuario.getUser()).append("password", usuario.getPassword()).append("email", usuario.getEmail()).append("rol", usuario.getRol());
 			coll.insert(doc);
 			mongoClient.close();			
 		}
@@ -195,9 +198,9 @@ public class MongoDB {
 			DBCollection coll= db.getCollection(tabla);
 			
 			BasicDBObject newDocument = new BasicDBObject();
-			newDocument.append("$set", new BasicDBObject().append("email", usuario.getEmail()).append("rol", usuario.getRol()));
+			newDocument.append("$set", new BasicDBObject().append("user", usuario.getUser()).append("email", usuario.getEmail()).append("rol", usuario.getRol()));
 
-			BasicDBObject searchQuery = new BasicDBObject().append("user", usuario.getUser());
+			BasicDBObject searchQuery = new BasicDBObject().append("id", usuario.getId());
 
 			coll.update(searchQuery, newDocument);
 			mongoClient.close();
@@ -213,14 +216,14 @@ public class MongoDB {
 			DBCursor cursor=coll.find();			
 			
 			BasicDBObject newDocument = new BasicDBObject();
-			newDocument.append("$set", new BasicDBObject().append("prioridad", tarea.getPrioridad()).append("pertenece", tarea.getPertenece()).append("estado", tarea.getEstado()).append("fecha", tarea.getFecha()).append("notas", tarea.getNotas()));
+			newDocument.append("$set", new BasicDBObject().append("nombre", tarea.getNombre()).append("prioridad", tarea.getPrioridad()).append("pertenece", tarea.getPertenece()).append("estado", tarea.getEstado()).append("fecha", tarea.getFecha()).append("notas", tarea.getNotas()));
 
-			BasicDBObject searchQuery = new BasicDBObject().append("nombre", tarea.getNombre());
+			BasicDBObject searchQuery = new BasicDBObject().append("id", tarea.getId());
 			coll.update(searchQuery, newDocument);
 			
 			mongoClient.close();
 		}
-		public static void eliminar_usuario(String usuario) throws UnknownHostException {
+		public static void eliminar_usuario(String id_usuario) throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
 			String dbName="usuarios_prueba";
@@ -232,12 +235,12 @@ public class MongoDB {
 			
 			//DBObject usuarioEliminar=new BasicDBObject("user", usuario);
 			//db.getCollection("users").find();
-			coll.remove(new BasicDBObject("user",usuario));
+			coll.remove(new BasicDBObject("id",id_usuario));
 			
 			mongoClient.close();			
 		}	
 		
-		public static void eliminar_tarea(String nombretarea) throws UnknownHostException {
+		public static void eliminar_tarea(String id_nombretarea) throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
 			String dbName="usuarios_prueba";
@@ -249,7 +252,7 @@ public class MongoDB {
 			
 			//DBObject usuarioEliminar=new BasicDBObject("user", usuario);
 			//db.getCollection("users").find();
-			coll.remove(new BasicDBObject("nombre",nombretarea));
+			coll.remove(new BasicDBObject("id",id_nombretarea));
 			
 			
 			mongoClient.close();			

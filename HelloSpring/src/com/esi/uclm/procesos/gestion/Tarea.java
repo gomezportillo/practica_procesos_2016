@@ -1,6 +1,8 @@
 package com.esi.uclm.procesos.gestion;
 
 public class Tarea {
+	String id;
+
 	String nombre;
 	String prioridad;
 	String pertenece;
@@ -8,9 +10,9 @@ public class Tarea {
 	String notas;
 	String estado;
 	
-	public Tarea(String nombre, String prioridad, String pertenece, String fecha, String notas, String estado) {
+	public Tarea(String id,String nombre, String prioridad, String pertenece, String fecha, String notas, String estado) {
 		super();
-		System.out.println("Tarea creada");
+		this.id=id;
 		this.nombre = nombre;
 		this.prioridad = prioridad;
 		this.pertenece = pertenece;
@@ -54,5 +56,11 @@ public class Tarea {
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 }
