@@ -43,9 +43,13 @@ public class MongoDB {
 					DBObject theObj = cursor.next();
 					System.out.println(theObj.toString());
 					System.out.println(theObj.get("user")+" rol "+theObj.get("rol"));
-					rol=theObj.get("rol").toString();
+					if(theObj.get("password").equals(password))
+					{
+						rol=theObj.get("rol").toString();
+					}
 				}
 			}
+			
 			mongoClient.close();
 			return rol;
 		}

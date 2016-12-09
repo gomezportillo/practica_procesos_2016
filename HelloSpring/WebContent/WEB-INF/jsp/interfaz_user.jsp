@@ -33,6 +33,7 @@ function comprobar_y_crear_sesion() {
 		HttpSession sesion;
 		
 		if(user!=null && password!=null){	
+			//PABLO:AQUI CREO QUE AHORA NO ENTRA NUNCA
 			// user=request.getParameter("user");
 			sesion=request.getSession();
 			sesion.setAttribute("user",user); 

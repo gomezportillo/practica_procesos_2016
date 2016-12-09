@@ -14,8 +14,45 @@
   <link rel="stylesheet" type="text/css" href="css/procesos.css" />
 
 
-<body>
+<%
+String user= request.getParameter("user");
+String password,rol;
+String flag="false";
+HttpSession sesion;
+if(user!=null)
+{
+     password=request.getParameter("password");
+	rol=MongoDB.comprobar_user_pass(user, password);
+	if(rol.equals("admin") || rol.equals("user") ){
+		flag="true";
+		out.println("usuario introducido correctamente" +rol);
+			
+			// user=request.getParameter("user");
+			sesion=request.getSession();
+			sesion.setAttribute("user",user); 
+		    rol=MongoDB.comprobar_user_pass(user, password);
+			sesion.setAttribute("rol",rol);
+			
+			System.out.println("Último acceso: "+sesion.getId()); 
+		  	System.out.println("La sesión es "+sesion.getAttribute("user"));
+		
+		response.sendRedirect("interfaz_user.jsp");
+	}
+	else
+	{
+		out.println("usuario NO introducido correctamente");
+		//response.sendRedirect("index.jsp");
+	}
+	
+  	
+}
+%>
 
+
+
+
+
+<body>
 <h1>Inicio</h1>
 
 </section>
@@ -24,12 +61,12 @@
 	    <div class="vertical">
 			<h2>Autenticacion</h2><br>      
 			<div class="contenido">
-			<form action="interfaz_user.jsp" method="post" name="form_login">
+			<form method="post" name="form_login">
 	      
 				<label for="login">Usuario: </label>			<input type="text" align="right" name="user"> <br>
 				<label for="contrasena">Contrasena: </label> <input type="password" align="right" name="password"><br>  
 			
-				<button type="submit" value="Aceptar" name="aceptar" onclick=comprobar_y_crear_sesion() class="verde">Aceptar</button>
+				<button type="submit" value="Aceptar" name="aceptar"  class="verde">Aceptar</button>
 			</form>
 			<form action="registrarse.jsp" method="post">
 				<button type="submit" value="Registrarse" name = "Registrarse" class="azul">Registarse</button> 
