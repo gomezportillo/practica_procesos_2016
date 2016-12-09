@@ -94,54 +94,69 @@ document.getElementById("notas").value=notas;
 <script type="text/javascript">
 <%
 String nombre,prioridad,pertenece,fecha,notas,estado;
-%> 
-  
-  function anadir() {
-	  <%
-	     nombre=request.getParameter("nombre");
-		 prioridad=request.getParameter("prioridad");
-		 pertenece=request.getParameter("pertenece");
-		 fecha=request.getParameter("fecha_limite");
-		 notas=request.getParameter("notas");
-		 estado=request.getParameter("estado");
-		
-	  	if(nombre!=null){
-	  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
-	 	 	MongoDB.insertar_tarea(tarea);
-	  	}
-	  %>
-	    }
-  
-  function modificar() {
-	  <%
-	    nombre=request.getParameter("nombre");
-		prioridad=request.getParameter("prioridad");
-		pertenece=request.getParameter("pertenece");
-		fecha=request.getParameter("fecha_limite");
-		notas=request.getParameter("notas");
-		estado=request.getParameter("estado");
-		
-	  	if(nombre!=null){
-	  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
-	 	 	MongoDB.modificar_tarea(tarea);
-	  	}
-	  %>
-	    }
-  
-  function borrar() {
-	  <%
-	    nombre=request.getParameter("nombre");		
-		
-	  	if(nombre!=null){
-	  		//Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
-	 	 	MongoDB.eliminar_tarea(nombre);
-	  	}
-	  %>
-	    }
-  
-  
-  </script>
 
+String accion=request.getParameter("accion");
+if(accion!=null)
+{
+	  if(accion.equals("anadir"))
+		{
+		     nombre=request.getParameter("nombre");
+			 prioridad=request.getParameter("prioridad");
+			 pertenece=request.getParameter("pertenece");
+			 fecha=request.getParameter("fecha_limite");
+			 notas=request.getParameter("notas");
+			 estado=request.getParameter("estado");
+			
+		  	if(nombre!=null){
+		  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
+		 	 	MongoDB.insertar_tarea(tarea);
+		  	}
+		}
+	
+  
+	  if(accion.equals("modificar"))
+		{
+		    nombre=request.getParameter("nombre");
+			prioridad=request.getParameter("prioridad");
+			pertenece=request.getParameter("pertenece");
+			fecha=request.getParameter("fecha_limite");
+			notas=request.getParameter("notas");
+			estado=request.getParameter("estado");
+			
+		  	if(nombre!=null){
+		  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
+		 	 	MongoDB.modificar_tarea(tarea);
+		  	}
+	  
+	    }
+  
+	  if(accion.equals("borrar"))
+		{
+		    nombre=request.getParameter("nombre");		
+			
+		  	if(nombre!=null){
+		  		//Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
+		 	 	MongoDB.eliminar_tarea(nombre);
+		  	}	 
+	    }
+  
+  }
+  %>
+  </script>
+<script type="text/javascript">
+	function borrar(valor)
+	{		
+		document.getElementById("accion").value="borrar";
+	}
+	function modificar()
+	{
+		document.getElementById("accion").value="modificar";
+	}
+	function anadir()
+	{
+		document.getElementById("accion").value="anadir";
+	}
+  </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Tareas</title>
 
@@ -186,13 +201,13 @@ String nombre,prioridad,pertenece,fecha,notas,estado;
 		        Estado:<br>  <input type="text" id="estado" name="estado"><br>
 		        Pertenece:<br>  <input type="text" id="pertenece" name="pertenece"><br>
 		        Notas:<br>  <input type="text" id="notas" name="notas"><br>		        
-				
+				 <input type="hidden" id="accion" name="accion"><br>
 		        
 				<div class="bottom">
-					<button type="button" onclick=this.form.submit(),comprobar_y_crear_sesion(),borrar()>Borrar</button>         
-					<button type="button" onclick=this.form.submit(),comprobar_y_crear_sesion(),modificar()>Modificar</button>  
+					<button type="button" onclick=comprobar_y_crear_sesion(),borrar(),this.form.submit()>Borrar</button>         
+					<button type="button" onclick=comprobar_y_crear_sesion(),modificar(),this.form.submit()>Modificar</button>  
 					        
-					<button type="button" onclick=this.form.submit(),comprobar_y_crear_sesion(),anadir()>Añadir</button>    
+					<button type="button" onclick=comprobar_y_crear_sesion(),anadir(),this.form.submit()>Añadir</button>    
 					 
 				<div>
 			</form>

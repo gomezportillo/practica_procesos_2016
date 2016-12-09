@@ -28,51 +28,63 @@ document.getElementById("rol").value=rol;
 //alert(nombre+prioridad+fecha_limite+estado+pertenece+notas);
 }
 </script>
-<script type="text/javascript">
+
 <%
 	String user,password,email,rol;
-%>
-  function borrar() {
-<%
-	String resultado="No eliminado el usuario";
-	user=request.getParameter("user");
+	String accion=request.getParameter("accion");
+	if(accion!=null)
+	{
+			if(accion.equals("borrar"))
+			{
+				String resultado="No eliminado el usuario";
+				user=request.getParameter("user");
+				
+				if(user!=null){	
+					MongoDB.eliminar_usuario(user);
+					resultado="SI se ha eliminado el usuario";
+				}
+			}
 	
-	if(user!=null){	
-		MongoDB.eliminar_usuario(user);
-		resultado="SI se ha eliminado el usuario";
+		  if(accion.equals("anadir"))
+			{
+			  	user=request.getParameter("user");
+				password=user;
+				email=request.getParameter("email");
+				rol=request.getParameter("rol");
+				
+			  	if(user!=null){
+			  		Usuario usuario= new Usuario(user,  password,  email,  rol);
+			 	 	MongoDB.inserta_usuario(usuario);	  	
+			  	}
+			}
+		 
+		  	if(accion.equals("modificar"))
+		  	{
+			  	user=request.getParameter("user");
+			 	password=user;
+				email=request.getParameter("email");
+				rol=request.getParameter("rol");
+				
+			  	if(user!=null){
+			  		Usuario usuario= new Usuario(user,  password,  email,  rol);
+			 	 	MongoDB.modificar_usuario(usuario);	  	
+			  	}
+		  	}
 	}
-%>
-  }
-  
-  function anadir() {
-	  <%
-	  	
-	  	user=request.getParameter("user");
-		password=user;
-		email=request.getParameter("email");
-		rol=request.getParameter("rol");
-		
-	  	if(user!=null){
-	  		Usuario usuario= new Usuario(user,  password,  email,  rol);
-	 	 	MongoDB.inserta_usuario(usuario);	  	
-	  	}
 	  %>
-	    }
-  
-  function modificar() {
-	  <%
-	  	
-	  	user=request.getParameter("user");
-	 	password=user;
-		email=request.getParameter("email");
-		rol=request.getParameter("rol");
-		
-	  	if(user!=null){
-	  		Usuario usuario= new Usuario(user,  password,  email,  rol);
-	 	 	MongoDB.modificar_usuario(usuario);	  	
-	  	}
-	  %>
-	    }
+<script type="text/javascript">
+	function borrar(valor)
+	{		
+		document.getElementById("accion").value="borrar";
+	}
+	function modificar()
+	{
+		document.getElementById("accion").value="modificar";
+	}
+	function anadir()
+	{
+		document.getElementById("accion").value="anadir";
+	}
   </script>
 </head>
   <meta charset="utf-8">
@@ -106,14 +118,12 @@ document.getElementById("rol").value=rol;
         Usuario:<br>  <input type="text" id="user" name="user"><br>
        <!-- Contraseña:<br>  <input type="password" id="contraseña" name="password"><br><br>-->
         Email:<br> <input type="text"  value="@gmail.com" id="email" name="email"><br>
-        Rol:<br> <input type="text" id="rol" name="rol"><br>
-		
+        Rol:<br> <input type="text" id="rol" name="rol">
+		 <input type="hidden" id="accion" name="accion"><br>
 		<div class="bottom">
-			<button type="button" onclick=this.form.submit(),borrar()>Borrar</button>         
-			<button type="button" onclick=this.form.submit(),modificar()>Modificar</button>  
-			<button type="button" onclick="location.href='index.html'">Denegar</button>         
-			    
-			<button type="button" onclick=this.form.submit(),anadir() value="anadir" name="anadir">Añadir</button> <br> 
+			<button type="button" onclick=borrar(),this.form.submit()>Borrar</button>         
+			<button type="button" onclick=modificar(),this.form.submit()>Modificar</button> 
+			<button type="button" onclick=anadir(),this.form.submit()>Añadir</button> <br> 
 		<div>
 		</form>
       </div>
