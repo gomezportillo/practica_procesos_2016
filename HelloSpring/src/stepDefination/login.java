@@ -12,12 +12,14 @@ import cucumber.api.java.en.When;
 public class login {
 
 	WebDriver driver = new FirefoxDriver();
-
+	//WebDriver driver = new ChromeDriver();
+	//funciona
 	@Given("^Abrimos Mozilla Firefox$")
 	public void Abrimos_Mozilla_Firefox() throws Throwable {
-		
 		System.setProperty("webdriver.gecko.driver","geckodriver.exe");
+		//System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 		driver.get("http://localhost:8080/HelloSpring/");
+	//	driver.get("http://www.marca.es");
 
 		Thread.sleep(1000);
 	}
@@ -26,17 +28,15 @@ public class login {
 	public void Insertamos_nombre_contraseña() throws Throwable {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
-		Thread.sleep(2000);
 		barraNombre.sendKeys("pablo");
-		//barraNombre.submit();
-		Thread.sleep(2000);
+		barraNombre.submit();
 		password.sendKeys("pablo");
+		password.submit();
 		Thread.sleep(1000);
 	}
 	
 	@Then("^boton aceptar$")
 	public void aceptar() throws Throwable {
-		Thread.sleep(2000);
 		WebElement boton= driver.findElement(By.name("aceptar"));
 		boton.click();
 	}	

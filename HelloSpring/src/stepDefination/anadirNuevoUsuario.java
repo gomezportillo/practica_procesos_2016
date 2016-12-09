@@ -28,18 +28,15 @@ public class anadirNuevoUsuario {
 	public void Insertamos_nombre_contraseña() throws Throwable {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
-		Thread.sleep(2000);
-		barraNombre.sendKeys("pablo");
-		//barraNombre.submit();
-		Thread.sleep(2000);
-		password.sendKeys("pablo");
-		//password.submit();
+		barraNombre.sendKeys("julio");
+		barraNombre.submit();
+		password.sendKeys("julio");
+		password.submit();
 		Thread.sleep(1000);
 	}
 	
 	@Then("^boton aceptar3$")
 	public void aceptar() throws Throwable {
-		Thread.sleep(2000);
 		WebElement boton= driver.findElement(By.name("aceptar"));
 		boton.click();
 	}	
@@ -52,20 +49,16 @@ public class anadirNuevoUsuario {
 		Thread.sleep(7000);
 		WebElement nombre = driver.findElement(By.name("user"));
 		nombre.sendKeys("Paquito");
-		//nombre.submit();
-		//Thread.sleep(3000);
-		//WebElement prioridad = driver.findElement(By.name("password"));
-		//prioridad.sendKeys("paquito");
-		//prioridad.submit();
-		Thread.sleep(3000);
+		nombre.submit();
+		WebElement prioridad = driver.findElement(By.name("password"));
+		prioridad.sendKeys("paquito");
+		prioridad.submit();
 		WebElement email = driver.findElement(By.name("email"));
 		email.sendKeys("paco@gmail.com");
-		//email.submit();
-		Thread.sleep(3000);
+		email.submit();
 		WebElement rol = driver.findElement(By.name("rol"));
 		rol.sendKeys("Usuario");
-		//rol.submit();
-		Thread.sleep(3000);
+		rol.submit();
 		WebElement boton= driver.findElement(By.name("anadir"));
 		boton.click();
 	}
