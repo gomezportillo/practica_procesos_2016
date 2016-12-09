@@ -196,19 +196,21 @@ public class MongoDB {
 			
 			mongoClient.close();			
 		}	
+
 		public static void modificar_usuario(Usuario usuario) throws UnknownHostException {
-			
+		
 			MongoClient mongoClient=conexion();
 			String dbName="usuarios_prueba";
 			String tabla="usuarios";
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
 			
-			DBCursor cursor=coll.find();
-			
-			//CUIDADO, Si actualizas usando el campo user, no puede modificar dicho campo.
-			coll.update(new BasicDBObject("user", usuario.getUser()),
-	                  new BasicDBObject("$set", new BasicDBObject("email", usuario.getEmail())));
+			BasicDBObject newDocument = new BasicDBObject();
+			newDocument.append("$set", new BasicDBObject().append("email", usuario.getEmail()).append("rol", usuario.getRol()));
+
+			BasicDBObject searchQuery = new BasicDBObject().append("user", usuario.getUser());
+
+			coll.update(searchQuery, newDocument);
 			mongoClient.close();
 		}
 		public static void modificar_tarea(Tarea tarea) throws UnknownHostException {
@@ -219,11 +221,14 @@ public class MongoDB {
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
 			
-			DBCursor cursor=coll.find();
+			DBCursor cursor=coll.find();			
 			
-			//CUIDADO, Si actualizas usando el campo user, no puede modificar dicho campo.
-			coll.update(new BasicDBObject("user", tarea.getNombre()),
-	                  new BasicDBObject("$set", new BasicDBObject("prioridad", tarea.getPrioridad())));
+			BasicDBObject newDocument = new BasicDBObject();
+			newDocument.append("$set", new BasicDBObject().append("prioridad", tarea.getPrioridad()).append("pertenece", tarea.getPertenece()).append("estado", tarea.getEstado()).append("fecha", tarea.getFecha()).append("notas", tarea.getNotas()));
+
+			BasicDBObject searchQuery = new BasicDBObject().append("nombre", tarea.getNombre());
+			coll.update(searchQuery, newDocument);
+			
 			mongoClient.close();
 		}
 		
@@ -240,6 +245,7 @@ public class MongoDB {
 			//DBObject usuarioEliminar=new BasicDBObject("user", usuario);
 			//db.getCollection("users").find();
 			coll.remove(new BasicDBObject("nombre",nombretarea));
+			
 			
 			mongoClient.close();			
 		}	

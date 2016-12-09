@@ -31,6 +31,7 @@ function comprobar_y_crear_sesion() {
 		String password=request.getParameter("password");
 		String rol="";
 		HttpSession sesion;
+		
 		if(user!=null && password!=null){	
 			// user=request.getParameter("user");
 			sesion=request.getSession();
@@ -47,6 +48,7 @@ function comprobar_y_crear_sesion() {
 			System.out.println("Último acceso: "+sesion.getId()); 
 			System.out.println("La sesión es "+sesion.getAttribute("user"));
 			System.out.println("El Rol es "+sesion.getAttribute("rol"));
+			rol=sesion.getAttribute("rol").toString();
 		}
 	%>
 	  }
@@ -90,18 +92,18 @@ document.getElementById("notas").value=notas;
 
 </script>
 <script type="text/javascript">
-
-
- 
+<%
+String nombre,prioridad,pertenece,fecha,notas,estado;
+%> 
   
   function anadir() {
 	  <%
-	    String nombre=request.getParameter("nombre");
-		String prioridad=request.getParameter("prioridad");
-		String pertenece=request.getParameter("pertenece");
-		String fecha=request.getParameter("fecha_limite");
-		String notas=request.getParameter("notas");
-		String estado=request.getParameter("estado");
+	     nombre=request.getParameter("nombre");
+		 prioridad=request.getParameter("prioridad");
+		 pertenece=request.getParameter("pertenece");
+		 fecha=request.getParameter("fecha_limite");
+		 notas=request.getParameter("notas");
+		 estado=request.getParameter("estado");
 		
 	  	if(nombre!=null){
 	  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
@@ -184,7 +186,7 @@ document.getElementById("notas").value=notas;
 		        Estado:<br>  <input type="text" id="estado" name="estado"><br>
 		        Pertenece:<br>  <input type="text" id="pertenece" name="pertenece"><br>
 		        Notas:<br>  <input type="text" id="notas" name="notas"><br>		        
-				User:	<input type="text" id="user" name="user"><br>
+				
 		        
 				<div class="bottom">
 					<button type="button" onclick=this.form.submit(),comprobar_y_crear_sesion(),borrar()>Borrar</button>         

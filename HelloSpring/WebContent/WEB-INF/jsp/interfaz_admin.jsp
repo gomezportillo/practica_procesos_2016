@@ -29,12 +29,13 @@ document.getElementById("rol").value=rol;
 }
 </script>
 <script type="text/javascript">
-
-
+<%
+	String user,password,email,rol;
+%>
   function borrar() {
 <%
 	String resultado="No eliminado el usuario";
-	String user=request.getParameter("user");
+	user=request.getParameter("user");
 	
 	if(user!=null){	
 		MongoDB.eliminar_usuario(user);
@@ -47,9 +48,9 @@ document.getElementById("rol").value=rol;
 	  <%
 	  	
 	  	user=request.getParameter("user");
-		String password=user;
-		String email=request.getParameter("email");
-		String rol=request.getParameter("rol");
+		password=user;
+		email=request.getParameter("email");
+		rol=request.getParameter("rol");
 		
 	  	if(user!=null){
 	  		Usuario usuario= new Usuario(user,  password,  email,  rol);
