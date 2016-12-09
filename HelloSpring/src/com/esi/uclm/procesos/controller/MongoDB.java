@@ -180,22 +180,7 @@ public class MongoDB {
 			coll.insert(doc);
 			mongoClient.close();			
 		}
-		public static void eliminar_usuario(String usuario) throws UnknownHostException {
-			
-			MongoClient mongoClient=conexion();
-			String dbName="usuarios_prueba";
-			String tabla="usuarios";
-			DB db=mongoClient.getDB(dbName);
-			DBCollection coll= db.getCollection(tabla);
-			
-			DBCursor cursor=coll.find();
-			
-			//DBObject usuarioEliminar=new BasicDBObject("user", usuario);
-			//db.getCollection("users").find();
-			coll.remove(new BasicDBObject("user",usuario));
-			
-			mongoClient.close();			
-		}	
+		
 
 		public static void modificar_usuario(Usuario usuario) throws UnknownHostException {
 		
@@ -231,12 +216,28 @@ public class MongoDB {
 			
 			mongoClient.close();
 		}
+		public static void eliminar_usuario(String usuario) throws UnknownHostException {
+			
+			MongoClient mongoClient=conexion();
+			String dbName="usuarios_prueba";
+			String tabla="usuarios";
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+			
+			DBCursor cursor=coll.find();
+			
+			//DBObject usuarioEliminar=new BasicDBObject("user", usuario);
+			//db.getCollection("users").find();
+			coll.remove(new BasicDBObject("user",usuario));
+			
+			mongoClient.close();			
+		}	
 		
 		public static void eliminar_tarea(String nombretarea) throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
 			String dbName="usuarios_prueba";
-			String tabla="usuarios";
+			String tabla="tareas";
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
 			
