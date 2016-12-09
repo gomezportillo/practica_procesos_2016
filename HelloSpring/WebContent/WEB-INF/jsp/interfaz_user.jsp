@@ -61,6 +61,32 @@ document.getElementById("notas").value=notas;
 //alert(nombre+prioridad+fecha_limite+estado+pertenece+notas);
 }
 </script>
+<script type="text/javascript">
+
+
+ 
+  
+  function anadir() {
+	  <%
+	    String nombre=request.getParameter("nombre");
+		String prioridad=request.getParameter("prioridad");
+		String pertenece=request.getParameter("pertenece");
+		String fecha=request.getParameter("fecha");
+		String notas=request.getParameter("notas");
+		String estado=request.getParameter("estado");
+		
+	  	
+		
+		
+	  	if(nombre!=null){
+	  		Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
+	 	 	MongoDB.insertar_tarea(tarea);
+	  	}
+	  %>
+	    }
+  
+ 
+  </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Tareas</title>
@@ -87,17 +113,19 @@ document.getElementById("notas").value=notas;
 					out.println(MongoDB.generar_tabla_tareas_usuario(user));
 			
 			     		if(rol.equals("admin")){
-			    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> <br> </form> ");
+			    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> </form> ");
 			      		}
 			 %>     		
 			</div>
+			 
+      		 <a href="/HelloSpring">Volver</a>     
 		</div>
-	</div>
+	  
 
 	<div class="vertical">
-	    <h2>Administrar usuario</h2><br>      
+	    <h2>Administrar tareas</h2><br>      
 		<div class="contenido">
-	        <form action="user_añadido.jsp" method="post">   
+	        <form method="get">   
 		        Nombre:<br>  <input type="text" id="nombre" name="nombre"><br>
 		        Prioridad:<br>  <input type="text" id="prioridad" name="prioridad" ><br>
 		        Fecha Limite:<br>  <input type="text"  id="fecha_limite" name="fecha_limite"><br>
@@ -110,13 +138,13 @@ document.getElementById("notas").value=notas;
 					<button type="button" onclick="location.href='index.html'">Borrar</button>         
 					<button type="button" onclick="location.href='registrarse.html'">Modificar</button>  
 					<!--<button type="button" onclick="location.href='index.html'">Denegar</button> -->        
-					<!--<button type="button" onclick="location.href='registrarse.html'">Añadir</button>  -->   
+					<button type="button" onclick=anadir()>Añadir</button>    
 					<!--<button type="submit" value="Añadir" name="Añadir"/>Añadir</button> <br>--> 
 				<div>
 			</form>
 		</div>
 	</div>
-
+</div>
 </div>
  
 <!--  

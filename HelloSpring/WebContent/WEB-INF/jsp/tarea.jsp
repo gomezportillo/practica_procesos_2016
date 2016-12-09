@@ -1,5 +1,7 @@
  <%@page import="java.util.*"%>
 <%@page session='true'%> 
+<%@ page import="com.esi.uclm.procesos.gestion.Tarea" %>
+<%@ page import="com.esi.uclm.procesos.controller.MongoDB" %>
  <% HttpSession sesion=request.getSession();
 	System.out.println("Último acceso: "+sesion.getId()); 
 	System.out.println("La sesión es "+sesion.getAttribute("user"));
@@ -36,34 +38,8 @@
   
   </script>
   
-  <script type="text/javascript">
-
-
-  function mostrarMensaje1() {
-  	
-
-<%
-	String resultado="No se ha creado la tarea";
-	String nombre=request.getParameter("nombre");
-	String prioridad=request.getParameter("prioridad");
-	String pertenece=request.getParameter("pertenece");
-	String fecha=request.getParameter("fecha");
-	String notas=request.getParameter("notas");
-	String estado=request.getParameter("estado");
-
-	//Claramente hay un error porque cuando inicia esta pagina se mete aquí sin llamar a la función javaScript
-	// ehhhh....pero que lo arregle otro si tiene huevos.
-	
-	if(nombre!=null){
-	Tarea t=new Tarea(nombre, prioridad, pertenece, fecha, notas, estado);
-	MongoDB.insertar_tarea(t);
-	resultado="SI se ha creado la tarea";
-	}
-
-%>
-
-  }
-  </script>
+ 
+  
 
     
 </head>
@@ -93,7 +69,7 @@
 	        <br><br><br><br>
 	        
 	        <button type="reset" value="Limpiar">Limpiar</button>  
-	        <button type="submit" value="Aceptar" name="Aceptar" class="verde" onclick=mostrarMensaje1() >Aceptar</button> <br>
+	        <button type="submit" value="Aceptar" name="Aceptar" class="verde" onclick=anadir() >Aceptar</button> <br>
         </form>
       </div>
    </div>

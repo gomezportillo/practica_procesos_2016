@@ -73,15 +73,15 @@ public class MongoDB {
 			DBCursor cursor=coll.find();
 			
 			String cadena="";
-	    	cadena+="<table border=1><tr><th>User</th><th>Email</th><th>Rol</th>";
-	    	
+	    	cadena+="<table id='myTable' border=1><tr><th>User</th><th>Email</th><th>Rol</th>";
+	    	int i=0;;
 	    	while (cursor.hasNext()) {
 				DBObject theObj = cursor.next();
 				String user = theObj.get("user").toString();
 				String email = theObj.get("email").toString();
 				String rol = theObj.get("rol").toString();
-				
-				cadena+="<tr><td>"+user+"</td><td>"+email+"</td><td>"+rol+"</td></tr>";
+				i++;
+				cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+user+"</td><td>"+email+"</td><td>"+rol+"</td></tr>";
 			}
 	    		//System.out.println(cursor.next().get("prioridad"));
 	    	cadena+="</table>";
@@ -190,13 +190,13 @@ public class MongoDB {
 			
 			DBCursor cursor=coll.find();
 			
-			DBObject usuarioEliminar=new BasicDBObject("user", usuario);
+			//DBObject usuarioEliminar=new BasicDBObject("user", usuario);
 			//db.getCollection("users").find();
-			coll.remove(usuarioEliminar);
+			coll.remove(new BasicDBObject("user",usuario));
 			
 			mongoClient.close();			
 		}	
-		public static void modificar_usuario() throws UnknownHostException {
+		public static void modificar_usuario(Usuario usuario) throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
 			String dbName="usuarios_prueba";
@@ -207,8 +207,8 @@ public class MongoDB {
 			DBCursor cursor=coll.find();
 			
 			//CUIDADO, Si actualizas usando el campo user, no puede modificar dicho campo.
-			coll.update(new BasicDBObject("user", "pablo"),
-	                  new BasicDBObject("$set", new BasicDBObject("email", "jose")));
+			coll.update(new BasicDBObject("user", usuario.getUser()),
+	                  new BasicDBObject("$set", new BasicDBObject("email", usuario.getEmail())));
 			mongoClient.close();
 		}
 		 
