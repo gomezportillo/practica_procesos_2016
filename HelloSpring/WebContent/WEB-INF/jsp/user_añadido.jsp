@@ -9,7 +9,7 @@
 	String email = request.getParameter("email");
 	String rol = request.getParameter("rol");
 	
-	Usuario usuario= new Usuario(user, password, email, rol);
+	Usuario usuario= new Usuario("", user, password, email, rol);
 	MongoDB.inserta_usuario(usuario);
 	
 	

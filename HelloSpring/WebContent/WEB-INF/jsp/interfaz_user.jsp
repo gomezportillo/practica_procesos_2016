@@ -177,7 +177,11 @@ if(accion!=null)
 					out.println(MongoDB.generar_tabla_tareas_usuario(sesion.getAttribute("user").toString()));
 			
 			     		if(rol.equals("admin")){
-			    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> </form> ");
+			     			%> 
+			    	  		<form action='interfaz_admin.jsp' method='post'>
+			    	  		<button type='submit' value='Panel Admin' name='Panel_admin'>Panel Admin</button>
+			    	  		</form>
+			      			<%	
 			      		}
 			 %>     		
 			</div>
@@ -200,10 +204,10 @@ if(accion!=null)
 				 <input type="hidden" id="accion" name="accion"><br>
 		        
 				<div class="bottom">
-					<button type="button" onclick=comprobar_y_crear_sesion(),borrar(),this.form.submit()>Borrar</button>         
-					<button type="button" onclick=comprobar_y_crear_sesion(),modificar(),this.form.submit()>Modificar</button>  
+					<button type="button" name ="borrar" value = "borrar" onclick=comprobar_y_crear_sesion(),borrar(),this.form.submit()>Borrar</button>         
+					<button type="button" name ="modificar" value = "modificar" onclick=comprobar_y_crear_sesion(),modificar(),this.form.submit()>Modificar</button>  
 					        
-					<button type="button" onclick=comprobar_y_crear_sesion(),anadir(),this.form.submit()>Añadir</button>    
+					<button type="button" name ="anadir" value = "anadir" onclick=comprobar_y_crear_sesion(),anadir(),this.form.submit()>Añadir</button>    
 					 
 				<div>
 			</form>

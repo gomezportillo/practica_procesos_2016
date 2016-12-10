@@ -11,7 +11,7 @@
 	String notas= request.getParameter("notas");
 	String estado= request.getParameter("estado");	
 		
-	Tarea t= new Tarea(nombre, prioridad, pertenece, fecha, notas, estado);
+	Tarea t= new Tarea("", nombre, prioridad, pertenece, fecha, notas, estado);
 	
 	MongoDB.insertar_tarea(t);
 %>

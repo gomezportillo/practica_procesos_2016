@@ -29,9 +29,7 @@ public class login {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
 		barraNombre.sendKeys("pablo");
-		barraNombre.submit();
 		password.sendKeys("pablo");
-		password.submit();
 		Thread.sleep(1000);
 	}
 	

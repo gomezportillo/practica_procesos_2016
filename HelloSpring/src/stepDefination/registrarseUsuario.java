@@ -44,9 +44,6 @@ public class registrarseUsuario {
 		WebElement email = driver.findElement(By.name("email"));
 		email.sendKeys("paco@gmail.com");
 		//email.submit();
-		Thread.sleep(3000);
-		WebElement rol = driver.findElement(By.name("rol"));
-		rol.sendKeys("Usuario");
 		//rol.submit();
 		Thread.sleep(3000);
 		WebElement boton = driver.findElement(By.name("aceptar"));
