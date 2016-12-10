@@ -54,6 +54,30 @@ public class MongoDB {
 			mongoClient.close();
 			return rol;
 		}
+		public static Boolean consultar_id(String id, String tabla) throws UnknownHostException{
+			MongoClient mongoClient=conexion();
+	          
+			String dbName="usuarios_prueba";
+			Boolean esta=false;
+			if(id!=""){
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+				BasicDBObject query = new BasicDBObject();
+				query.put("id", id); 
+				DBCursor cursor = coll.find(query); 
+				while (cursor.hasNext()) {
+					DBObject theObj = cursor.next();
+					System.out.println(theObj.toString());
+					if(theObj.get("id").equals(id))
+					{
+					esta=true;
+					}
+				}
+			}
+			
+			mongoClient.close();
+			return esta;
+		}
 		public static int ultimoid(String dbName, String tabla) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
 			DB db=mongoClient.getDB(dbName);
