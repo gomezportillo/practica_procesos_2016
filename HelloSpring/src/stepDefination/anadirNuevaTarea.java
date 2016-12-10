@@ -29,8 +29,10 @@ public class anadirNuevaTarea {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
 		barraNombre.sendKeys("pablo");
+		barraNombre.submit();
 		password.sendKeys("pablo");
-		Thread.sleep(2000);
+		password.submit();
+		Thread.sleep(1000);
 	}
 	
 	@Then("^boton aceptar2$")
@@ -42,31 +44,31 @@ public class anadirNuevaTarea {
 	@Then("^boton anadir$")
 	public void anadir() throws Throwable {
 		Thread.sleep(7000);
+		WebElement botonAnadir = driver.findElement(By.name("anadir"));
+		botonAnadir.click();
+		Thread.sleep(7000);
 		WebElement nombre = driver.findElement(By.name("nombre"));
 		nombre.sendKeys("Tarea1");
-		Thread.sleep(2000);
+		nombre.submit();
 		WebElement prioridad = driver.findElement(By.name("prioridad"));
 		prioridad.sendKeys("2");
-		Thread.sleep(2000);
+		prioridad.submit();
 		WebElement pertenece = driver.findElement(By.name("pertenece"));
 		pertenece.sendKeys("Kike");
-		Thread.sleep(2000);
-		WebElement fecha = driver.findElement(By.name("fecha_limite"));
+		pertenece.submit();
+		WebElement fecha = driver.findElement(By.name("fecha"));
 		fecha.sendKeys("01/01/2018");
-		Thread.sleep(2000);
+		fecha.submit();
 		WebElement notas = driver.findElement(By.name("notas"));
 		notas.sendKeys("Tarea1");
-		Thread.sleep(2000);
-		WebElement estado = driver.findElement(By.name("estado"));
-		estado.sendKeys("En curso");
-		Thread.sleep(2000);
-		WebElement boton= driver.findElement(By.name("anadir"));
+		notas.submit();
+		WebElement boton= driver.findElement(By.name("Aceptar"));
 		boton.click();
 	}
 
 	@Then("^cerraremos el navegador2$")
 	public void cerraremos_el_navegador() throws Throwable {
-	    Thread.sleep(7000);
+	    Thread.sleep(5000);
 		driver.quit();
 	}
 }

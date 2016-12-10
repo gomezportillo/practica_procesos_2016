@@ -1,5 +1,5 @@
 
-<%@page import="com.esi.uclm.procesos.controller.MongoDB" %>
+<%@page import="com.esi.uclm.procesos.gestion.MongoDB" %>
 <%@page import="com.esi.uclm.procesos.gestion.Usuario" %>
 <!doctype html>
 <html>

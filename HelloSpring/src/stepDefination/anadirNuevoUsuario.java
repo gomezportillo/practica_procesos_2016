@@ -12,11 +12,14 @@ import cucumber.api.java.en.When;
 public class anadirNuevoUsuario {
 	
 	WebDriver driver = new FirefoxDriver();
-	
+	//WebDriver driver = new ChromeDriver();
+	//funciona
 	@Given("^Abrimos Mozilla Firefox3$")
 	public void Abrimos_Mozilla_Firefox() throws Throwable {
 		System.setProperty("webdriver.gecko.driver","geckodriver.exe");
+		//System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 		driver.get("http://localhost:8080/HelloSpring/");
+	//	driver.get("http://www.marca.es");
 
 		Thread.sleep(1000);
 	}
@@ -25,10 +28,10 @@ public class anadirNuevoUsuario {
 	public void Insertamos_nombre_contraseña() throws Throwable {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
-		barraNombre.sendKeys("pablo");
-		//barraNombre.submit();
-		password.sendKeys("pablo");
-		//password.submit();
+		barraNombre.sendKeys("julio");
+		barraNombre.submit();
+		password.sendKeys("julio");
+		password.submit();
 		Thread.sleep(1000);
 	}
 	
@@ -45,14 +48,17 @@ public class anadirNuevoUsuario {
 		botonAdmin.click();
 		Thread.sleep(7000);
 		WebElement nombre = driver.findElement(By.name("user"));
-		nombre.sendKeys("paco");
-		Thread.sleep(2000);
+		nombre.sendKeys("Paquito");
+		nombre.submit();
+		WebElement prioridad = driver.findElement(By.name("password"));
+		prioridad.sendKeys("paquito");
+		prioridad.submit();
 		WebElement email = driver.findElement(By.name("email"));
 		email.sendKeys("paco@gmail.com");
-		Thread.sleep(2000);
+		email.submit();
 		WebElement rol = driver.findElement(By.name("rol"));
 		rol.sendKeys("Usuario");
-		Thread.sleep(2000);
+		rol.submit();
 		WebElement boton= driver.findElement(By.name("anadir"));
 		boton.click();
 	}

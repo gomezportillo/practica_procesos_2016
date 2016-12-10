@@ -1,15 +1,14 @@
-package com.esi.uclm.procesos.controller;
+package com.esi.uclm.procesos.gestion;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
 
-import com.esi.uclm.procesos.gestion.Tarea;
-import com.esi.uclm.procesos.gestion.Usuario;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -55,32 +54,6 @@ public class MongoDB {
 			mongoClient.close();
 			return rol;
 		}
-		
-		public static Boolean consultar_id(String id, String tabla) throws UnknownHostException{
-			MongoClient mongoClient=conexion();
-	          
-			String dbName="usuarios_prueba";
-			Boolean esta=false;
-			if(id!=""){
-			DB db=mongoClient.getDB(dbName);
-			DBCollection coll= db.getCollection(tabla);
-				BasicDBObject query = new BasicDBObject();
-				query.put("id", id); 
-				DBCursor cursor = coll.find(query); 
-				while (cursor.hasNext()) {
-					DBObject theObj = cursor.next();
-					System.out.println(theObj.toString());
-					if(theObj.get("id").equals(id))
-					{
-					esta=true;
-					}
-				}
-			}
-			
-			mongoClient.close();
-			return esta;
-		}
-		
 		public static int ultimoid(String dbName, String tabla) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
 			DB db=mongoClient.getDB(dbName);
@@ -92,6 +65,8 @@ public class MongoDB {
 		
 			return valor;
 		}
+		
+
 
 		public static String generar_tabla_users() throws UnknownHostException{
 			MongoClient mongoClient=conexion();
@@ -103,6 +78,7 @@ public class MongoDB {
 			DB db= mongoClient.getDB(dbName);
 			DBCollection coll=db.getCollection(tablaUsuarios);
 			DBCursor cursor=coll.find();
+			
 			
 			String cadena="";
 	    	cadena+="<table id='myTable' border=1><tr><th>Id</th><th>User</th><th>Email</th><th>Rol</th>";
@@ -120,7 +96,7 @@ public class MongoDB {
 	    	cadena+="</table>";
 			return cadena;
 		}								
-		public static String generar_tabla_tareas_usuario(String usuario) throws UnknownHostException{
+		public static String generar_tabla_tareas_usuario(String usuario,String campo_a_ordenar) throws UnknownHostException{
 	        
 	        MongoClient mongoClient=conexion();
 	            
@@ -140,7 +116,10 @@ public class MongoDB {
 				BasicDBObject filtro = new BasicDBObject();
 				filtro.put("pertenece", usuario);
 				DBCursor cur = coll.find(filtro);
-
+				if(campo_a_ordenar!="")
+				{
+					cur.sort(new BasicDBObject(campo_a_ordenar, 1)).toString();
+				}
 		    while (cur.hasNext()) {
 				DBObject theObj = cur.next(); 
 				Tarea t = new  Tarea(theObj.get("id").toString(),theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());

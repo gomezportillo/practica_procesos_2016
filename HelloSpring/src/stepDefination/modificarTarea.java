@@ -29,8 +29,10 @@ public class modificarTarea {
 		WebElement password = driver.findElement(By.name("password"));
 		Thread.sleep(3000);
 		barraNombre.sendKeys("pablo");
+		//barraNombre.submit();
 		Thread.sleep(3000);
 		password.sendKeys("pablo");
+		//password.submit();
 		Thread.sleep(1000);
 	}
 	
@@ -46,24 +48,29 @@ public class modificarTarea {
 	public void anadir() throws Throwable {
 		Thread.sleep(4000);
 		WebElement nombre = driver.findElement(By.name("nombre"));
-		nombre.sendKeys("pablooo");
+		nombre.sendKeys("tareauno");
+		//nombre.submit();
 		Thread.sleep(4000);
 		WebElement prioridad = driver.findElement(By.name("prioridad"));
-		prioridad.sendKeys("oooo");
+		prioridad.sendKeys("2");
+		//prioridad.submit();
 		Thread.sleep(4000);
 		WebElement pertenece = driver.findElement(By.name("pertenece"));
 		pertenece.sendKeys("pablo");
+		//pertenece.submit();
 		Thread.sleep(4000);
 		WebElement fecha = driver.findElement(By.name("fecha_limite"));
-		fecha.sendKeys("ooo");
+		fecha.sendKeys("25/06/9");
+		//fecha.submit();
 		Thread.sleep(4000);
 		WebElement notas = driver.findElement(By.name("notas"));
-		notas.sendKeys("dasf");
+		notas.sendKeys("adsfas");
+		//notas.submit();
 		Thread.sleep(4000);
 		WebElement estado = driver.findElement(By.name("estado"));
-		estado.sendKeys("oo");
+		estado.sendKeys("dsfadfsadsfadsa");
 		Thread.sleep(4000);
-		notas.sendKeys("TareaCambiada");
+		nombre.sendKeys("TareaCambiada");
 		Thread.sleep(4000);
 		WebElement botonModificar = driver.findElement(By.name("modificar"));
 		botonModificar.click();

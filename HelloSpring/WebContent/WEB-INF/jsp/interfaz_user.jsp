@@ -1,5 +1,5 @@
 
-<%@ page import="com.esi.uclm.procesos.controller.MongoDB" %>
+<%@ page import="com.esi.uclm.procesos.gestion.MongoDB" %>
 <%@ page import="com.esi.uclm.procesos.controller.HelloSpring" %>
 <%@ page import="com.esi.uclm.procesos.gestion.Tarea" %>
 <%@ page import=" java.util.ArrayList" %>
@@ -89,11 +89,12 @@ document.getElementById("notas").value=notas;
 String nombre,prioridad,pertenece,fecha,notas,estado,id;
 
 String accion=request.getParameter("accion");
-if(accion!=null)
+if(accion!=null && !accion.equals("sort_nombre") && !accion.equals("sort_fecha"))
 {
 	  if(accion.equals("anadir"))
 		{
 		  	 id=String.valueOf(MongoDB.ultimoid("usuarios_prueba", "tareas"));
+		  	 //id="1";
 		     nombre=request.getParameter("nombre");
 			 prioridad=request.getParameter("prioridad");
 			 pertenece=request.getParameter("pertenece");
@@ -151,7 +152,17 @@ if(accion!=null)
 	{
 		document.getElementById("accion").value="anadir";
 	}
+	function sort_nombre()
+	{
+		document.getElementById("accion").value="sort_nombre";
+	}
+	function sort_fecha()
+	{
+		document.getElementById("accion").value="sort_fecha";
+	}
+	
   </script>
+  
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Tareas</title>
 
@@ -173,27 +184,38 @@ if(accion!=null)
 		     <h2>Usuario</h2><br>      
 		     <div class="contenido" id="cont">
 		      
-			<%					
-					out.println(MongoDB.generar_tabla_tareas_usuario(sesion.getAttribute("user").toString()));
+			<%		
+			if(accion==null || accion.equals("modificar") || accion.equals("borrar") || accion.equals("anadir"))
+			{
+					out.println(MongoDB.generar_tabla_tareas_usuario(sesion.getAttribute("user").toString(),""));
+			}
+			else if(accion.equals("sort_nombre"))
+			{
+					out.println(MongoDB.generar_tabla_tareas_usuario(sesion.getAttribute("user").toString(),"nombre"));
+			}
+			else if(accion.equals("sort_fecha"))
+			{
+				out.println(MongoDB.generar_tabla_tareas_usuario(sesion.getAttribute("user").toString(),"fecha"));
+			}
 			
 			     		if(rol.equals("admin")){
-			     			%> 
-			    	  		<form action='interfaz_admin.jsp' method='post'>
-			    	  		<button type='submit' value='Panel Admin' name='Panel_admin'>Panel Admin</button>
-			    	  		</form>
-			      			<%	
+			    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> </form> ");
 			      		}
-			 %>     		
+			     		
+			 %>  
+			  <form method="post">  
+			   <button type="button" onclick=sort_nombre(),this.form.submit()>Ordenar por nombre</button>   
+				<button type="button" onclick=sort_fecha(),this.form.submit()>Ordenar por fecha</button><br>     
+					   		
 			</div>
 			 
-      		 <a href="/HelloSpring">Volver</a>     
 		</div>
 	  
 
 	<div class="vertical">
 	    <h2>Administrar tareas</h2><br>      
 		<div class="contenido">
-	        <form method="get"> 
+	       
 	        	<br>  <input type="hidden" id="id" name="id"><br>  
 		        Nombre:<br>  <input type="text" id="nombre" name="nombre"><br>
 		        Prioridad:<br>  <input type="text" id="prioridad" name="prioridad" ><br>
@@ -204,11 +226,11 @@ if(accion!=null)
 				 <input type="hidden" id="accion" name="accion"><br>
 		        
 				<div class="bottom">
-					<button type="button" name ="borrar" value = "borrar" onclick=comprobar_y_crear_sesion(),borrar(),this.form.submit()>Borrar</button>         
-					<button type="button" name ="modificar" value = "modificar" onclick=comprobar_y_crear_sesion(),modificar(),this.form.submit()>Modificar</button>  
-					        
-					<button type="button" name ="anadir" value = "anadir" onclick=comprobar_y_crear_sesion(),anadir(),this.form.submit()>Añadir</button>    
-					 
+					<button type="button" onclick=comprobar_y_crear_sesion(),borrar(),this.form.submit()>Borrar</button>         
+					<button type="button" onclick=comprobar_y_crear_sesion(),modificar(),this.form.submit()>Modificar</button>  
+					   
+					<button type="button" onclick=comprobar_y_crear_sesion(),anadir(),this.form.submit()>Añadir</button> 
+					
 				<div>
 			</form>
 		</div>

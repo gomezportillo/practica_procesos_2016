@@ -48,11 +48,11 @@ public class borrarTarea {
 	public void anadir() throws Throwable {
 		Thread.sleep(4000);
 		WebElement nombre = driver.findElement(By.name("nombre"));
-		nombre.sendKeys("aloggoo");
+		nombre.sendKeys("tareauno");
 		//nombre.submit();
 		Thread.sleep(4000);
 		WebElement prioridad = driver.findElement(By.name("prioridad"));
-		prioridad.sendKeys("jkl");
+		prioridad.sendKeys("2");
 		//prioridad.submit();
 		Thread.sleep(4000);
 		WebElement pertenece = driver.findElement(By.name("pertenece"));
@@ -60,17 +60,17 @@ public class borrarTarea {
 		//pertenece.submit();
 		Thread.sleep(4000);
 		WebElement fecha = driver.findElement(By.name("fecha_limite"));
-		fecha.sendKeys("j?kl");
+		fecha.sendKeys("25/06/9");
 		//fecha.submit();
 		Thread.sleep(4000);
 		WebElement notas = driver.findElement(By.name("notas"));
-		notas.sendKeys("klf?");
+		notas.sendKeys("adsfas");
 		//notas.submit();
 		Thread.sleep(4000);
 		WebElement estado = driver.findElement(By.name("estado"));
-		estado.sendKeys("j?kl");
+		estado.sendKeys("dsfadfsadsfadsa");
 		Thread.sleep(4000);
-		WebElement botonEliminar = driver.findElement(By.name("borrar"));
+		WebElement botonEliminar = driver.findElement(By.name("eliminar"));
 		botonEliminar.click();
 		Thread.sleep(7000);
 	}
