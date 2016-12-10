@@ -22,18 +22,16 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/cobertura-2.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/cucumber-core-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/cucumber-java-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/cucumber-junit-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/cucumber-jvm-deps-1.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/cucumber-reporting-0.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/gherkin-2.12.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/javax.servlet.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/junit-4.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/mockito-all-2.0.2-beta.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/mongo-java-driver-2.10.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/selenium-server-standalone-3.0.0-beta4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Enrique/Desktop/jars/org.eclipse.jdt.core-3.7.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/cobertura-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/cucumber-core-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/cucumber-java-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/cucumber-junit-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/cucumber-jvm-deps-1.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/cucumber-reporting-0.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/gherkin-2.12.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/mockito-all-2.0.2-beta.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/selenium-server-standalone-3.0.0-beta4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pablo/Desktop/jars/mongo-java-driver-2.10.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
