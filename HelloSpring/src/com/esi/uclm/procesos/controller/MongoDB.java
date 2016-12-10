@@ -20,9 +20,9 @@ import com.mongodb.MongoClientURI;
 
 public class MongoDB {
 		public static MongoClient conexion() throws UnknownHostException{
-			MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
-	        MongoClient mongoClient = new MongoClient(uri);
-	        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+		//	MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
+	        MongoClient mongoClient = new MongoClient("localhost");
+	      //  Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
 	        return mongoClient;
 			
 		}
@@ -55,6 +55,35 @@ public class MongoDB {
 			mongoClient.close();
 			return rol;
 		}
+		
+		public static Boolean consultar_id(String id, String tabla) throws UnknownHostException{
+			MongoClient mongoClient=conexion();
+	          
+			String dbName="usuarios_prueba";
+			Boolean esta=false;
+			if(id!=""){
+			DB db=mongoClient.getDB(dbName);
+			DBCollection coll= db.getCollection(tabla);
+				BasicDBObject query = new BasicDBObject();
+				query.put("id", id); 
+				DBCursor cursor = coll.find(query); 
+				while (cursor.hasNext()) {
+					DBObject theObj = cursor.next();
+					System.out.println(theObj.toString());
+					if(theObj.get("id").equals(id))
+					{
+					esta=true;
+					}
+				}
+			}
+			
+			mongoClient.close();
+			return esta;
+		}
+		
+		
+		
+		
 		public static int ultimoid(String dbName, String tabla) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
 			DB db=mongoClient.getDB(dbName);
@@ -168,24 +197,29 @@ public class MongoDB {
 	          
 			String dbName="usuarios_prueba";
 			String tabla="tareas";
-			String rol="";
-			DB db=mongoClient.getDB(dbName);
-			DBCollection coll= db.getCollection(tabla);
-			BasicDBObject doc = new BasicDBObject("id",t.getId()).append("nombre",t.getNombre()).append("prioridad",t.getPrioridad()).append("pertenece",t.getPertenece()).append("fecha",t.getFecha()).append("notas",t.getNotas()).append("estado",t.getEstado());
-			coll.insert(doc);
-			mongoClient.close();
+			if(consultar_id(t.getId(),tabla)==false && t.getNombre() !=null && t.getPrioridad() !=null && t.getPertenece()!=null && t.getFecha()!=null && t.getNotas() !=null && t.getFecha() !=null){
+				String rol="";
+				DB db=mongoClient.getDB(dbName);
+				DBCollection coll= db.getCollection(tabla);
+				BasicDBObject doc = new BasicDBObject("id",t.getId()).append("nombre",t.getNombre()).append("prioridad",t.getPrioridad()).append("pertenece",t.getPertenece()).append("fecha",t.getFecha()).append("notas",t.getNotas()).append("estado",t.getEstado());
+				coll.insert(doc);
+				mongoClient.close();
+				}
 		}
+		
 		public static void inserta_usuario(Usuario usuario) throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
 			String dbName="usuarios_prueba";
 			String tabla="usuarios";
-			
+			if(consultar_id(usuario.getId(),tabla)==false && usuario.getUser()!=null && usuario.getPassword()!=null && usuario.getEmail()!=null && usuario.getRol()!=null){
+
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
 			BasicDBObject doc = new BasicDBObject("id", usuario.getId()).append("user", usuario.getUser()).append("password", usuario.getPassword()).append("email", usuario.getEmail()).append("rol", usuario.getRol());
 			coll.insert(doc);
-			mongoClient.close();			
+			mongoClient.close();		
+			}
 		}
 		
 
@@ -205,6 +239,7 @@ public class MongoDB {
 			coll.update(searchQuery, newDocument);
 			mongoClient.close();
 		}
+		
 		public static void modificar_tarea(Tarea tarea) throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
@@ -223,6 +258,7 @@ public class MongoDB {
 			
 			mongoClient.close();
 		}
+		
 		public static void eliminar_usuario(String id_usuario) throws UnknownHostException {
 			
 			MongoClient mongoClient=conexion();
