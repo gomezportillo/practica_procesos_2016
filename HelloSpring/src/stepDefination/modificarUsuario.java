@@ -42,15 +42,15 @@ public class modificarUsuario {
 		botonAdmin.click();
 		Thread.sleep(7000);
 		WebElement nombre = driver.findElement(By.name("user"));
-		nombre.sendKeys("paco");
+		nombre.sendKeys("_CAMBIADO");
+//		Thread.sleep(2000);
+//		WebElement email = driver.findElement(By.name("email"));
+//		email.sendKeys("paco@gmail.com");
+//		Thread.sleep(2000);
+//		WebElement rol = driver.findElement(By.name("rol"));
+//		rol.sendKeys("Usuario");
 		Thread.sleep(2000);
-		WebElement email = driver.findElement(By.name("email"));
-		email.sendKeys("paco@gmail.com");
-		Thread.sleep(2000);
-		WebElement rol = driver.findElement(By.name("rol"));
-		rol.sendKeys("Usuario");
-		Thread.sleep(2000);
-		WebElement boton= driver.findElement(By.name("modificar"));
+		WebElement boton= driver.findElement(By.name("boton2"));
 		boton.click();
 	}
 

@@ -125,9 +125,9 @@ document.getElementById("rol").value=rol;
         Rol:<br> <input type="text" id="rol" name="rol">
 		 <input type="hidden" id="accion" name="accion"><br>
 		<div class="bottom">
-			<button type="button" onclick=borrar(),this.form.submit()>Borrar</button>         
-			<button type="button" onclick=modificar(),this.form.submit()>Modificar</button> 
-			<button type="button" onclick=anadir(),this.form.submit()>Añadir</button> <br> 
+			<button type="button" name = "boton3" onclick=borrar(),this.form.submit()>Borrar</button>         
+			<button type="button" name = "boton2" onclick=modificar(),this.form.submit()>Modificar</button> 
+			<button type="button" name = "boton1" onclick=anadir(),this.form.submit()>Añadir</button> <br> 
 		<div>
 		</form>
       </div>

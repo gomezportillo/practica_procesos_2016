@@ -73,7 +73,20 @@ document.getElementById("estado").value=estado;
 document.getElementById("pertenece").value=pertenece;
 document.getElementById("notas").value=notas;
 
-//alert(nombre+prioridad+fecha_limite+estado+pertenece+notas);
+/*var x = (valor.pageX - this.offsetleft);
+var y = (valor.pageY - this.offsetTop);
+
+
+document.onmousemove = function (e){
+var contenedºor = document.getElementById("cont");
+contenedor.innerHTML = e.pageX + "__asdfasdf__" + e.pageY;
+contenedor.style.left = e.pageX + "px";
+contenedor.style.top = e.pageY + "px";
+}
+
+alert(x);
+alert(y);*/
+
 }
 </script>
 
@@ -199,7 +212,11 @@ if(accion!=null && !accion.equals("sort_nombre") && !accion.equals("sort_fecha")
 			}
 			
 			     		if(rol.equals("admin")){
-			    	  		out.println("<form action='interfaz_admin.jsp' method='post'><button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button> </form> ");
+			     			%>
+			    	  	<form action='interfaz_admin.jsp' method='post'>
+			    	  	<button type='submit' value='Panel Admin' name='Panel_admin'/>Panel Admin</button>
+			    	  	</form>
+			    	  		<%
 			      		}
 			     		
 			 %>  
@@ -226,10 +243,9 @@ if(accion!=null && !accion.equals("sort_nombre") && !accion.equals("sort_fecha")
 				 <input type="hidden" id="accion" name="accion"><br>
 		        
 				<div class="bottom">
-					<button type="button" onclick=comprobar_y_crear_sesion(),borrar(),this.form.submit()>Borrar</button>         
-					<button type="button" onclick=comprobar_y_crear_sesion(),modificar(),this.form.submit()>Modificar</button>  
-					   
-					<button type="button" onclick=comprobar_y_crear_sesion(),anadir(),this.form.submit()>Añadir</button> 
+					<button type="button" name = "boton3" onclick=comprobar_y_crear_sesion(),borrar(),this.form.submit()>Borrar</button>         
+					<button type="button" name = "boton2" onclick=comprobar_y_crear_sesion(),modificar(),this.form.submit()>Modificar</button>  
+					<button type="button" name = "boton1" onclick=comprobar_y_crear_sesion(),anadir(),this.form.submit()>Añadir</button> 
 					
 				<div>
 			</form>

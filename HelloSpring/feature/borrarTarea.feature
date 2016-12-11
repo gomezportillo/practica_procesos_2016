@@ -1,8 +1,8 @@
 
 	
-Feature: eliminarTarea
+Feature: borrarTarea
 	
-	Scenario: Test para eliminarTarea
+	Scenario: Test para borrarTarea
 	Given Abrimos Mozilla Firefox6
 	When Insertamos nombre y password en la barra6
 	Then boton aceptar6

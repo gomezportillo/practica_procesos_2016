@@ -41,16 +41,16 @@ public class eliminarUsuario {
 		WebElement botonAdmin = driver.findElement(By.name("Panel_admin"));
 		botonAdmin.click();
 		Thread.sleep(7000);
-		WebElement nombre = driver.findElement(By.name("user"));
-		nombre.sendKeys("paco");
-		Thread.sleep(2000);
-		WebElement email = driver.findElement(By.name("email"));
-		email.sendKeys("paco@gmail.com");
-		Thread.sleep(2000);
-		WebElement rol = driver.findElement(By.name("rol"));
-		rol.sendKeys("Usuario");
-		Thread.sleep(2000);
-		WebElement boton= driver.findElement(By.name("borrar"));
+//		WebElement nombre = driver.findElement(By.name("user"));
+//		nombre.sendKeys("oscar");
+//		Thread.sleep(2000);
+//		WebElement email = driver.findElement(By.name("email"));
+//		email.sendKeys("oscar@gmail.com");
+//		Thread.sleep(2000);
+//		WebElement rol = driver.findElement(By.name("rol"));
+//		rol.sendKeys("Usuario");
+//		Thread.sleep(2000);
+		WebElement boton= driver.findElement(By.name("boton3"));
 		boton.click();
 	}
 
