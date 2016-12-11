@@ -19,9 +19,10 @@ public class b_registrarse {
 	@Given("^creamos un usuario$")
 	public void Creamos_usuario() throws UnknownHostException  {
 		
-		usuario= new Usuario("4","pedro", "pedro", "julito", "admin");
+		usuario= new Usuario("66","juan", "mateo", "julito", "admin");
 		
 	} 
+	
 	@Given("^creamos un usuario que este ya en la bd$")
 	public void Creamos_usuario_repetido() throws UnknownHostException  {
 		
@@ -29,7 +30,19 @@ public class b_registrarse {
 		
 	} 
 
-	@When("^lo registramos en la bd$")
+
+	@When("^Comprobar que no existia$")
+	public void Comprobar_registro() throws Throwable {
+		assertFalse((MongoDB.comprobar_user_pass(usuario.getUser(), usuario.getPassword())).equals("admin"));
+	}
+	@When("^Comprobar que existe$")
+	public void Comprobar_registro_repetido() throws Throwable {
+	
+		assertTrue((MongoDB.comprobar_user_pass(usuario.getUser(), usuario.getPassword())).equals("admin"));
+	}
+	
+	
+	@Then("^lo registramos en la bd$")
 	public void registrar_bd(){
 		
 		try {
@@ -37,18 +50,6 @@ public class b_registrarse {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	@Then("^Comprobar si esta bien$")
-	public void Comprobar_registro() throws Throwable {
-	
-		assertTrue((MongoDB.comprobar_user_pass(usuario.getUser(), usuario.getPassword())).equals("admin"));
-		MongoDB.eliminar_usuario(usuario.getId());
-	}
-	@Then("^Comprobar que esta repetido$")
-	public void Comprobar_registro_repetido() throws Throwable {
-	
-		assertFalse((MongoDB.comprobar_user_pass(usuario.getUser(), usuario.getPassword())).equals("admin"));
 	}
 	
 }

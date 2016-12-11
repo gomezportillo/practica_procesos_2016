@@ -1,13 +1,10 @@
 package com.esi.uclm.procesos.gestion;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -22,7 +19,9 @@ public class MongoDB {
 			MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
 	        MongoClient mongoClient = new MongoClient(uri);
 	        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
-	        return mongoClient;
+			
+	      //  MongoClient mongoClient=new MongoClient("localhost");
+			return mongoClient;
 			
 		}
 	
@@ -54,6 +53,7 @@ public class MongoDB {
 			mongoClient.close();
 			return rol;
 		}
+		
 		public static Boolean consultar_id(String id, String tabla) throws UnknownHostException{
 			MongoClient mongoClient=conexion();
 	          
@@ -209,7 +209,6 @@ public class MongoDB {
 			MongoClient mongoClient=conexion();
 			String dbName="usuarios_prueba";
 			String tabla="usuarios";
-			
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
 			BasicDBObject doc = new BasicDBObject("id", usuario.getId()).append("user", usuario.getUser()).append("password", usuario.getPassword()).append("email", usuario.getEmail()).append("rol", usuario.getRol());

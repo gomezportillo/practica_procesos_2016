@@ -13,20 +13,19 @@ import cucumber.api.java.en.When;
 public class a_login {
 
 	
-	Usuario usuario;
-	Usuario usuario1;
+	private Usuario usuario;
+	private Usuario usuario1;
+	
+	
 	@Given("^Definimos el nombre y password$")
 	public void Definimos_nombre_password() throws Throwable {
 		usuario=new Usuario("1", "luis", "luis", "pablito@gmail.com", "admin");
-		//usuario= MongoDB.consultar_usuario("1");
-		//usuario= new Usuario("4", "gfdgdfgd", "dfgdgdfgd", "julito", "admin");
-
 	} 
 
 	@Given("^Definimos el nombre y password que no existen$")
 	public void Definimos_nombre_password_no_existentes() throws Throwable {
-		usuario1= new Usuario("4", "gfdgdfgd", "dfgdgdfgd", "sddgdg", "user");
-
+		usuario1= new Usuario("8", "luis", "ffasdfasfsa", "sddgdg", "user");
+		
 	} 
 	@When("^Comprobamos login en la bd$")
 	public void Comprobamos_bd() throws Throwable{
@@ -43,8 +42,8 @@ public class a_login {
 		}
 	
 	@Then("^Login repetido$")
-	public void repecticion() throws Throwable{
-			
+	public void login_repetido() throws Throwable{			
+		System.out.println("/n /n /n"+usuario1.getId());
 		assertFalse(MongoDB.consultar_id(usuario1.getId(),"usuarios"));
 	}
 	
