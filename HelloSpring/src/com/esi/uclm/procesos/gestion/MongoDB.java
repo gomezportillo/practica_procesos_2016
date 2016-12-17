@@ -132,9 +132,8 @@ public class MongoDB {
 	        
 	        int i=0;
 	        String cadena="";
-	         
-	        cadena+="<table id='myTable' border=1><tr  bgcolor='#EBEBEB' style='vertical-align:middle'><th>id</th><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></tr> ";
-	          
+	        cadena+="<table class='table table-hover' id='myTable'><thead><th>ID</th><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></thead><tbody>";
+
 	        //Buscar solo los usuario con el filtro dado
 				BasicDBObject filtro = new BasicDBObject();
 				filtro.put("pertenece", usuario);
