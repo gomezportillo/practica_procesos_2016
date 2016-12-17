@@ -11,15 +11,11 @@ import cucumber.api.java.en.When;
 
 public class registrarseUsuario {
 	WebDriver driver = new FirefoxDriver();
-	//WebDriver driver = new ChromeDriver();
-	//funciona
+
 	@Given("^Abrimos Mozilla Firefox4$")
 	public void Abrimos_Mozilla_Firefox() throws Throwable {
 		System.setProperty("webdriver.gecko.driver","geckodriver.exe");
-		//System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 		driver.get("http://localhost:8080/HelloSpring/");
-	//	driver.get("http://www.marca.es");
-
 		Thread.sleep(1000);
 	}
 
@@ -34,17 +30,14 @@ public class registrarseUsuario {
 	public void aceptar() throws Throwable {
 		Thread.sleep(5000);
 		WebElement nombre = driver.findElement(By.name("user"));
-		nombre.sendKeys("Paquito");
-		nombre.submit();
-		WebElement prioridad = driver.findElement(By.name("password"));
-		prioridad.sendKeys("paquito");
-		prioridad.submit();
+		nombre.sendKeys("oscar");
+		Thread.sleep(3000);
+		WebElement password = driver.findElement(By.name("password"));
+		password.sendKeys("oscar");
+		Thread.sleep(3000);
 		WebElement email = driver.findElement(By.name("email"));
-		email.sendKeys("paco@gmail.com");
-		email.submit();
-		WebElement rol = driver.findElement(By.name("rol"));
-		rol.sendKeys("Usuario");
-		rol.submit();
+		email.sendKeys("oscar@gmail.com");
+		Thread.sleep(3000);
 		WebElement boton = driver.findElement(By.name("aceptar"));
 		boton.click();
 		Thread.sleep(1000);

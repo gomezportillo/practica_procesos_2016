@@ -1,19 +1,29 @@
 package com.esi.uclm.procesos.gestion;
 
 public class Usuario {
+	String id;
 	String user;
 	String password;
 	String email;
 	String rol;
 
-	public Usuario(String user, String password, String email, String rol) {
+	public Usuario(String id,String user, String password, String email, String rol) {
 		super();
+		this.id=id;
 		this.user = user;
 		this.password = password;
 		this.email = email;
 		this.rol = rol;
 	}	
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getUser() {
 		return user;
 	}

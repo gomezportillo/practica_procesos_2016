@@ -1,37 +1,28 @@
-<style>
-@import url('https://fonts.googleapis.com/css?family=Fjalla+One|Josefin+Sans|Raleway');
+@import url('https://fonts.googleapis.com/css?family=Archivo+Narrow');
 
-<!-- General -->
-
-
-*{
-	padding:0;
-	margin:0;
-}
 body {
-    background: -webkit-linear-gradient(orange, pink);
-    background: -moz-linear-gradient(orange, pink);
-    background: -o-linear-gradient(orange, pink);	 
+    background-color: #F1F1F1	 
 }
 
-h1{
+h1 {
 	text-align:center;
 	padding:10px;
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Archivo Narrow', 'Arial';
 	color:#1A5157;
 }
-h2{
+
+h2 {
 	text-align:center;	
-	font-family: 'Fjalla One', sans-serif;
+	font-family: 'Archivo Narrow', 'Arial';
 	color:#03212E;	
 }
-h3{
-	font-family: 'Josefin Sans', sans-serif;
+
+h3 {
+	font-family: 'Archivo Narrow', 'Arial';
 	text-align:center;
 	font-weight:bold;
 	color:black;
 	font-weight:bold;
-	
 }
 
  #marco {
@@ -39,45 +30,33 @@ h3{
     padding: 10px;
     margin: 10px;
 }
-    div {
-      margin: 0 auto;
-    }
+
+div {
+	margin: 0 auto;
+}
+
 #contenedor {
-
-
-
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
-	
-
-    -webkit-flex-wrap: wrap;
     flex-wrap:wrap;
 }
-table,td{
+
+table, td {
 	border:1px,solid black;
 }
 
 
 .vertical {
-
-	/*para Firefox*/
-  -moz-border-radius: 15px 15px 15px 15px;
-/*para Safari y Chrome*/
-  -webkit-border-radius: 15px 15px 15px 15px;
-/* para Opera */
-  border-radius: 15px 15px 15px 15px;
   padding:20px;
-  border:1px solid black;
- 
   width:600px;
   height:400px;
 }
 
+.centrado {
+	display: block !important;
+	margin: auto !important;
+}
 
 .contenido {
-
     width: 400px;
     font: normal bold 12px Verdana, Arial;
 }
@@ -87,22 +66,23 @@ table,td{
     width: auto;
     margin-bottom: 10px;
 }
+
 .contenido label {
   margin: .4em 0;
   width: 25%;
   float: left;
-
 }
 
 <!-- Botton Style -->
 
-.verde{
-  background: #2ECC71; 
-  border: 1px solid #27AE60;
+.verde {
+  background: #c0c0c0; 
+  border: 1px solid #808080;
+
 }
 
 .verde:hover{
-  background: #32db78;
+  background: #c0c0c0;
 }
 
 .rojo{
@@ -113,7 +93,3 @@ table,td{
 .rojo:hover{
   background: #ff5242;
 }
-
-</style>
-
-
