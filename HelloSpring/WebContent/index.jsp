@@ -10,10 +10,8 @@
 </head>
 
 <script src="https://code.jquery.com/jquery.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="css/procesos.css">
@@ -23,7 +21,7 @@
 	String password, rol;
 	String flag = "false";
 	HttpSession sesion;
-	
+
 	if (user != null) {
 		password = request.getParameter("password");
 		rol = MongoDB.comprobar_user_pass(user, password);
@@ -55,28 +53,27 @@
 		<div class="col-md-6">
 			<h2>Acceder</h2>
 			<br>
-			<form method="post" name="form_login" class="col-md-8 col-md-offset-2">
+			<div class="contenido">
+				<form method="post" name="form_login"
+					class="col-md-8 col-md-offset-2">
 
-				<label for="login">Usuario: </label> 
-				<input type="text" align="right" name="user"> 
-				
-				<br> 
-				
-				<label for="contrasena">Contrasena: </label> 
-				<input type="password" align="right" name="password">
-				
-				<br>
+					<label for="login">Usuario: </label> <input type="text"
+						align="right" name="user"> <br> <label
+						for="contrasena">Contraseña: </label> <input type="password"
+						align="right" name="password"> <br>
 
-				<button style="margin: auto; display: block; width: 40%;"
-					type="submit" value="Aceptar" name="aceptar" class="verde">Aceptar</button>
-			</form>
+					<button style="margin: auto; display: block; width: 40%;"
+						type="submit" value="Aceptar" name="aceptar">Aceptar</button>
+				</form>
+			</div>
 		</div>
 		<div class="col-md-6 centrado">
 			<h2>Registrarse</h2>
-			<form action="registrarse.jsp" method="post" class="col-md-8 col-md-offset-2">
-			<br>
+			<form action="registrarse.jsp" method="post"
+				class="col-md-8 col-md-offset-2">
+				<br>
 				<button style="margin: auto; display: block; width: 40%;"
-					type="submit" value="Registrarse" name="Registrarse" class="azul">Registarse</button>
+					type="submit" value="Registrarse" name="Registrarse">Registarse</button>
 			</form>
 		</div>
 	</div>

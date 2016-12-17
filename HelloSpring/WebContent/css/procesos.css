@@ -1,34 +1,34 @@
 @import url('https://fonts.googleapis.com/css?family=Archivo+Narrow');
 
 body {
-    background-color: #F1F1F1	 
+	background-color: #F1F1F1
 }
 
 h1 {
-	text-align:center;
-	padding:10px;
+	text-align: center;
+	padding: 10px;
 	font-family: 'Archivo Narrow', 'Arial';
-	color:#1A5157;
+	color: #1A5157;
 }
 
 h2 {
-	text-align:center;	
+	text-align: center;
 	font-family: 'Archivo Narrow', 'Arial';
-	color:#03212E;	
+	color: #03212E;
 }
 
 h3 {
 	font-family: 'Archivo Narrow', 'Arial';
-	text-align:center;
-	font-weight:bold;
-	color:black;
-	font-weight:bold;
+	text-align: center;
+	font-weight: bold;
+	color: black;
+	font-weight: bold;
 }
 
- #marco {
- 	margin: 0 auto;
-    padding: 10px;
-    margin: 10px;
+#marco {
+	margin: 0 auto;
+	padding: 10px;
+	margin: 10px;
 }
 
 div {
@@ -36,19 +36,18 @@ div {
 }
 
 #contenedor {
-    display: flex;
-    flex-wrap:wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 table, td {
-	border:1px,solid black;
+	border: 1px, solid black;
 }
 
-
 .vertical {
-  padding:20px;
-  width:600px;
-  height:400px;
+	padding: 20px;
+	width: 600px;
+	height: 400px;
 }
 
 .centrado {
@@ -57,39 +56,18 @@ table, td {
 }
 
 .contenido {
-    width: 400px;
-    font: normal bold 12px Verdana, Arial;
+	width: 400px;
+	font: normal bold 12px Verdana, Arial;
 }
 
 .contenido input {
-    display: inline-block;
-    width: auto;
-    margin-bottom: 10px;
+	display: inline-block;
+	width: auto;
+	margin-bottom: 10px;
 }
 
 .contenido label {
-  margin: .4em 0;
-  width: 25%;
-  float: left;
-}
-
-<!-- Botton Style -->
-
-.verde {
-  background: #c0c0c0; 
-  border: 1px solid #808080;
-
-}
-
-.verde:hover{
-  background: #c0c0c0;
-}
-
-.rojo{
-  background: #E74C3C;
-  border: 1px solid #C0392B;
-}
-
-.rojo:hover{
-  background: #ff5242;
+	margin: .4em 0;
+	width: 25%;
+	float: left;
 }
