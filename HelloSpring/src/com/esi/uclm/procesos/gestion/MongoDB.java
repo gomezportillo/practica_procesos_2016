@@ -105,7 +105,7 @@ public class MongoDB {
 			
 			
 			String cadena="";
-	    	cadena+="<table id='myTable' border=1><tr><th>Id</th><th>User</th><th>Email</th><th>Rol</th>";
+	    	cadena+="<table class='table table-hover' id='myTable'><thead><th>ID</th><th>Nombre</th><th>Email</th><th>Rol</th></thead><tbody>";
 	    	int i=0;;
 	    	while (cursor.hasNext()) {
 				DBObject theObj = cursor.next();
@@ -116,8 +116,7 @@ public class MongoDB {
 				i++;
 				cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+id+"</td><td>"+user+"</td><td>"+email+"</td><td>"+rol+"</td></tr>";
 			}
-	    		//System.out.println(cursor.next().get("prioridad"));
-	    	cadena+="</table>";
+	    	cadena+="</tbody></table>";
 			return cadena;
 		}								
 		public static String generar_tabla_tareas_usuario(String usuario,String campo_a_ordenar) throws UnknownHostException{
