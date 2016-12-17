@@ -43,7 +43,7 @@
   <div id="contenedor">
      <div class="vertical">
      <form action="" method="post"> 
-      <h2>Autenticacion</h2><br>      
+      <h2>Registrarse</h2><br>      
       <div class="contenido">
        	<br>  <input type="hidden" id="id" name="id"><br>
         <label for="Usuario">Usuario: </label><input type="text" name = "user" ><br>
