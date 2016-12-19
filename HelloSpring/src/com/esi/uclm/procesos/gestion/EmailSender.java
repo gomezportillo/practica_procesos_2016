@@ -27,6 +27,10 @@ public class EmailSender {
 	}
 
 	public void send(String to_email) {
+		send(to_email, "existen tareas que requieren su atención.");
+	}
+	
+	public void send(String to_email, String mensaje) {
 
 		Session session = Session.getInstance(_props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -43,12 +47,13 @@ public class EmailSender {
 
 			message.setSubject("TODO App - Información");
 
-			String msg = "Buenas " + to_email.split("@")[0] + ",\n\n";
-			msg += "existen tareas que requieren su atención. Acceda al sitio web para verlas.";		
-			message.setText(msg);
+			String full_msg = "Buenas " + to_email.split("@")[0] + ",\n\n";
+			full_msg += mensaje;
+			full_msg += "Acceda al sitio web para más información (http:://localhost.com:8080/HelloSpring).";
+			message.setText(full_msg);
 
 			Transport.send(message);
-
+			System.out.println("Correo enviado a " + to_email);
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
