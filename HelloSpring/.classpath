@@ -22,16 +22,16 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/cobertura-2.1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/cucumber-core-1.1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/cucumber-java-1.1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/cucumber-junit-1.1.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/cucumber-jvm-deps-1.0.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/cucumber-reporting-0.1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/gherkin-2.12.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/junit-4.11.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/mockito-all-2.0.2-beta.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/mongo-java-driver-2.13.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Pedroma/Documents/workspace/libs/selenium-server-standalone-3.0.0-beta4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/cobertura-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/cucumber-core-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/cucumber-java-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/cucumber-junit-1.1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/cucumber-jvm-deps-1.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/cucumber-reporting-0.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/gherkin-2.12.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/mockito-all-2.0.2-beta.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/mongo-java-driver-2.13.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JoseAntonio/workspace/lib/selenium-server-standalone-3.0.0-beta4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
