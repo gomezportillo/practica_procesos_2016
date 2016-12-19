@@ -3,44 +3,45 @@ package com.esi.uclm.procesos.gestion;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
 
-//https://www.tutorialspoint.com/java/java_sending_email.htm
 public class EmailSender {
 
-    String from = "PIS_TO_DO_APP@gmail.com";
-    String host = "localhost";    
-	String content = "Este email le informa de que se le ha asignado una nueva tarea, ";
-	String to;
-	
-	public EmailSender (String to) {    
-		this.to= to;
+	final String username = "pis.uclm.2016@gmail.com";
+	final String password = "pisuclm2016";   
+	String content = "Existen tareas que requieren su atención, ";
+	String to_email;
+
+	public EmailSender (String to_email) {    
+		this.to_email= to_email;
 	}
-	
-	public boolean send() {
-      Properties properties = System.getProperties();
-      properties.setProperty("mail.smtp.host", host);
-      Session session = Session.getDefaultInstance(properties);
 
-      try {
-         MimeMessage message = new MimeMessage(session);
+	public void send() {
 
-         message.setFrom(new InternetAddress(from));
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
 
-         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
 
-         message.setSubject("Se le ha asignado una tarea.");
-         
-         message.setText(content + to.split("@")[0] + ". Acceda al sitio web para verla.");
-         
-         Transport.send(message);
-         
-         System.out.println("Mensaje enviado");
-         return true;
-         
-      }catch (MessagingException mex) {
-         mex.printStackTrace();
-         return false;
-      }
-   }
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(username));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to_email));
+			message.setSubject("TODO App - Información");
+			message.setText(content + to_email.split("@")[0]);
+
+			Transport.send(message);
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }
