@@ -1,5 +1,6 @@
 
 <%@ page import="com.esi.uclm.procesos.gestion.MongoDB"%>
+<%@ page import="com.esi.uclm.procesos.gestion.EmailSender"%>
 <%@ page import="com.esi.uclm.procesos.controller.HelloSpring"%>
 <%@ page import="com.esi.uclm.procesos.gestion.Tarea"%>
 <%@ page import=" java.util.ArrayList"%>
@@ -29,9 +30,9 @@ function comprobar_y_crear_sesion() {
 				System.out.println("La sesión es " + sesion.getAttribute("user"));
 			} else {
 				sesion = request.getSession();
-				System.out.println("Último acceso: " + sesion.getId());
+				//System.out.println("Último acceso: " + sesion.getId());
 				System.out.println("La sesión es " + sesion.getAttribute("user"));
-				System.out.println("El Rol es " + sesion.getAttribute("rol"));
+				//System.out.println("El Rol es " + sesion.getAttribute("rol"));
 				rol = sesion.getAttribute("rol").toString();
 			}%>
 	  }
@@ -89,6 +90,9 @@ document.getElementById("notas").value=notas;
 					if (nombre != null) {
 						Tarea tarea = new Tarea(id, nombre, prioridad, pertenece, fecha, notas, estado);
 						MongoDB.insertar_tarea(tarea);
+						
+						String email = MongoDB.obtener_email_desde_nombre(pertenece);
+						EmailSender.getInstance().send(email, "ha sido asignado a una nueva tarea.");
 					}
 				}
 
@@ -104,16 +108,23 @@ document.getElementById("notas").value=notas;
 					if (nombre != null) {
 						Tarea tarea = new Tarea(id, nombre, prioridad, pertenece, fecha, notas, estado);
 						MongoDB.modificar_tarea(tarea);
+						
+						String email = MongoDB.obtener_email_desde_nombre(pertenece);
+						EmailSender.getInstance().send(email, "una de las tareas a la que pertenece se ha modificado.");
 					}
 
 				}
 
 				if (accion.equals("borrar")) {
 					id = request.getParameter("id");
+					pertenece = request.getParameter("pertenece");
 
 					if (id != null) {
 						//Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
 						MongoDB.eliminar_tarea(id);
+						
+						String email = MongoDB.obtener_email_desde_nombre(pertenece);
+						EmailSender.getInstance().send(email, "una de las tareas a la que pertenece se ha eliminado.");
 					}
 				}
 			}%>

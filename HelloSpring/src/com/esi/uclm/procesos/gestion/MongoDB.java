@@ -282,7 +282,30 @@ public class MongoDB {
 			
 			
 			mongoClient.close();			
-		}	
+		}
+		
+		public static String obtener_email_desde_nombre(String nombre) throws UnknownHostException {
+			MongoClient mongoClient = conexion();
+
+			String dbName = "usuarios_prueba";
+			String tabla = "usuarios";
+			DBCollection coll = mongoClient.getDB(dbName).getCollection(tabla);
+
+			BasicDBObject query = new BasicDBObject();
+			query.put("user", nombre); 
+			DBCursor cursor = coll.find(query); 
+			
+			String email = "";
+			DBObject obj;
+			while (cursor.hasNext()) {
+				obj = cursor.next();
+				email = obj.get("email").toString();
+			}
+
+			mongoClient.close();
+			return email;
+		}
+
 /*
 		public static ArrayList<Tarea> generar_list_tareas() throws UnknownHostException{
 			
