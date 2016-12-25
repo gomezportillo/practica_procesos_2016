@@ -5,12 +5,12 @@ public class Tarea {
 
 	String nombre;
 	String prioridad;
-	String pertenece;
+	String [] pertenece;
 	String fecha;
 	String notas;
 	String estado;
 	
-	public Tarea(String id,String nombre, String prioridad, String pertenece, String fecha, String notas, String estado) {
+	public Tarea(String id,String nombre, String prioridad, String[] pertenece, String fecha, String notas, String estado) {
 		super();
 		this.id=id;
 		this.nombre = nombre;

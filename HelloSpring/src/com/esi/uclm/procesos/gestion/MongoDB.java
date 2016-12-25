@@ -17,10 +17,10 @@ import com.mongodb.MongoClientURI;
 public class MongoDB {
 		public static MongoClient conexion() throws UnknownHostException{
 			MongoClientURI uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
-	        MongoClient mongoClient = new MongoClient(uri);
+	       MongoClient mongoClient = new MongoClient(uri);
 	        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
 			
-	      //  MongoClient mongoClient=new MongoClient("localhost");
+	        //MongoClient mongoClient=new MongoClient("localhost");
 			return mongoClient;
 			
 		}
@@ -198,7 +198,12 @@ public class MongoDB {
 			String rol="";
 			DB db=mongoClient.getDB(dbName);
 			DBCollection coll= db.getCollection(tabla);
-			BasicDBObject doc = new BasicDBObject("id",t.getId()).append("nombre",t.getNombre()).append("prioridad",t.getPrioridad()).append("pertenece",t.getPertenece()).append("fecha",t.getFecha()).append("notas",t.getNotas()).append("estado",t.getEstado());
+			BasicDBObject doc = new BasicDBObject("id",t.getId()).append
+					("nombre",t.getNombre()).append
+					("prioridad",t.getPrioridad()).append
+					("pertenece",t.getPertenece()).append
+					("fecha",t.getFecha()).append("notas",t.getNotas()).append
+					("estado",t.getEstado());
 			coll.insert(doc);
 			mongoClient.close();
 		}

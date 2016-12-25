@@ -13,14 +13,14 @@ public class loginConUsuarioNoExiste {
 
 	WebDriver driver = new FirefoxDriver();
 
-	@Given("^Abrimos Mozilla Firefox$")
+	@Given("^Abre Mozilla Firefox$")
 	public void Abrimos_Mozilla_Firefox() throws Throwable {
 		System.setProperty("webdriver.gecko.driver","geckodriver.exe");
 		driver.get("http://localhost:8080/HelloSpring/");
 		Thread.sleep(1000);
 	}
 
-	@When("^Insertamos nombre y password en la barra$")
+	@When("^Insertamos nombre y pass en la barra$")
 	public void Insertamos_nombre_contraseña() throws Throwable {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
@@ -29,14 +29,14 @@ public class loginConUsuarioNoExiste {
 		Thread.sleep(1000);
 	}
 	
-	@Then("^boton aceptar$")
+	@Then("^boton de aceptar$")
 	public void aceptar() throws Throwable {
 		WebElement boton= driver.findElement(By.name("aceptar"));
 		boton.click();
 		Thread.sleep(1000);
 	}	
 
-	@Then("^cerraremos el navegador$")
+	@Then("^se cierra el navegador$")
 	public void cerraremos_el_navegador() throws Throwable {
 	    driver.quit();
 	}
