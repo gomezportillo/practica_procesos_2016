@@ -4,6 +4,9 @@ import com.esi.uclm.procesos.gestion.Tarea;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.esi.uclm.procesos.gestion.MongoDB;
 
 
@@ -16,10 +19,14 @@ public class InsertarTarea {
 	
 	Tarea tasktest;
 	
+
+	@SuppressWarnings("null")
 	@Given("^The user creates a task with multiple users$")
 	public void The_user_creates_a_task_with_multiple_users() throws Throwable {
-		 String[] users= {"pablo", "manolo"};
-	    tasktest =new Tarea("ks1","hacer el registro","32", users, "2/5/2010","agkfdlgdfkogikjsdgnbi", "hecho");
+		Set<String> users = new HashSet<String>();
+			users.add("pablo");
+			users.add( "manolo");
+	    tasktest = new Tarea("ks1","hacer el registro","32", users, "2/5/2010","agkfdlgdfkogikjsdgnbi", "hecho");
 	}
 
 	@When("^The user inserts all data$")

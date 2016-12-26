@@ -9,6 +9,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 import java.sql.*;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,7 +61,7 @@ public class GestionUsuario extends HttpServlet
 		String id=request.getParameter("id");
 		String nombre=request.getParameter("nombre");
 		String prioridad=request.getParameter("prioridad");
-		String[] pertenece=request.getParameter("pertenece");
+		Set<String> pertenece=request.getParameter("pertenece");
 		String fecha=request.getParameter("fecha");
 		String notas=request.getParameter("notas");
 		String estado=request.getParameter("estado");
