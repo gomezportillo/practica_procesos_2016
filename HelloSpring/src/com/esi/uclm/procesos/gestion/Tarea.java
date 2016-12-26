@@ -33,10 +33,10 @@ public class Tarea {
 	public void setPrioridad(String prioridad) {
 		this.prioridad = prioridad;
 	}
-	public String getPertenece() {
+	public String[] getPertenece() {
 		return pertenece;
 	}
-	public void setPertenece(String pertenece) {
+	public void setPertenece(String [] pertenece) {
 		this.pertenece = pertenece;
 	}
 	public String getFecha() {

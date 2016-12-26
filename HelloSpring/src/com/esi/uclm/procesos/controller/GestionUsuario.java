@@ -52,7 +52,7 @@ public class GestionUsuario extends HttpServlet
 		 // Obtener la sesion
 		 HttpSession s = request.getSession(true);
 		/* 
-		 // Guardar el nombre del cliente en la sesión para poderlo utilizar en el siguiente servlet
+		 // Guardar el nombre del cliente en la sesiï¿½n para poderlo utilizar en el siguiente servlet
 		 String usuarioSesion=(String) request.getSession().getAttribute("user");
 
 	 	*/
@@ -60,7 +60,7 @@ public class GestionUsuario extends HttpServlet
 		String id=request.getParameter("id");
 		String nombre=request.getParameter("nombre");
 		String prioridad=request.getParameter("prioridad");
-		String pertenece=request.getParameter("pertenece");
+		String[] pertenece=request.getParameter("pertenece");
 		String fecha=request.getParameter("fecha");
 		String notas=request.getParameter("notas");
 		String estado=request.getParameter("estado");
