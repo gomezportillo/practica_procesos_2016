@@ -6,7 +6,8 @@
 <%@ page import=" java.util.List"%>
 <%@ page import="java.util.*"%>
 <%@ page session='true'%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ page session='true'%>
 
 <script>
@@ -81,13 +82,14 @@ document.getElementById("notas").value=notas;
 					//id="1";
 					nombre = request.getParameter("nombre");
 					prioridad = request.getParameter("prioridad");
-					pertenece = request.getParameter("pertenece");
+					String[] usuarios = request.getParameter("pertenece").split(",");
+					Set<String> users = (Set<String>) Arrays.asList(usuarios);
 					fecha = request.getParameter("fecha_limite");
 					notas = request.getParameter("notas");
 					estado = request.getParameter("estado");
 
 					if (nombre != null) {
-						Tarea tarea = new Tarea(id, nombre, prioridad, pertenece, fecha, notas, estado);
+						Tarea tarea = new Tarea(id, nombre, prioridad, users, fecha, notas, estado);
 						MongoDB.insertar_tarea(tarea);
 					}
 				}
@@ -96,13 +98,14 @@ document.getElementById("notas").value=notas;
 					id = request.getParameter("id");
 					nombre = request.getParameter("nombre");
 					prioridad = request.getParameter("prioridad");
-					pertenece = request.getParameter("pertenece");
+					String[] usuarios = request.getParameter("pertenece").split(",");
+					Set<String> users = (Set<String>) Arrays.asList(usuarios);
 					fecha = request.getParameter("fecha_limite");
 					notas = request.getParameter("notas");
 					estado = request.getParameter("estado");
 
 					if (nombre != null) {
-						Tarea tarea = new Tarea(id, nombre, prioridad, pertenece, fecha, notas, estado);
+						Tarea tarea = new Tarea(id, nombre, prioridad, users, fecha, notas, estado);
 						MongoDB.modificar_tarea(tarea);
 					}
 
@@ -151,7 +154,8 @@ document.getElementById("notas").value=notas;
 
 <body>
 	<h2 style="text-align: center;">
-		Usuario: <%=sesion.getAttribute("user")%>
+		Usuario:
+		<%=sesion.getAttribute("user")%>
 	</h2>
 
 	<div id='marco'>
