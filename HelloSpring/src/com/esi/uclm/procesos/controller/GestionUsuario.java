@@ -9,6 +9,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.logging.Level;
@@ -62,14 +63,13 @@ public class GestionUsuario extends HttpServlet
 		String id=request.getParameter("id");
 		String nombre=request.getParameter("nombre");
 		String prioridad=request.getParameter("prioridad");
-		String[] pertenece =  request.getParameter("pertenece").split(",");
-		Set<String> users = (Set<String>) Arrays.asList(pertenece);
+		String pertenece =  request.getParameter("pertenece");
 		String fecha=request.getParameter("fecha");
 		String notas=request.getParameter("notas");
 		String estado=request.getParameter("estado");
 
 		if(nombre!=null){
-			Tarea t = new Tarea(id,nombre, prioridad, users, fecha, notas, estado);
+			Tarea t = new Tarea(id,nombre, prioridad, pertenece, fecha, notas, estado);
 			MongoDB.insertar_tarea(t);
 		}
 	}

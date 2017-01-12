@@ -1,6 +1,7 @@
 package com.esi.uclm.procesos.gestion;
 
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -83,12 +84,13 @@ public class MongoDB {
 		MongoClient mongoClient=conexion();
 		DB db=mongoClient.getDB(dbName);
 		DBCollection coll= db.getCollection(tabla);
-		DBCursor cursor=coll.find();
-		cursor.sort(new BasicDBObject("id", -1)).toString();
-		int valor= Integer.parseInt((cursor.next().get("id").toString()))+1;
+		DBCursor cursor=coll.find();		
 
+		System.out.println(	cursor.sort(new BasicDBObject("id",-1)).limit(1));
+		int valor= Integer.parseInt((cursor.next().get("id").toString()));
+		System.out.println(valor);
 
-		return valor;
+		return valor +1;
 	}
 
 
@@ -125,36 +127,35 @@ public class MongoDB {
 		MongoClient mongoClient=conexion();
 
 		String dbName="usuarios_prueba";
-		String tabla="tareas";
+		String tabla="tareas"; 
 		String rol="";
 
 		DB db=mongoClient.getDB(dbName);
 		DBCollection coll= db.getCollection(tabla);
+		DBCursor cursor = coll.find(); 
 
 		int i=0;
 		String cadena="";
 		cadena+="<table class='table table-hover' id='myTable'><thead><th>ID</th><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></thead><tbody>";
 
 		//Buscar solo los usuario con el filtro dado
-		BasicDBObject filtro = new BasicDBObject();
-		filtro.put("pertenece", usuario);
-		DBCursor cur = coll.find(filtro);
+		
 		if(campo_a_ordenar!="")
 		{
-			cur.sort(new BasicDBObject(campo_a_ordenar, 1)).toString();
+			cursor.sort(new BasicDBObject(campo_a_ordenar, 1)).toString();
 		}
-		while (cur.hasNext()) {
-			DBObject theObj = cur.next(); 
-			Set<String> pertenece = new HashSet<String>();
-			BasicDBList dbl = (BasicDBList)theObj.get("pertenece");
-			
-			  for (int j=0; j<dbl.size(); j++){
-				  pertenece.add((String)dbl.get(j));
-			  }
-			Tarea t = new Tarea(theObj.get("id").toString(),theObj.get("nombre").toString(), theObj.get("prioridad").toString(), pertenece, theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+		while (cursor.hasNext()) {
+			DBObject theObj = cursor.next(); 
+			 
+			String [] usuarios = theObj.get("pertenece").toString().split(",");
+			 for (String user : usuarios){
+				 if (user.replace(" ", "").equals(usuario)){
+			 
+			Tarea t = new Tarea(theObj.get("id").toString(),theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
 			i++;
 			cadena+="<tr  style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getId()+"</td><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
-		}
+			break;
+				 }}}
 
 		cadena+="</table>";
 		mongoClient.close();
@@ -186,13 +187,8 @@ public class MongoDB {
 
 		while (cursor.hasNext()) {
 			DBObject theObj = cursor.next();
-			Set<String> pertenece = new HashSet<String>();
-			BasicDBList dbl = (BasicDBList)theObj.get("pertenece");
 			
-			  for (int i1=0; i1<dbl.size(); i1++){
-				  pertenece.add((String)dbl.get(i));
-			  }
-			Tarea t = new Tarea(theObj.get("id").toString(),theObj.get("nombre").toString(), theObj.get("prioridad").toString(), pertenece, theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
+			Tarea t = new Tarea(theObj.get("id").toString(),theObj.get("nombre").toString(), theObj.get("prioridad").toString(), theObj.get("pertenece").toString(), theObj.get("fecha").toString(), theObj.get("notas").toString(), theObj.get("estado").toString());
 
 			cadena+="<tr style='cursor: pointer' onclick='muestra("+i+")'><td>"+t.getId()+"</td><td>"+t.getNombre()+"</td><td>"+t.getPrioridad()+"</td><td>"+t.getFecha()+"</td><td>"+t.getEstado()+"</td><td>"+t.getPertenece()+"</td><td>"+t.getNotas()+"</td></tr>";
 			i++;

@@ -82,14 +82,13 @@ document.getElementById("notas").value=notas;
 					//id="1";
 					nombre = request.getParameter("nombre");
 					prioridad = request.getParameter("prioridad");
-					String[] usuarios = request.getParameter("pertenece").split(",");
-					Set<String> users = (Set<String>) Arrays.asList(usuarios);
+					pertenece = request.getParameter("pertenece");
 					fecha = request.getParameter("fecha_limite");
 					notas = request.getParameter("notas");
 					estado = request.getParameter("estado");
 
 					if (nombre != null) {
-						Tarea tarea = new Tarea(id, nombre, prioridad, users, fecha, notas, estado);
+						Tarea tarea = new Tarea(id, nombre, prioridad, pertenece, fecha, notas, estado);
 						MongoDB.insertar_tarea(tarea);
 					}
 				}
@@ -98,14 +97,13 @@ document.getElementById("notas").value=notas;
 					id = request.getParameter("id");
 					nombre = request.getParameter("nombre");
 					prioridad = request.getParameter("prioridad");
-					String[] usuarios = request.getParameter("pertenece").split(",");
-					Set<String> users = (Set<String>) Arrays.asList(usuarios);
+					pertenece = request.getParameter("pertenece");
 					fecha = request.getParameter("fecha_limite");
 					notas = request.getParameter("notas");
 					estado = request.getParameter("estado");
 
 					if (nombre != null) {
-						Tarea tarea = new Tarea(id, nombre, prioridad, users, fecha, notas, estado);
+						Tarea tarea = new Tarea(id, nombre, prioridad, pertenece, fecha, notas, estado);
 						MongoDB.modificar_tarea(tarea);
 					}
 

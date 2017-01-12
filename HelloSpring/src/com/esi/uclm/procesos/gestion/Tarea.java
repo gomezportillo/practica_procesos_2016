@@ -1,5 +1,6 @@
 package com.esi.uclm.procesos.gestion;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,12 +9,12 @@ public class Tarea {
 
 	String nombre;
 	String prioridad;
-	Set<String> pertenece = new HashSet<String>();
+	String pertenece ;
 	String fecha;
 	String notas;
 	String estado;
 	
-	public Tarea(String id,String nombre, String prioridad, Set<String> pertenece, String fecha, String notas, String estado) {
+	public Tarea(String id,String nombre, String prioridad, String pertenece, String fecha, String notas, String estado) {
 		super();
 		this.id=id;
 		this.nombre = nombre;
@@ -36,10 +37,10 @@ public class Tarea {
 	public void setPrioridad(String prioridad) {
 		this.prioridad = prioridad;
 	}
-	public Set<String> getPertenece() {
+	public String getPertenece() {
 		return pertenece;
 	}
-	public void setPertenece(Set<String> pertenece) {
+	public void setPertenece(String pertenece) {
 		this.pertenece = pertenece;
 	}
 	public String getFecha() {
