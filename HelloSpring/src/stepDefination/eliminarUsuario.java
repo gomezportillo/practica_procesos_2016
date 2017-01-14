@@ -21,7 +21,7 @@ public class eliminarUsuario {
 	}
 
 	@When("^Insertamos nombre y password en la barra7$")
-	public void Insertamos_nombre_contraseña() throws Throwable {
+	public void Insertamos_nombre_contraseÃ±a() throws Throwable {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
 		barraNombre.sendKeys("pablo");

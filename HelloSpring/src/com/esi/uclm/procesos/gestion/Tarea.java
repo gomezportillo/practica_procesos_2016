@@ -1,11 +1,15 @@
 package com.esi.uclm.procesos.gestion;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 public class Tarea {
 	String id;
 
 	String nombre;
 	String prioridad;
-	String pertenece;
+	String pertenece ;
 	String fecha;
 	String notas;
 	String estado;

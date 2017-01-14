@@ -9,6 +9,9 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,21 +22,21 @@ import com.esi.uclm.procesos.controller.*;
 @WebServlet("/GestionUsuario")
 public class GestionUsuario extends HttpServlet
 {
-	 private Connection conexion;
-	 private Statement set;
-	 private ResultSet rs;
-	 String cad;
-	 MongoClientURI uri;
-	 
+	private Connection conexion;
+	private Statement set;
+	private ResultSet rs;
+	String cad;
+	MongoClientURI uri;
 
-	 public void init(ServletConfig cfg) throws ServletException
-	 {
-	System.out.println("Lega aqui");
-		 this.uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
-		 super.init(cfg);
 
-		
-/*	
+	public void init(ServletConfig cfg) throws ServletException
+	{
+		System.out.println("Lega aqui");
+		this.uri  = new MongoClientURI("mongodb://juliky999:Informatica1@ds119768.mlab.com:19768/usuarios_prueba"); 
+		super.init(cfg);
+
+
+		/*	
 	 try
 	 {
 	 Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -44,30 +47,30 @@ public class GestionUsuario extends HttpServlet
 	 {
 	 System.out.println( "No se ha conectado");
 	 }
-	*/
-	 }
-	 
-	 public void doPost(HttpServletRequest request, HttpServletResponse res) throws ServletException, IOException
-	 {
-		 // Obtener la sesion
-		 HttpSession s = request.getSession(true);
+		 */
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse res) throws ServletException, IOException
+	{
+		// Obtener la sesion
+		HttpSession s = request.getSession(true);
 		/* 
-		 // Guardar el nombre del cliente en la sesión para poderlo utilizar en el siguiente servlet
+		 // Guardar el nombre del cliente en la sesiï¿½n para poderlo utilizar en el siguiente servlet
 		 String usuarioSesion=(String) request.getSession().getAttribute("user");
 
-	 	*/
-		
+		 */
+
 		String id=request.getParameter("id");
 		String nombre=request.getParameter("nombre");
 		String prioridad=request.getParameter("prioridad");
-		String pertenece=request.getParameter("pertenece");
+		String pertenece =  request.getParameter("pertenece");
 		String fecha=request.getParameter("fecha");
 		String notas=request.getParameter("notas");
 		String estado=request.getParameter("estado");
-		
+
 		if(nombre!=null){
-				Tarea t=new Tarea(id,nombre, prioridad, pertenece, fecha, notas, estado);
-				MongoDB.insertar_tarea(t);
-			}
-	 }
+			Tarea t = new Tarea(id,nombre, prioridad, pertenece, fecha, notas, estado);
+			MongoDB.insertar_tarea(t);
+		}
+	}
 }

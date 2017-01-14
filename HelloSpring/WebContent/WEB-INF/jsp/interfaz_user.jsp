@@ -7,7 +7,8 @@
 <%@ page import=" java.util.List"%>
 <%@ page import="java.util.*"%>
 <%@ page session='true'%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@ page session='true'%>
 
 <script>
@@ -162,7 +163,8 @@ document.getElementById("notas").value=notas;
 
 <body>
 	<h2 style="text-align: center;">
-		Usuario: <%=sesion.getAttribute("user")%>
+		Usuario:
+		<%=sesion.getAttribute("user")%>
 	</h2>
 
 	<div id='marco'>
@@ -211,7 +213,7 @@ document.getElementById("notas").value=notas;
 						name="prioridad"><br> Fecha Limite:<br> <input
 						type="text" id="fecha_limite" name="fecha_limite"><br>
 					Estado:<br> <input type="text" id="estado" name="estado"><br>
-					Pertenece:<br> <input type="text" id="pertenece"
+					Pertenece(introducir cada usuario separado por coma):<br> <input type="text" id="pertenece"
 						name="pertenece"><br> Notas:<br> <input
 						type="text" id="notas" name="notas"><br> <input
 						type="hidden" id="accion" name="accion"><br>

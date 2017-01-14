@@ -24,7 +24,7 @@ public class borrarTarea {
 	}
 
 	@When("^Insertamos nombre y password en la barra6$")
-	public void Insertamos_nombre_contraseña() throws Throwable {
+	public void Insertamos_nombre_contraseÃ±a() throws Throwable {
 		WebElement barraNombre = driver.findElement(By.name("user"));
 		WebElement password = driver.findElement(By.name("password"));
 		Thread.sleep(3000);

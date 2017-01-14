@@ -20,7 +20,7 @@ public class registrarseUsuario {
 	}
 
 	@When("^Pulsa registrarse$")
-	public void Insertamos_nombre_contraseña() throws Throwable {
+	public void Insertamos_nombre_contraseÃ±a() throws Throwable {
 		WebElement boton = driver.findElement(By.name("Registrarse"));
 		boton.click();
 		Thread.sleep(1000);
