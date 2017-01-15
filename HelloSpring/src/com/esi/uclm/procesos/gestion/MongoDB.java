@@ -200,7 +200,6 @@ public class MongoDB {
 		String cadena="";
 		cadena+="<table class='table table-hover' id='myTable'><thead><th>ID</th><th>Nombre</th><th>Prioridad</th><th>Fecha Limite</th><th>Estado</th><th>Pertenece</th><th>Notas</th></thead><tbody>";
 
-		//Buscar solo los usuario con el filtro dado
 
 		if(campo_a_ordenar!="")
 		{

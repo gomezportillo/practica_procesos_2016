@@ -91,9 +91,15 @@ document.getElementById("notas").value=notas;
 					if (nombre != null) {
 						Tarea tarea = new Tarea(id, nombre, prioridad, pertenece, fecha, notas, estado);
 						MongoDB.insertar_tarea(tarea);
-						
-						String email = MongoDB.obtener_email_desde_nombre(pertenece);
-						EmailSender.getInstance().send(email, "ha sido asignado a una nueva tarea.");
+
+						String[] usuarios = pertenece.split(",");
+
+						for (String tempU : usuarios) {
+							String u = tempU.replace(" ", "");
+
+							String email = MongoDB.obtener_email_desde_nombre(u);
+							if (email!= "")	EmailSender.getInstance().send(email, "ha sido asignado a una nueva tarea.");
+						}
 					}
 				}
 
@@ -109,9 +115,15 @@ document.getElementById("notas").value=notas;
 					if (nombre != null) {
 						Tarea tarea = new Tarea(id, nombre, prioridad, pertenece, fecha, notas, estado);
 						MongoDB.modificar_tarea(tarea);
-						
-						String email = MongoDB.obtener_email_desde_nombre(pertenece);
-						EmailSender.getInstance().send(email, "una de las tareas a la que pertenece se ha modificado.");
+
+						String[] usuarios = pertenece.split(",");
+
+						for (String tempU : usuarios) {
+							String u = tempU.replace(" ", "");
+
+							String email = MongoDB.obtener_email_desde_nombre(u);
+							if (email!= "")	EmailSender.getInstance().send(email, "ha sido asignado a una nueva tarea.");
+						}
 					}
 
 				}
@@ -123,9 +135,15 @@ document.getElementById("notas").value=notas;
 					if (id != null) {
 						//Tarea tarea= new Tarea(nombre,prioridad,pertenece,fecha,notas,estado);
 						MongoDB.eliminar_tarea(id);
-						
-						String email = MongoDB.obtener_email_desde_nombre(pertenece);
-						EmailSender.getInstance().send(email, "una de las tareas a la que pertenece se ha eliminado.");
+
+						String[] usuarios = pertenece.split(",");
+
+						for (String tempU : usuarios) {
+							String u = tempU.replace(" ", "");
+
+							String email = MongoDB.obtener_email_desde_nombre(u);
+							if (email!= "")	EmailSender.getInstance().send(email, "ha sido asignado a una nueva tarea.");
+						}
 					}
 				}
 			}%>
@@ -213,10 +231,10 @@ document.getElementById("notas").value=notas;
 						name="prioridad"><br> Fecha Limite:<br> <input
 						type="text" id="fecha_limite" name="fecha_limite"><br>
 					Estado:<br> <input type="text" id="estado" name="estado"><br>
-					Pertenece(introducir cada usuario separado por coma):<br> <input type="text" id="pertenece"
-						name="pertenece"><br> Notas:<br> <input
-						type="text" id="notas" name="notas"><br> <input
-						type="hidden" id="accion" name="accion"><br>
+					Pertenece(introducir cada usuario separado por coma):<br> <input
+						type="text" id="pertenece" name="pertenece"><br>
+					Notas:<br> <input type="text" id="notas" name="notas"><br>
+					<input type="hidden" id="accion" name="accion"><br>
 
 					<div class="bottom">
 						<button type="button" name="boton3"
